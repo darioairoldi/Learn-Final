@@ -1,6 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-
 # Explicitly define line endings and encoding for specific file types
 # All source code files should be UTF-8 without BOM
 *.cs text eol=crlf encoding=utf-8
@@ -15,19 +14,15 @@
 *.txt text eol=crlf encoding=utf-8
 *.yml text eol=crlf encoding=utf-8
 *.yaml text eol=crlf encoding=utf-8
-
 # Ensure shell scripts use LF (for cross-platform compatibility)
 *.sh text eol=lf encoding=utf-8
 *.bash text eol=lf encoding=utf-8
-
 # Ensure PowerShell files use CRLF (Windows standard)
 *.ps1 text eol=crlf encoding=utf-8
 *.psm1 text eol=crlf encoding=utf-8
-
 # Batch files must use CRLF
 *.bat text eol=crlf encoding=utf-8
 *.cmd text eol=crlf encoding=utf-8
-
 # Git LFS - Binary files that should be stored in LFS
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.rar filter=lfs diff=lfs merge=lfs -text
@@ -46,6 +41,8 @@
 *.webp filter=lfs diff=lfs merge=lfs -text
 *.svg filter=lfs diff=lfs merge=lfs -text
 *.ico filter=lfs diff=lfs merge=lfs -text
+*.psd filter=lfs diff=lfs merge=lfs -text
+*.ai filter=lfs diff=lfs merge=lfs -text
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 *.avi filter=lfs diff=lfs merge=lfs -text
 *.mov filter=lfs diff=lfs merge=lfs -text
@@ -60,7 +57,7 @@
 *.aac filter=lfs diff=lfs merge=lfs -text
 *.ogg filter=lfs diff=lfs merge=lfs -text
 *.dll filter=lfs diff=lfs merge=lfs -text
-*.so filter=lfs diff=lfs merge=lfs -text
+*.pdb filter=lfs diff=lfs merge=lfs -text
 *.docx filter=lfs diff=lfs merge=lfs -text
 *.doc filter=lfs diff=lfs merge=lfs -text
 *.pptx filter=lfs diff=lfs merge=lfs -text
@@ -78,3 +75,6 @@
 *.ods filter=lfs diff=lfs merge=lfs -text
 *.odp filter=lfs diff=lfs merge=lfs -text
 *.rtf filter=lfs diff=lfs merge=lfs -text
+# Additional binary files that don't need LFS (smaller files)
+*.so binary
+*.dylib binary
