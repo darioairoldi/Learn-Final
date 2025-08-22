@@ -1,3 +1,34 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Explicitly define line endings and encoding for specific file types
+# All source code files should be UTF-8 without BOM
+*.cs text eol=crlf encoding=utf-8
+*.csproj text eol=crlf encoding=utf-8
+*.sln text eol=crlf encoding=utf-8
+*.props text eol=crlf encoding=utf-8
+*.targets text eol=crlf encoding=utf-8
+*.json text eol=crlf encoding=utf-8
+*.xml text eol=crlf encoding=utf-8
+*.config text eol=crlf encoding=utf-8
+*.md text eol=crlf encoding=utf-8
+*.txt text eol=crlf encoding=utf-8
+*.yml text eol=crlf encoding=utf-8
+*.yaml text eol=crlf encoding=utf-8
+
+# Ensure shell scripts use LF (for cross-platform compatibility)
+*.sh text eol=lf encoding=utf-8
+*.bash text eol=lf encoding=utf-8
+
+# Ensure PowerShell files use CRLF (Windows standard)
+*.ps1 text eol=crlf encoding=utf-8
+*.psm1 text eol=crlf encoding=utf-8
+
+# Batch files must use CRLF
+*.bat text eol=crlf encoding=utf-8
+*.cmd text eol=crlf encoding=utf-8
+
+# Git LFS - Binary files that should be stored in LFS
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.rar filter=lfs diff=lfs merge=lfs -text
 *.7z filter=lfs diff=lfs merge=lfs -text
