@@ -1,0 +1,172 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "*.md"
+    - "*/README.md"
+    - "**/README.md"
+    - "*/Readme.md"
+    - "**/Readme.md"
+    - "20250702 Azure Naming conventions/README.md"
+    - "20250704 TableStorageAccess options/Readme.md"
+    - "20250706 CosmosDB Access options/README.md"
+    - "20250709 Manage GitRepo from commandline/README.md"
+    - "20250711 Use http files for easy and repeatable test/README.md"
+    - "20250712 Use QUARTO doc for Github repos doc/README.md"
+    - "20250713 Use http files for easy and repeatable test/README.md"
+    - "Travel/Paris 2025/README.md"
+    - "_ISSUES/20250709 fatal error cloning a repo with Visual Studio/README.md"
+    - "20250815 DIY Battery Pack/README.md"
+
+website:
+  title: "Dario's Learning Journey"
+  description: "Technical learning notes, conference insights, and development guides"
+  site-url: "https://darioairoldi.github.io/Learn"
+  repo-url: "https://github.com/darioairoldi/Learn"
+  repo-actions: [edit, issue]
+  
+  page-navigation: true
+  search: true
+  reader-mode: true
+  
+  navbar:
+    background: primary
+    search: true
+    title: "Learning Hub"
+    left:
+      - icon: house-fill
+        href: index.qmd
+        text: "Home"
+      - text: "Events"
+        menu:
+          - href: "202506 Build 2025/Readme.md"
+            text: "Build 2025: Conference Overview"
+          - text: "---"
+          - href: "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.md"
+            text: "Build 2025: BRK101 - .NET App Modernization"
+          - href: "202506 Build 2025/BRK103 Microsoft Developers Use AI/README.Sonnet4.md"
+            text: "Build 2025: BRK103 - Microsoft Developers Use AI"
+          - href: "202506 Build 2025/BRK104 Building the Next Generation of Apps with AI and .NET/README.Sonnet4.md"
+            text: "Build 2025: BRK104 - Next Gen Apps with AI & .NET"
+          - href: "202506 Build 2025/BRK106 Elevating Development with .NET Aspire AI/README.Sonnet4.md"
+            text: "Build 2025: BRK106 - .NET Aspire AI & Cloud"
+          - href: "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/README.Sonnet4.md"
+            text: "Build 2025: BRK114 - What's New in C# 14"
+          - href: "202506 Build 2025/BRK119 Debug Like a Pro - Improve Your Efficiency/README.Sonnet4.md"
+            text: "Build 2025: BRK119 - Debug Like a Pro with Visual Studio & Copilot"
+          - href: "202506 Build 2025/BRK122 Supercharge Your Git workflow with VS Code/README.Sonnet4.md"
+            text: "Build 2025: BRK122 - ASP.NET Core & Blazor Future"
+          - href: "202506 Build 2025/BRK123 Build AI Apps with Microsoft Graph Data/README.Sonnet4.md"
+            text: "Build 2025: BRK123 - Build AI Apps with Microsoft Graph"
+          - href: "202506 Build 2025/BRK127 Unleash developer potential with AI and Dev Box/README.Sonnet4.md"
+            text: "Build 2025: BRK127 - Unleash Developer Potential with AI and Dev Box"
+          - href: "202506 Build 2025/BRK141 RAG for enterprise agents with Azure AI Search/SUMMARY.md"
+            text: "Build 2025: BRK141 - RAG for Enterprise Agents with Azure AI Search"
+          - href: "202506 Build 2025/BRK155 Azure AI Foundry - app and Agent Factory/SUMMARY.md"
+            text: "Build 2025: BRK155 - Azure AI Foundry: The AI App and Agent Factory"
+          - href: "202506 Build 2025/BRK163 Create agents for 365 Copilot with 365 Agents SDK/README.Sonnet4.md"
+            text: "Build 2025: BRK163 - Create Agents with M365 Agents SDK"
+          - href: "202506 Build 2025/BRK165 Building agents for Microsoft 365 Copilot/README.Sonnet4.md"
+            text: "Build 2025: BRK165 - Building Agents for Microsoft 365 Copilot"
+          - href: "202506 Build 2025/BRK176 agent solutions with Copilot Studio and M365 Agents SDK/README.Sonnet4.md"
+            text: "Build 2025: BRK176 - Multi-Agent Solutions with Copilot Studio and SDK"
+          - href: "202506 Build 2025/BRK195 Inside Azure innovations with Mark Russinovich/README.Sonnet4.md"
+            text: "Build 2025: BRK195 - Inside Azure Innovations with Mark Russinovich"
+          - href: "202506 Build 2025/BRK199 Accelerate Modernization/README.Sonnet4.md"
+            text: "Build 2025: BRK199 - Accelerate Modernization at Scale"
+          - href: "202506 Build 2025/BRK204 Whats new in Microsoft Databases/README.Sonnet4.md"
+            text: "Build 2025: BRK204 - What's New in Microsoft Databases"
+          - href: "202506 Build 2025/BRK223 An overview of Windows AI Foundry/README.Sonnet4.md"
+            text: "Build 2025: BRK223 - Windows AI Foundry Overview"
+          - href: "202506 Build 2025/BRK224 Integrate AI using Windows AI APIs/SUMMARY.md"
+            text: "Build 2025: BRK224 - Integrate AI using Windows AI APIs"
+          - href: "202506 Build 2025/BRK225 Bring your own model to Windows using Windows ML/SUMMARY.md"
+            text: "Build 2025: BRK225 - Bring Your Own Model to Windows using Windows ML"
+          - href: "202506 Build 2025/BRK226 Boost Development Productivity/README.Sonnet4.md"
+            text: "Build 2025: BRK226 - Windows Developer Tools"
+          - href: "202506 Build 2025/BRK229 Unlock agents for your apps using MCP on Windows/README.Sonnet4.md"
+            text: "Build 2025: BRK229 - Unlock Agentic Interactions with MCP on Windows"
+          - href: "202506 Build 2025/BRK229 Introducing Copilot Solutions/SUMMARY.md"
+            text: "Build 2025: BRK229 - Introducing Copilot Solutions"
+      - text: "Culture & Travel"
+        menu:
+          - href: "Travel/Paris 2025/README.md"
+            text: "Paris Cultural Journey 2025"
+      - icon: github
+        href: "https://github.com/darioairoldi/Learn"
+        aria-label: "GitHub Repository"
+
+  sidebar:
+    style: "floating"
+    search: true
+    collapse-level: 3
+    contents:
+      - href: index.qmd
+        text: "?? Home"
+      
+      - section: "?? Events"
+        contents:
+          - section: "Build Conference 2025"
+            href: "202506 Build 2025/Readme.md"
+            contents:
+              - href: "202506 Build 2025/Readme.md"
+                text: "Conference Overview"
+
+  page-footer:
+    left: |
+      Built with [Quarto](https://quarto.org/) by Dario Airoldi
+    center: |
+      Learning Journey - Technical Notes & Insights
+    right: |
+      Last updated: {{< meta date >}}
+
+format:
+  html:
+    theme: 
+      - cerulean
+      - cerulean.scss
+    css: 
+      - styles.css
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    number-sections: false
+    anchor-sections: true
+    smooth-scroll: true
+    code-fold: false
+    code-tools: true
+    code-copy: true
+    highlight-style: github
+    fig-width: 8
+    fig-height: 6
+    fig-cap-location: bottom
+    callout-appearance: default
+    citations-hover: true
+    footnotes-hover: true
+    crossref:
+      fig-title: "Figure"
+      tbl-title: "Table"
+      eq-title: "Equation"
+    date-format: "MMMM D, YYYY"
+    lang: en
+    page-layout: article
+    toc-title: "On This Page"
+    title-block-banner: false
+    title-block-style: default
+    grid:
+      sidebar-width: 300px
+      body-width: 900px
+      margin-width: 280px
+    html-table-processing: none
+    html-math-method: katex
+    strip-comments: false
+    link-external-newwindow: true
+    link-external-icon: true
+    embed-resources: false
+    html-q-tags: true
+    from: markdown+emoji+tex_math_dollars+fenced_divs+bracketed_spans+pipe_tables+grid_tables+simple_tables+multiline_tables
+    fig-responsive: true
+    lightbox: true
+    smart: true
+    preserve-tabs: true
