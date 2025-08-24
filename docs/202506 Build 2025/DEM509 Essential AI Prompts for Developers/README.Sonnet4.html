@@ -1175,7 +1175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../20250712 Use QUARTO doc for Github repos doc/002.03. Quarto Theming and Styling.html" class="sidebar-item-text sidebar-link">
+  <a href="../../20250712 Use QUARTO doc for Github repos doc/002.03. Quarto Theming and Styling.md" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto Theming and Styling</span></a>
   </div>
 </li>
@@ -2112,7 +2112,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 #quarto-sidebar .sidebar-item-text .bi {
 
-  margin-right: 0.75rem !important;
+  margin-right: 0.5rem !important; /* Reduced from 0.75rem to 0.5rem */
 
   font-size: 1.1em !important;
 
@@ -2128,7 +2128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 #quarto-sidebar .sidebar-item-text i {
 
-  margin-right: 0.75rem !important;
+  margin-right: 0.5rem !important; /* Reduced from 0.75rem to 0.5rem */
 
   font-size: 1.1em !important;
 
@@ -2142,7 +2142,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 #quarto-sidebar .sidebar-item-text .bi::before {
 
-  margin-right: 0.75rem !important;
+  margin-right: 0.5rem !important; /* Reduced from 0.75rem to 0.5rem */
 
 }
 
@@ -2154,7 +2154,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 #quarto-sidebar .sidebar-section > .sidebar-item-text .bi {
 
-  margin-right: 0.75rem !important;
+  margin-right: 0.5rem !important; /* Reduced from 0.75rem to 0.5rem */
 
 }
 
@@ -2168,7 +2168,151 @@ document.addEventListener('DOMContentLoaded', function() {
 
   color: white !important;
 
-  margin-right: 0.75rem !important;
+  margin-right: 0.5rem !important; /* Reduced from 0.75rem to 0.5rem */
+
+}
+
+
+
+/* FIXED: Left sidebar hierarchical indentation and spacing */
+
+/* Reduce spacing between sidebar items */
+
+#quarto-sidebar .sidebar-item {
+
+  margin-bottom: 0.02rem; /* Further reduced from 0.05rem */
+
+}
+
+
+
+/* Ensure proper alignment and indentation for nested items */
+
+#quarto-sidebar .sidebar-item-text {
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 0.15rem 0.4rem; /* Reduced from 0.2rem 0.8rem */
+
+  gap: 0.4rem; /* Reduced gap */
+
+  line-height: 1.2;
+
+}
+
+
+
+/* Level 0: Top-level sections - "Home", "Events", "Tools", etc. */
+
+#quarto-sidebar > .sidebar-navigation > .sidebar-item > .sidebar-item-text {
+
+  font-weight: 600;
+
+  padding: 0.2rem 0.4rem; /* Reduced padding */
+
+}
+
+
+
+/* Level 1: Second-level items - "Build Conference 2025", "Development Tools", etc. */
+
+#quarto-sidebar .sidebar-item .sidebar-item > .sidebar-item-text {
+
+  padding: 0.12rem 1.2rem; /* Reduced vertical and horizontal padding */
+
+  font-size: 0.9rem;
+
+  color: #666;
+
+}
+
+
+
+/* Level 2: Third-level items - "Conference Overview", "Git Command Line", etc. */
+
+#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
+
+  padding: 0.1rem 2.0rem; /* Reduced padding */
+
+  font-size: 0.85rem;
+
+  color: #777;
+
+}
+
+
+
+/* Level 3: Fourth-level items */
+
+#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
+
+  padding: 0.1rem 2.8rem; /* Reduced padding */
+
+  font-size: 0.8rem;
+
+  color: #888;
+
+}
+
+
+
+/* Alternative selector approach for better specificity */
+
+#quarto-sidebar .sidebar-item-container .sidebar-item-text {
+
+  padding: 0.12rem 1.2rem !important;
+
+}
+
+
+
+#quarto-sidebar .sidebar-item-container .sidebar-item-container .sidebar-item-text {
+
+  padding: 0.1rem 2.0rem !important;
+
+}
+
+
+
+#quarto-sidebar .sidebar-item-container .sidebar-item-container .sidebar-item-container .sidebar-item-text {
+
+  padding: 0.1rem 2.8rem !important;
+
+}
+
+
+
+/* Hover effects for better UX */
+
+#quarto-sidebar .sidebar-item-text:hover {
+
+  background-color: rgba(248, 249, 250, 0.8);
+
+  border-radius: 4px;
+
+}
+
+
+
+/* Additional fix for any Quarto-generated link classes */
+
+#quarto-sidebar .sidebar-link {
+
+  padding: 0.12rem 0.4rem !important;
+
+}
+
+
+
+/* Fix for menu text spacing */
+
+#quarto-sidebar .menu-text {
+
+  margin-left: 0 !important;
+
+  padding-left: 0 !important;
 
 }
 
@@ -2353,33 +2497,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const customNav = document.querySelector('#custom-right-nav');
 
-    if (!customNav) {
-
-      console.log('🔍 handleResponsiveLayout: customNav not found');
-
-      return;
-
-    }
-
-    
-
-    // FIXED: Also ensure native TOC is preserved during responsive changes
-
-    const nativeToc = document.querySelector('#TOC, .table-of-contents, nav[role="doc-toc"]:not(#custom-right-nav nav)');
-
-    if (nativeToc) {
-
-      console.log('🔍 handleResponsiveLayout: preserving native TOC visibility');
-
-      // Don't hide native TOC on mobile - let Quarto handle that
-
-    }
+    if (!customNav) return;
 
     
 
     const isMobile = window.innerWidth <= 800;
-
-    console.log(`📱 handleResponsiveLayout: width=${window.innerWidth}, isMobile=${isMobile}, hasContent=${customNav.classList.contains('has-content')}`);
 
     
 
@@ -2387,19 +2509,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       customNav.style.display = 'none';
 
-      console.log('📱 Hidden custom nav on mobile');
-
     } else if (customNav.classList.contains('has-content')) {
-
-      customNav.style.display = 'block';
-
-      console.log('💻 Showing custom nav on desktop with content');
-
-    } else {
-
-      console.log('💻 Desktop but no content class found');
-
-      // Force show for debugging
 
       customNav.style.display = 'block';
 
@@ -2409,7 +2519,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
 
-  // Multiple initialization strategies to ensure it works across all page types
+  // Initialize right navigation with minimal delay
 
   function initializeRightNav() {
 
@@ -2417,23 +2527,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    // FIXED: Wait a bit longer to ensure Quarto's native TOC is fully initialized
-
     setTimeout(() => {
 
       createCustomRightNav();
 
       handleResponsiveLayout();
-
-      
-
-      // Additional attempt after a short delay for any page type
-
-      setTimeout(() => {
-
-        renderRightNav();
-
-      }, 200);
 
     }, 300);
 
@@ -2447,57 +2545,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
 
-  // FIXED: Wait longer for Quarto to finish loading to avoid TOC conflicts
-
-  setTimeout(initializeRightNav, 1000);
-
-  
-
-  // Also try when the page is fully loaded (universal)
+  // Also try when the page is fully loaded
 
   window.addEventListener('load', function() {
 
-    console.log('📄 Page fully loaded, attempting right nav render...');
+    console.log('📄 Page loaded, rendering right nav...');
 
-    setTimeout(function() {
-
-      if (!document.querySelector('#custom-right-nav.has-content')) {
-
-        console.log('🔄 Right nav not yet rendered, trying again...');
-
-        createCustomRightNav();
-
-      }
-
-      renderRightNav();
-
-    }, 500);
+    setTimeout(renderRightNav, 200);
 
   });
 
   
 
-  // Universal fallback after page load for any menu structure
-
-  setTimeout(() => {
-
-    console.log('⏰ Final fallback attempt for right nav...');
-
-    renderRightNav();
-
-  }, 2000);
-
-  
-
-  // Handle window resize (universal)
+  // Handle window resize
 
   window.addEventListener('resize', handleResponsiveLayout);
 
   
 
-  // Dynamic navigation structure - reads from Quarto's rendered sidebar
+  // OPTIMIZED: Find only the current page and its siblings, not entire navigation tree
 
-  function extractNavigationFromSidebar() {
+  function findCurrentPageSiblings() {
 
     const sidebar = document.querySelector('#quarto-sidebar');
 
@@ -2511,389 +2579,95 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    // Look for the main sidebar content structure - IMPROVED selectors
+    const currentPath = getCurrentPagePath();
 
-    const sidebarContent = sidebar.querySelector('.sidebar-menu-container, .sidebar-content, .sidebar-navigation, .sidebar-menu');
-
-    if (!sidebarContent) {
-
-      console.log('❌ Sidebar content not found, available classes:', sidebar.className);
-
-      console.log('❌ Sidebar children:', Array.from(sidebar.children).map(c => c.className).join(', '));
-
-      // Fallback: try to use the sidebar itself
-
-      return extractItemsDirectly(sidebar);
-
-    }
+    console.log('🔍 Looking for current page:', currentPath);
 
     
 
-    console.log('✅ Found sidebar content:', sidebarContent.className);
+    // Find the active sidebar item (current page)
 
-    return extractItemsDirectly(sidebarContent);
+    const activeItem = sidebar.querySelector('.sidebar-item-text.active, .sidebar-item-text[href*="' + currentPath + '"]');
 
-  }
+    if (!activeItem) {
 
-
-
-  // Extract navigation items directly from container
-
-  function extractItemsDirectly(container) {
-
-    const items = [];
-
-    
-
-    // Find all navigation items recursively with proper level tracking
-
-    function extractItems(element, level = 0) {
-
-      const childItems = [];
-
-      const directChildren = Array.from(element.children);
-
-      
-
-      directChildren.forEach(child => {
-
-        // Look for sidebar items at any level
-
-        if (child.classList.contains('sidebar-item') || 
-
-            child.classList.contains('sidebar-item-container') ||
-
-            child.classList.contains('sidebar-section')) {
-
-          const item = extractSidebarItem(child, level);
-
-          if (item) {
-
-            childItems.push(item);
-
-          }
-
-        } else if (child.tagName === 'UL' || child.tagName === 'OL') {
-
-          // Handle list structures
-
-          const listItems = extractItems(child, level);
-
-          childItems.push(...listItems);
-
-        } else if (child.children.length > 0) {
-
-          // Recurse into other containers
-
-          const nestedItems = extractItems(child, level);
-
-          childItems.push(...nestedItems);
-
-        }
-
-      });
-
-      
-
-      return childItems;
-
-    }
-
-    
-
-    function extractSidebarItem(itemElement, level) {
-
-      const textElement = itemElement.querySelector('.sidebar-item-text');
-
-      if (!textElement) return null;
-
-      
-
-      const item = {
-
-        text: textElement.textContent.trim(),
-
-        level: level,
-
-        href: textElement.getAttribute('href'),
-
-        isSection: !textElement.hasAttribute('href') || textElement.getAttribute('href') === '#',
-
-        children: []
-
-      };
-
-      
-
-      // FIXED: More comprehensive child container detection
-
-      const childContainers = itemElement.querySelectorAll(':scope > .sidebar-item-container, :scope > .sidebar-section, :scope > ul, :scope > .sidebar-items, :scope > div[class*="sidebar"]');
-
-      
-
-      childContainers.forEach(childContainer => {
-
-        // Extract children at the next level
-
-        const childItems = extractItems(childContainer, level + 1);
-
-        item.children.push(...childItems);
-
-      });
-
-      
-
-      // Also check for nested sidebar items directly under this item (alternative structure)
-
-      const directNestedItems = itemElement.querySelectorAll(':scope .sidebar-item');
-
-      directNestedItems.forEach(nestedItem => {
-
-        if (nestedItem !== itemElement) { // Avoid self-reference
-
-          const nestedItemData = extractSidebarItem(nestedItem, level + 1);
-
-          if (nestedItemData && !item.children.some(child => child.text === nestedItemData.text)) {
-
-            item.children.push(nestedItemData);
-
-          }
-
-        }
-
-      });
-
-      
-
-      console.log(`📝 Extracted item: "${item.text}" (level ${level}, ${item.children.length} children, isSection: ${item.isSection}, href: ${item.href})`);
-
-      
-
-      // Additional debug info for items with children
-
-      if (item.children.length > 0) {
-
-        console.log(`   📂 Children of "${item.text}":`, item.children.map(c => `"${c.text}"`).join(', '));
-
-      }
-
-      
-
-      return item;
-
-    }
-
-    
-
-    const allItems = extractItems(container, 0);
-
-    console.log('📊 Total extracted navigation items:', allItems.length);
-
-    
-
-    return allItems;
-
-  }
-
-
-
-  // Find current page in navigation structure
-
-  function findCurrentPageInNav(items, currentPath) {
-
-    if (!items || items.length === 0) return null;
-
-    
-
-    const normalizedCurrentPath = currentPath.toLowerCase().replace(/\\/g, '/');
-
-    
-
-    console.log('🔍 Searching for path:', normalizedCurrentPath);
-
-    
-
-    function searchItems(itemList, parentChain = []) {
-
-      for (const item of itemList) {
-
-        if (item.href) {
-
-          const itemHref = item.href.toLowerCase().replace(/\\/g, '/').replace('.md', '');
-
-          
-
-          // Generic matching strategies - no filename assumptions
-
-          const isExactMatch = normalizedCurrentPath === itemHref;
-
-          const isContainedMatch = normalizedCurrentPath.includes(itemHref) || itemHref.includes(normalizedCurrentPath);
-
-          const isFilenameMatch = normalizedCurrentPath.endsWith(itemHref.split('/').pop());
-
-          
-
-          // Generic path-based matching - works for any file in same directory
-
-          const isSameDirectoryMatch = (
-
-            normalizedCurrentPath.split('/').slice(0, -1).join('/') === 
-
-            itemHref.split('/').slice(0, -1).join('/')
-
-          ) && (
-
-            // Only match if the filenames are related (same base name or common patterns)
-
-            normalizedCurrentPath.split('/').pop().replace(/\.(html|md)$/, '') === 
-
-            itemHref.split('/').pop().replace(/\.(html|md)$/, '') ||
-
-            // Or if one contains the other (like "summary" in "project-summary")
-
-            normalizedCurrentPath.split('/').pop().includes(itemHref.split('/').pop()) ||
-
-            itemHref.split('/').pop().includes(normalizedCurrentPath.split('/').pop())
-
-          );
-
-          
-
-          const isMatch = isExactMatch || isContainedMatch || isFilenameMatch || isSameDirectoryMatch;
-
-          
-
-          if (isMatch) {
-
-            console.log('🎯 Found current page: "' + item.text + '"');
-
-            console.log('   📄 Current path: ' + normalizedCurrentPath);
-
-            console.log('   🔗 Item href: ' + itemHref);
-
-            console.log('   ✅ Match type: ' + (isExactMatch ? 'exact' : isContainedMatch ? 'contained' : isFilenameMatch ? 'filename' : 'same-directory'));
-
-            
-
-            // FIXED: For leaf nodes, determine siblings correctly
-
-            // If this item has no children, its siblings are other items at the same level
-
-            let siblings = [];
-
-            let children = item.children || [];
-
-            
-
-            if (children.length === 0) {
-
-              // This is a leaf node - find its siblings
-
-              // Siblings are other items in the same itemList (at the same hierarchical level)
-
-              siblings = itemList.filter(sibling => 
-
-                sibling !== item && // Not the current item
-
-                sibling.href && // Has a valid link
-
-                sibling.href !== '#' // Not just a placeholder
-
-              );
-
-              
-
-              console.log(`📄 Leaf node "${item.text}" has ${siblings.length} siblings at level ${item.level || 0}`);
-
-              console.log('📄 Siblings:', siblings.map(s => `"${s.text}"`).join(', '));
-
-            } else {
-
-              // This is a section node - children are already available
-
-              // Filter children to only include those with valid links
-
-              const validChildren = children.filter(child => 
-
-                child.href && child.href !== '#'
-
-              );
-
-              
-
-              console.log(`📂 Section node "${item.text}" has ${validChildren.length} valid children`);
-
-              console.log('📂 Children:', validChildren.map(c => `"${c.text}"`).join(', '));
-
-              
-
-              // For consistency, we'll use siblings array to store what should be shown
-
-              // Even though they're technically children, this simplifies the downstream logic
-
-              siblings = validChildren;
-
-            }
-
-            
-
-            return {
-
-              currentItem: item,
-
-              parentChain: parentChain,
-
-              siblings: siblings, // This contains either siblings or children depending on node type
-
-              children: children,  // Always contains the original children for reference
-
-              isLeafNode: children.length === 0
-
-            };
-
-          }
-
-        }
-
-        
-
-        // Search in children
-
-        if (item.children && item.children.length > 0) {
-
-          const result = searchItems(item.children, [...parentChain, item]);
-
-          if (result) return result;
-
-        }
-
-      }
-
-      
+      console.log('❌ Active sidebar item not found');
 
       return null;
 
     }
 
+    
 
+    console.log('✅ Found active item:', activeItem.textContent.trim());
 
-    return searchItems(items);
+    
+
+    // Find the parent container of the active item
+
+    const parentContainer = activeItem.closest('.sidebar-item').parentElement;
+
+    if (!parentContainer) {
+
+      console.log('❌ Parent container not found');
+
+      return [];
+
+    }
+
+    
+
+    // Extract only siblings at the same level
+
+    const siblingItems = [];
+
+    const siblings = parentContainer.querySelectorAll(':scope > .sidebar-item');
+
+    
+
+    siblings.forEach(sibling => {
+
+      const textElement = sibling.querySelector('.sidebar-item-text');
+
+      if (textElement && textElement.hasAttribute('href')) {
+
+        const href = textElement.getAttribute('href');
+
+        if (href && href !== '#') {
+
+          siblingItems.push({
+
+            text: textElement.textContent.trim(),
+
+            href: href,
+
+            isActive: textElement.classList.contains('active') || href.includes(currentPath)
+
+          });
+
+        }
+
+      }
+
+    });
+
+    
+
+    console.log(`✅ Found ${siblingItems.length} sibling pages:`, siblingItems.map(s => s.text));
+
+    return siblingItems;
 
   }
 
-  
+
 
   function createCustomRightNav() {
 
     console.log('🏗️ Creating custom right nav...');
 
-    console.log('🏗️ Current URL:', window.location.href);
-
-    console.log('🏗️ Page width:', window.innerWidth);
-
     
 
-    // Try multiple container strategies for right sidebar with more debugging
+    // Find right sidebar container
 
     const containerSelectors = [
 
@@ -2901,21 +2675,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
       '.margin-sidebar', 
 
-      '#quarto-sidebar-toc',
-
-      '.toc-right',
-
-      '.page-columns .margin-sidebar',
-
-      '[class*="margin"]',
-
-      '.page-layout-article .margin-sidebar'
+      '#quarto-sidebar-toc'
 
     ];
-
-    
-
-    console.log('🔍 Searching for right sidebar containers...');
 
     
 
@@ -2925,17 +2687,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const found = document.querySelector(selector);
 
-      console.log(`   Testing selector "${selector}":`, !!found);
-
       if (found) {
 
         targetContainer = found;
 
         console.log('✅ Found right sidebar container:', selector);
-
-        console.log('✅ Container classes:', found.className);
-
-        console.log('✅ Container ID:', found.id);
 
         break;
 
@@ -2947,25 +2703,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!targetContainer) {
 
-      console.log('❌ Right sidebar container not found. Available page structure:');
-
-      console.log('   Body classes:', document.body.className);
-
-      console.log('   HTML classes:', document.documentElement.className);
-
-      
-
-      // Try to find any element that might be the right sidebar
-
-      const allSidebarCandidates = document.querySelectorAll('[class*="sidebar"], [class*="margin"], [class*="toc"], [id*="sidebar"], [id*="margin"], [id*="toc"]');
-
-      console.log('   Found potential containers:', Array.from(allSidebarCandidates).map(el => `${el.tagName}.${el.className}#${el.id}`));
-
-      
-
-      // As a last resort, try to append to body
-
-      console.log('⚠️ Attempting to create right sidebar container...');
+      console.log('⚠️ Creating fallback right sidebar container...');
 
       const rightSidebarContainer = document.createElement('div');
 
@@ -3003,19 +2741,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
       targetContainer = rightSidebarContainer;
 
-      console.log('✅ Created fallback right sidebar container');
+      console.log('✅ Created fallback container');
 
     }
 
 
 
-    // Check if custom nav already exists
+    // Remove existing custom nav
 
     const existing = document.querySelector('#custom-right-nav');
 
     if (existing) {
-
-      console.log('🔄 Removing existing custom nav');
 
       existing.remove();
 
@@ -3023,35 +2759,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // FIXED: Check if there's already a native Quarto TOC and preserve it
+    // Preserve existing TOC
 
-    const existingToc = targetContainer.querySelector('#TOC, .table-of-contents, nav[role="doc-toc"]:not(#custom-right-nav nav), .toc:not(#custom-right-nav .toc)');
-
-    console.log('🔍 Found existing TOC:', !!existingToc);
+    const existingToc = targetContainer.querySelector('#TOC, .table-of-contents, nav[role="doc-toc"]:not(#custom-right-nav nav)');
 
     if (existingToc) {
 
-      console.log('✅ Preserving existing Quarto TOC:', existingToc.className, existingToc.id);
-
-      
-
-      // Make sure the existing TOC is visible and properly styled
-
-      existingToc.style.display = '';
-
-      existingToc.style.visibility = '';
+      console.log('✅ Preserving existing Quarto TOC');
 
     }
 
 
 
-    // Create the custom nav element with proper styling
+    // Create the custom nav element
 
     const customNav = document.createElement('div');
 
     customNav.id = 'custom-right-nav';
 
-    customNav.className = 'toc-right custom-navigation'; // Added custom class for distinction
+    customNav.className = 'toc-right custom-navigation';
 
     customNav.innerHTML = `
 
@@ -3071,63 +2797,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // FIXED: Insert AFTER the existing TOC, not before or instead of it
+    // Insert after existing TOC or append to container
 
     if (existingToc) {
-
-      // Add some spacing between TOCs
 
       customNav.style.marginTop = '2rem';
 
       existingToc.parentNode.insertBefore(customNav, existingToc.nextSibling);
 
-      console.log('✅ Inserted custom nav AFTER existing TOC to preserve native functionality');
-
     } else {
 
       targetContainer.appendChild(customNav);
-
-      console.log('✅ Appended custom nav to container (no existing TOC found)');
 
     }
 
 
 
-    console.log('✅ Custom nav created and added to DOM');
+    console.log('✅ Custom nav created');
 
     
 
-    // FIXED: Don't force show immediately - let the responsive handler decide
+    // Render content immediately
 
-    // customNav.style.display = 'block';
-
-    // customNav.style.visibility = 'visible';
-
-
-
-    // Now render the navigation
-
-    setTimeout(() => {
-
-      console.log('⏰ About to render right nav content...');
-
-      renderRightNav();
-
-    }, 100);
+    setTimeout(renderRightNav, 100);
 
   }
 
 
 
-  // Get current page path, accounting for different environments
+  // Get current page path
 
   function getCurrentPagePath() {
 
     let path = window.location.pathname;
 
     
-
-    // Handle different URL structures
 
     if (path === '/' || path === '') {
 
@@ -3137,8 +2841,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    // Remove leading slash and decode URI components
-
     path = path.replace(/^\//, '');
 
     try {
@@ -3147,21 +2849,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     } catch (e) {
 
-      // If decoding fails, use original path
-
-      console.log('⚠️ URI decoding failed, using original path');
+      console.log('⚠️ URI decoding failed');
 
     }
 
     
 
-    // Convert .html back to source file extensions for matching
-
     path = path.replace('.html', '');
-
-    
-
-    console.log('📍 Current path detected:', path);
 
     return path;
 
@@ -3169,159 +2863,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
 
-  // Find the relevant section for the current page
-
-  function findCurrentSection(currentPath) {
-
-    console.log('🔍 Looking for section for path:', currentPath);
-
-    
-
-    // Handle home page special case
-
-    if (!currentPath || currentPath === '/' || currentPath === '' || currentPath === 'index') {
-
-      return {
-
-        sectionName: 'Home',
-
-        subsectionName: 'Quick Navigation',
-
-        subsectionData: {
-
-          pages: []
-
-        }
-
-      };
-
-    }
-
-    
-
-    // Normalize current path for matching
-
-    const normalizedPath = currentPath.toLowerCase().replace(/\\/g, '/');
-
-    
-
-    const navData = extractNavigationFromSidebar();
-
-    if (!navData) {
-
-      console.log('❌ No navigation data available');
-
-      return null;
-
-    }
-
-    
-
-    // Try to find the current section by analyzing the navigation data
-
-    for (const item of navData) {
-
-      // Check if this item matches the current path
-
-      if (item.href && normalizedPath === item.href.toLowerCase().replace(/\\/g, '/').replace('.md', '')) {
-
-        console.log('✅ Current section found in navigation:', item.text);
-
-        
-
-        return {
-
-          sectionName: item.text,
-
-          subsectionName: null,
-
-          subsectionData: null
-
-        };
-
-      }
-
-      
-
-      // Check in children recursively
-
-      const result = findSectionInChildren(item.children, normalizedPath);
-
-      if (result) {
-
-        return result;
-
-      }
-
-    }
-
-    
-
-    console.log('❌ Current section not found in navigation');
-
-    return null;
-
-  }
-
-
-
-  // Recursive helper to find section in children
-
-  function findSectionInChildren(children, path) {
-
-    for (const child of children) {
-
-      // Check if this child matches the path
-
-      if (child.href && path === child.href.toLowerCase().replace(/\\/g, '/').replace('.md', '')) {
-
-        console.log('✅ Current subsection found in navigation:', child.text);
-
-        
-
-        return {
-
-          sectionName: child.text,
-
-          subsectionName: null,
-
-          subsectionData: null
-
-        };
-
-      }
-
-      
-
-      // Recurse into deeper children
-
-      const result = findSectionInChildren(child.children, path);
-
-      if (result) {
-
-        return result;
-
-      }
-
-    }
-
-    
-
-    return null;
-
-  }
-
-  
-
-  // Render the right navigation based on the extracted items
+  // OPTIMIZED: Render only sibling pages, not entire navigation tree
 
   function renderRightNav() {
-
-    const navItems = extractNavigationFromSidebar();
-
-    if (!navItems) return;
-
-    
 
     const customNav = document.querySelector('#custom-right-nav');
 
@@ -3329,183 +2873,67 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    const currentPath = getCurrentPagePath();
-
-    const currentNavItem = findCurrentPageInNav(navItems, currentPath);
-
-    
-
-    // Mark the current item and its parents as active
-
-    function markActiveItems(item, isActive = false) {
-
-      if (!item) return isActive;
-
-      
-
-      const itemElement = document.querySelector(`#custom-right-nav [href="${item.href}"]`);
-
-      if (itemElement) {
-
-        itemElement.classList.add('active');
-
-        isActive = true;
-
-      }
-
-      
-
-      // Also mark parents as active (for nested items)
-
-      if (item.parent) {
-
-        markActiveItems(item.parent, isActive);
-
-      }
-
-      
-
-      return isActive;
-
-    }
-
-    
-
-    // Clear existing content and render the new navigation
-
-    function renderItemsList(container, items, level = 0) {
-
-      container.innerHTML = '';
-
-      
-
-      if (!items || items.length === 0) {
-
-        container.innerHTML = '<li><em>No related pages found</em></li>';
-
-        return;
-
-      }
-
-      
-
-      const list = document.createElement('ul');
-
-      list.className = 'nav-list';
-
-      
-
-      items.forEach(item => {
-
-        const listItem = document.createElement('li');
-
-        listItem.className = 'nav-item';
-
-        
-
-        // Link element
-
-        const link = document.createElement('a');
-
-        link.href = item.href || '#';
-
-        link.textContent = item.text;
-
-        link.className = 'nav-link';
-
-        
-
-        // Active class for current item
-
-        if (currentNavItem && currentNavItem.currentItem && currentNavItem.currentItem.text === item.text) {
-
-          link.classList.add('active');
-
-        }
-
-        
-
-        link.addEventListener('click', function(e) {
-
-          // Prevent default if it's just a placeholder
-
-          if (item.href === '#' || !item.href) {
-
-            e.preventDefault();
-
-          }
-
-        });
-
-        
-
-        listItem.appendChild(link);
-
-        
-
-        // Recursively render children if they exist
-
-        if (item.children && item.children.length > 0) {
-
-          const childContainer = document.createElement('div');
-
-          childContainer.className = 'child-nav-container';
-
-          renderItemsList(childContainer, item.children, level + 1);
-
-          listItem.appendChild(childContainer);
-
-        }
-
-        
-
-        list.appendChild(listItem);
-
-      });
-
-      
-
-      container.appendChild(list);
-
-    }
-
-    
+    const siblings = findCurrentPageSiblings();
 
     const navContainer = customNav.querySelector('.toc > ul');
 
-    if (navContainer) {
+    
 
-      // Clear existing content
+    if (!navContainer) return;
 
-      navContainer.innerHTML = '';
+    
+
+    // Clear existing content
+
+    navContainer.innerHTML = '';
+
+    
+
+    if (!siblings || siblings.length === 0) {
+
+      navContainer.innerHTML = '<li><em>No related pages found</em></li>';
+
+      console.log('📄 No related pages to show');
+
+      return;
+
+    }
+
+    
+
+    // Render sibling pages
+
+    siblings.forEach(sibling => {
+
+      const listItem = document.createElement('li');
+
+      listItem.className = 'nav-item';
 
       
 
-      if (currentNavItem) {
+      const link = document.createElement('a');
 
-        // Show current item and its siblings/children
+      link.href = sibling.href;
 
-        const { currentItem, siblings, children } = currentNavItem;
+      link.textContent = sibling.text;
 
-        
+      link.className = 'nav-link';
 
-        renderItemsList(navContainer, siblings || children);
+      
 
-        
+      if (sibling.isActive) {
 
-        // Mark the current item as active
-
-        markActiveItems(currentItem);
-
-      } else {
-
-        // Just render the top-level items
-
-        renderItemsList(navContainer, navItems);
+        link.classList.add('active');
 
       }
 
-    }
+      
+
+      listItem.appendChild(link);
+
+      navContainer.appendChild(listItem);
+
+    });
 
     
 
@@ -3515,21 +2943,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    // Debugging output
-
-    console.log('📜 Navigation rendered:', navItems);
+    console.log('✅ Related pages rendered:', siblings.length, 'items');
 
   }
-
-  
-
-  // Initial right navigation setup
-
-  setTimeout(() => {
-
-    createCustomRightNav();
-
-  }, 1000);
 
 });
 

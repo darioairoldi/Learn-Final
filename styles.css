@@ -428,69 +428,123 @@ a:hover {
   box-shadow: 0 2px 8px rgba(134, 239, 172, 0.3);
 }
 
-/* Active states */
-.sidebar-section > .nav-link.active {
-  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
-  color: white !important;
-  box-shadow: 0 6px 16px rgba(167, 139, 250, 0.4);
-  border-color: var(--secondary-color);
+/* FIXED: Left sidebar hierarchical indentation and spacing */
+/* Reset default sidebar spacing */
+#quarto-sidebar {
+  line-height: 1.4;
 }
 
-.sidebar-section .nav-item .nav-link.active {
-  background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
-  color: white !important;
-  font-weight: 500;
-  box-shadow: 0 3px 8px rgba(134, 239, 172, 0.4);
+/* Remove unwanted margin-top from sidebar items and sections */
+#quarto-sidebar .sidebar-item {
+  margin-top: 0 !important;
+  margin-bottom: 0.05rem;
 }
 
-/* Home link special styling - make it white and prominent */
-.sidebar .nav-link[href="index.qmd"] {
+#quarto-sidebar .sidebar-item.sidebar-item-section {
+  margin-top: 0 !important;
+  margin-bottom: 0.05rem;
+}
+
+/* Base sidebar item text styling */
+#quarto-sidebar .sidebar-item-text {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 0.5rem;
+  gap: 0.5rem;
+  margin: 0.1rem 0;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+/* Level 0 (Top-level items) - "Home", "Events", "Tools", etc. */
+#quarto-sidebar .sidebar-navigation > .sidebar-item > .sidebar-item-text {
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
+  padding-left: 0.5rem;
+  color: #2d3748;
+}
+
+/* Level 1 (First nested) - "Build Conference 2025", "Development Tools", etc. */
+#quarto-sidebar .sidebar-navigation .sidebar-item .sidebar-item > .sidebar-item-text {
+  padding-left: 1.8rem !important;
+  font-size: 0.9rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+/* Level 2 (Second nested) - "Conference Overview", "Git Command Line", etc. */
+#quarto-sidebar .sidebar-navigation .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
+  padding-left: 3.1rem !important;
+  font-size: 0.85rem;
+  color: #718096;
+  font-weight: 400;
+}
+
+/* Level 3 (Third nested) - Deep nested items */
+#quarto-sidebar .sidebar-navigation .sidebar-item .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
+  padding-left: 4.4rem !important;
+  font-size: 0.8rem;
+  color: #a0aec0;
+  font-weight: 400;
+}
+
+/* Fix icon alignment within sidebar items */
+#quarto-sidebar .sidebar-item-text i,
+#quarto-sidebar .sidebar-item-text .bi {
+  flex-shrink: 0;
+  width: 1em;
+  text-align: center;
+  margin-right: 0.5rem;
+}
+
+/* Hover states for better UX */
+#quarto-sidebar .sidebar-item-text:hover {
+  background-color: rgba(237, 242, 247, 0.8);
+}
+
+/* Active states - More specific and hierarchical */
+/* Level 0 (Top-level) active state */
+#quarto-sidebar .sidebar-navigation > .sidebar-item > .sidebar-item-text.active {
+  background-color: var(--primary-color);
   color: white !important;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  border: 2px solid var(--primary-color);
-  margin-bottom: 1rem;
-  padding: 0.8rem 1rem;
-  border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(123, 159, 224, 0.3);
-  transition: all 0.3s ease;
+  border-radius: 6px;
 }
 
-.sidebar .nav-link[href="index.qmd"]:hover {
-  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-dark) 100%);
-  transform: translateX(3px) translateY(-1px);
-  box-shadow: 0 6px 16px rgba(123, 159, 224, 0.4);
-  border-color: var(--secondary-color);
-  color: white !important;
+/* Level 1 (First nested) active state - lighter blue */
+#quarto-sidebar .sidebar-navigation .sidebar-item .sidebar-item > .sidebar-item-text.active {
+  background-color: rgba(123, 159, 224, 0.3);
+  color: var(--primary-dark) !important;
+  border-radius: 4px;
 }
 
-/* Bootstrap Icons spacing fix - add margin between icon and text */
-.sidebar .nav-link .bi {
-  margin-right: 0.75rem !important;
-  font-size: 1.1em;
+/* Level 2 (Second nested) active state - even lighter */
+#quarto-sidebar .sidebar-navigation .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text.active {
+  background-color: rgba(123, 159, 224, 0.15);
+  color: var(--primary-dark) !important;
+  border-radius: 4px;
+  border-left: 3px solid var(--primary-color);
 }
 
-/* General sidebar icon spacing */
-.sidebar .nav-link i {
-  margin-right: 0.75rem !important;
-  font-size: 1.1em;
+/* Level 3 (Third nested) active state - subtle highlight */
+#quarto-sidebar .sidebar-navigation .sidebar-item .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text.active {
+  background-color: rgba(123, 159, 224, 0.1);
+  color: var(--primary-dark) !important;
+  border-radius: 4px;
+  border-left: 2px solid var(--primary-color);
 }
 
-/* Force Bootstrap Icons to display with proper spacing in sidebar */
-.sidebar .sidebar-item-text .bi::before {
-  margin-right: 0.75rem !important;
+/* Ensure active state icons are properly colored */
+#quarto-sidebar .sidebar-item-text.active i,
+#quarto-sidebar .sidebar-item-text.active .bi {
+  color: inherit !important;
 }
 
-/* Section icons spacing */
-.sidebar .sidebar-section > .nav-link .bi {
-  margin-right: 0.75rem !important;
-}
-
-/* Ensure all navigation icons have consistent spacing */
-.navbar .nav-link .bi,
-.navbar .nav-link i {
-  margin-right: 0.5rem !important;
+/* Override the general active rule that was too broad */
+#quarto-sidebar .sidebar-item-text.active {
+  /* Remove this general rule as it's now handled by specific hierarchy levels above */
 }
 
 /* Custom Right Navigation Widget */
@@ -688,86 +742,4 @@ body > .custom-toc-addition {
   .page-columns .page-full {
     grid-template-columns: 1fr min(calc(900px + 2*1rem), calc(100% - 320px)) 280px 1fr;
   }
-}
-
-/* FIXED: Left sidebar hierarchical indentation and spacing */
-/* Reset default sidebar spacing */
-#quarto-sidebar {
-  line-height: 1.4;
-}
-
-/* Base sidebar item text styling */
-#quarto-sidebar .sidebar-item-text {
-  display: flex;
-  align-items: center;
-  padding: 0.3rem 0.5rem;
-  gap: 0.5rem;
-  margin: 0.1rem 0;
-  word-wrap: break-word;
-  white-space: normal;
-  overflow-wrap: break-word;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-/* Level 0 (Top-level items) - "Home", "Events", "Tools", etc. */
-#quarto-sidebar .sidebar-navigation > .sidebar-item > .sidebar-item-text {
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding-left: 0.5rem;
-  color: #2d3748;
-}
-
-/* Level 1 (First nested) - "Build Conference 2025", "Development Tools", etc. */
-#quarto-sidebar .sidebar-navigation .sidebar-item .sidebar-item > .sidebar-item-text {
-  padding-left: 1.8rem !important;
-  font-size: 0.9rem;
-  color: #4a5568;
-  font-weight: 500;
-}
-
-/* Level 2 (Second nested) - "Conference Overview", "Git Command Line", etc. */
-#quarto-sidebar .sidebar-navigation .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
-  padding-left: 3.1rem !important;
-  font-size: 0.85rem;
-  color: #718096;
-  font-weight: 400;
-}
-
-/* Level 3 (Third nested) - Deep nested items */
-#quarto-sidebar .sidebar-navigation .sidebar-item .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
-  padding-left: 4.4rem !important;
-  font-size: 0.8rem;
-  color: #a0aec0;
-  font-weight: 400;
-}
-
-/* Fix icon alignment within sidebar items */
-#quarto-sidebar .sidebar-item-text i,
-#quarto-sidebar .sidebar-item-text .bi {
-  flex-shrink: 0;
-  width: 1em;
-  text-align: center;
-  margin-right: 0.5rem;
-}
-
-/* Improve overall sidebar spacing */
-#quarto-sidebar .sidebar-item {
-  margin-bottom: 0.05rem;
-}
-
-/* Hover states for better UX */
-#quarto-sidebar .sidebar-item-text:hover {
-  background-color: rgba(237, 242, 247, 0.8);
-}
-
-/* Active states */
-#quarto-sidebar .sidebar-item-text.active {
-  background-color: var(--primary-color);
-  color: white !important;
-}
-
-#quarto-sidebar .sidebar-item-text.active i,
-#quarto-sidebar .sidebar-item-text.active .bi {
-  color: white !important;
 }
