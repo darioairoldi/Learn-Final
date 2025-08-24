@@ -443,62 +443,54 @@ a:hover {
   box-shadow: 0 3px 8px rgba(134, 239, 172, 0.4);
 }
 
-/* Home link special styling */
+/* Home link special styling - make it white and prominent */
 .sidebar .nav-link[href="index.qmd"] {
   font-weight: 600;
   font-size: 1.1rem;
   color: white !important;
-  background: linear-gradient(135deg, var(--bg-pastel-green) 0%, var(--bg-pastel-yellow) 100%);
-  border: 2px solid var(--accent-color);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border: 2px solid var(--primary-color);
   margin-bottom: 1rem;
   padding: 0.8rem 1rem;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(134, 239, 172, 0.2);
+  box-shadow: 0 3px 8px rgba(123, 159, 224, 0.3);
   transition: all 0.3s ease;
 }
 
 .sidebar .nav-link[href="index.qmd"]:hover {
-  background: linear-gradient(135deg, var(--bg-pastel-yellow) 0%, var(--bg-pastel-pink) 100%);
+  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-dark) 100%);
   transform: translateX(3px) translateY(-1px);
-  box-shadow: 0 6px 16px rgba(134, 239, 172, 0.3);
-  border-color: var(--accent-dark);
+  box-shadow: 0 6px 16px rgba(123, 159, 224, 0.4);
+  border-color: var(--secondary-color);
+  color: white !important;
 }
 
-/* Emoji spacing */
-.nav-link .emoji {
-  margin-right: 0.5rem;
+/* Bootstrap Icons spacing fix - add margin between icon and text */
+.sidebar .nav-link .bi {
+  margin-right: 0.75rem !important;
+  font-size: 1.1em;
 }
 
-/* Enhanced grid cards with pastel backgrounds */
-.grid .g-col-12 {
-  padding: 0.75rem;
+/* General sidebar icon spacing */
+.sidebar .nav-link i {
+  margin-right: 0.75rem !important;
+  font-size: 1.1em;
 }
 
-.grid .g-col-12 > div,
-.grid .g-col-12 > section {
-  background: linear-gradient(135deg, var(--bg-pastel-gray) 0%, var(--bg-pastel-blue) 100%);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.5rem;
-  height: 100%;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(123, 159, 224, 0.08);
+/* Force Bootstrap Icons to display with proper spacing in sidebar */
+.sidebar .sidebar-item-text .bi::before {
+  margin-right: 0.75rem !important;
 }
 
-.grid .g-col-12:nth-child(even) > div,
-.grid .g-col-12:nth-child(even) > section {
-  background: linear-gradient(135deg, var(--bg-pastel-green) 0%, var(--bg-pastel-yellow) 100%);
+/* Section icons spacing */
+.sidebar .sidebar-section > .nav-link .bi {
+  margin-right: 0.75rem !important;
 }
 
-.grid .g-col-12:nth-child(3n) > div,
-.grid .g-col-12:nth-child(3n) > section {
-  background: linear-gradient(135deg, var(--bg-pastel-purple) 0%, var(--bg-pastel-pink) 100%);
-}
-
-.grid .g-col-12 > div:hover,
-.grid .g-col-12 > section:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(123, 159, 224, 0.15);
+/* Ensure all navigation icons have consistent spacing */
+.navbar .nav-link .bi,
+.navbar .nav-link i {
+  margin-right: 0.5rem !important;
 }
 
 /* Custom Right Navigation Widget */
