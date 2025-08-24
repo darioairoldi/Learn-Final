@@ -468,7 +468,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (href && text && href !== '#') {
           availableLinks.push({
             text: text,
-            href: href
+            href: href,
+            level: 0 // Default level for fallback items
           });
         }
       });
@@ -480,12 +481,14 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Filter out the current page and take first 10 items
       const relevantLinks = availableLinks.filter(link => {
-        return !currentPath.includes(link.href.replace('.md', '').replace('.html', ''));
+        const linkPath = link.href.replace('.md', '').replace('.html', '').toLowerCase();
+        const currentPathNormalized = currentPath.toLowerCase();
+        return !currentPathNormalized.includes(linkPath) && !linkPath.includes(currentPathNormalized);
       }).slice(0, 10);
       
       return {
         sectionName: 'Navigation',
-        subsectionName: 'Available Pages',
+        subsectionName: `Available Pages (${relevantLinks.length} items)`,
         subsectionData: {
           pages: relevantLinks
         }
