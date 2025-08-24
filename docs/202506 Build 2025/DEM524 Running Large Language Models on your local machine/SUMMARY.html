@@ -1687,35 +1687,17 @@ Intelexion<br>
 </section>
 
 </main> <!-- /main -->
-<div id="custom-right-nav" style="display: none;">
-
-  <div class="toc-title">Related Pages</div>
-
-  <nav class="toc" role="doc-toc">
-
-    <ul>
-
-      <li><em>Loading...</em></li>
-
-    </ul>
-
-  </nav>
-
-</div>
-
-
-
 <!-- Bootstrap Icons CDN - ensures icons are loaded -->
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
 
 
 
-<!-- Additional right navigation enhancements -->
+<!-- Navbar and general icon fixes -->
 
 <style>
 
-/* Ensure icons display properly */
+/* Ensure icons display properly in navbar */
 
 .navbar .bi {
 
@@ -1799,18 +1781,6 @@ Intelexion<br>
 
 
 
-/* Ensure sidebar icons work with emoji fallback */
-
-.sidebar-navigation .sidebar-item-text {
-
-    display: inline-flex;
-
-    align-items: center;
-
-}
-
-
-
 /* Enhanced typography for better readability */
 
 .navbar-brand {
@@ -1855,7 +1825,7 @@ Intelexion<br>
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    console.log('Icon fix script loaded');
+    console.log('Navbar fixes script loaded');
 
     
 
@@ -1885,7 +1855,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (homeLink && !homeLink.querySelector('.bi')) {
 
-            console.log('Adding home icon');
+            console.log('Adding home icon to navbar');
 
             const icon = document.createElement('i');
 
@@ -1903,7 +1873,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (githubLink && !githubLink.querySelector('.bi')) {
 
-            console.log('Adding github icon');
+            console.log('Adding github icon to navbar');
 
             const icon = document.createElement('i');
 
@@ -1915,7 +1885,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
 
-        // Also try to find any other icon elements that might need fixing
+        // Fix any other icon elements that might need the .bi class
 
         const iconElements = document.querySelectorAll('[class*="bi-"]:not(.bi)');
 
@@ -1936,6 +1906,153 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
+<!-- Sidebar styling and fixes -->
+
+<style>
+
+/* Home link special styling - make it white and prominent */
+
+.sidebar .nav-link[href="index.qmd"],
+
+.sidebar .sidebar-item-text[href="index.qmd"],
+
+.sidebar a[href="index.qmd"],
+
+.sidebar-navigation .sidebar-item-text[href="index.qmd"],
+
+#quarto-sidebar .sidebar-item-text[href="index.qmd"] {
+
+  font-weight: 600 !important;
+
+  font-size: 1.1rem !important;
+
+  color: white !important;
+
+  background: linear-gradient(135deg, #2780e3 0%, #1967d2 100%) !important;
+
+  border: 2px solid #2780e3 !important;
+
+  margin-bottom: 1rem !important;
+
+  padding: 0.8rem 1rem !important;
+
+  border-radius: 12px !important;
+
+  box-shadow: 0 3px 8px rgba(39, 128, 227, 0.3) !important;
+
+  transition: all 0.3s ease !important;
+
+  display: block !important;
+
+}
+
+
+
+.sidebar .nav-link[href="index.qmd"]:hover,
+
+.sidebar .sidebar-item-text[href="index.qmd"]:hover,
+
+.sidebar a[href="index.qmd"]:hover,
+
+.sidebar-navigation .sidebar-item-text[href="index.qmd"]:hover,
+
+#quarto-sidebar .sidebar-item-text[href="index.qmd"]:hover {
+
+  background: linear-gradient(135deg, #1967d2 0%, #1557b0 100%) !important;
+
+  transform: translateX(3px) translateY(-1px) !important;
+
+  box-shadow: 0 6px 16px rgba(39, 128, 227, 0.4) !important;
+
+  border-color: #1967d2 !important;
+
+  color: white !important;
+
+}
+
+
+
+/* Ensure sidebar icons work with emoji fallback */
+
+.sidebar-navigation .sidebar-item-text {
+
+    display: inline-flex;
+
+    align-items: center;
+
+}
+
+
+
+/* Bootstrap Icons spacing fix - add margin between icon and text */
+
+.sidebar .nav-link .bi,
+
+.sidebar .sidebar-item-text .bi,
+
+#quarto-sidebar .sidebar-item-text .bi {
+
+  margin-right: 0.75rem !important;
+
+  font-size: 1.1em !important;
+
+}
+
+
+
+/* General sidebar icon spacing */
+
+.sidebar .nav-link i,
+
+.sidebar .sidebar-item-text i,
+
+#quarto-sidebar .sidebar-item-text i {
+
+  margin-right: 0.75rem !important;
+
+  font-size: 1.1em !important;
+
+}
+
+
+
+/* Force Bootstrap Icons to display with proper spacing in sidebar */
+
+.sidebar .sidebar-item-text .bi::before,
+
+#quarto-sidebar .sidebar-item-text .bi::before {
+
+  margin-right: 0.75rem !important;
+
+}
+
+
+
+/* Section icons spacing */
+
+.sidebar .sidebar-section > .nav-link .bi,
+
+#quarto-sidebar .sidebar-section > .sidebar-item-text .bi {
+
+  margin-right: 0.75rem !important;
+
+}
+
+
+
+/* Also target the Home icon specifically */
+
+.sidebar .sidebar-item-text[href="index.qmd"] .bi-house-fill,
+
+#quarto-sidebar .sidebar-item-text[href="index.qmd"] .bi-house-fill {
+
+  color: white !important;
+
+  margin-right: 0.75rem !important;
+
+}
+
+</style>
 
 
 
@@ -1943,825 +2060,98 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  console.log('Custom right navigation loading...'); // Debug log
+    console.log('Sidebar fixes script loaded');
 
-  
-
-  // Wait for Quarto to finish loading
-
-  setTimeout(function() {
-
-    createCustomRightNav();
-
-    handleResponsiveLayout();
-
-  }, 500);
-
-  
-
-  // Also try when the page is fully loaded
-
-  window.addEventListener('load', function() {
+    
 
     setTimeout(function() {
 
-      if (!document.querySelector('#custom-right-nav')) {
+        // Fix sidebar Home link styling
 
-        createCustomRightNav();
+        const sidebarHomeLinks = document.querySelectorAll(
 
-      }
+            '.sidebar a[href*="index"], #quarto-sidebar a[href*="index"], .sidebar-item-text[href*="index"]'
 
-      renderRightNav();
+        );
 
-    }, 200);
+        sidebarHomeLinks.forEach(link => {
 
-  });
+            if (link.textContent.trim().toLowerCase().includes('home')) {
 
-  
+                console.log('Applying white styling to Home link in sidebar');
 
-  // Handle window resize
+                link.style.setProperty('color', 'white', 'important');
 
-  window.addEventListener('resize', handleResponsiveLayout);
+                link.style.setProperty('background', 'linear-gradient(135deg, #2780e3 0%, #1967d2 100%)', 'important');
 
-  
+                link.style.setProperty('border', '2px solid #2780e3', 'important');
 
-  // Dynamic navigation structure - reads from Quarto's rendered sidebar
+                link.style.setProperty('border-radius', '12px', 'important');
 
-  function extractNavigationFromSidebar() {
+                link.style.setProperty('padding', '0.8rem 1rem', 'important');
 
-    const sidebar = document.querySelector('#quarto-sidebar');
+                link.style.setProperty('font-weight', '600', 'important');
 
-    if (!sidebar) {
+                link.style.setProperty('box-shadow', '0 3px 8px rgba(39, 128, 227, 0.3)', 'important');
 
-      console.log('Sidebar not found, using fallback structure');
+                link.style.setProperty('margin-bottom', '1rem', 'important');
 
-      return getFallbackNavStructure();
+                link.classList.add('home-link-styled');
 
-    }
+                
 
-    
+                // Add home icon if missing
 
-    const navStructure = {};
+                if (!link.querySelector('.bi-house-fill')) {
 
-    
+                    const homeIcon = document.createElement('i');
 
-    // Look for the main sidebar content structure
+                    homeIcon.className = 'bi bi-house-fill';
 
-    const sidebarContent = sidebar.querySelector('.sidebar-content, .sidebar-navigation');
+                    homeIcon.style.marginRight = '0.75rem';
 
-    if (!sidebarContent) {
+                    homeIcon.style.color = 'white';
 
-      console.log('Sidebar content not found, using fallback structure');
+                    link.prepend(homeIcon);
 
-      return getFallbackNavStructure();
-
-    }
-
-    
-
-    // Find all top-level sections (like "🎉 Events", "🛠️ Tools", etc.)
-
-    const topLevelSections = sidebarContent.querySelectorAll('.sidebar-item-container');
-
-    
-
-    topLevelSections.forEach(container => {
-
-      // Look for the section header
-
-      const sectionHeader = container.querySelector('.sidebar-item-text:not([href])');
-
-      if (!sectionHeader) return;
-
-      
-
-      const sectionName = sectionHeader.textContent.trim();
-
-      if (!sectionName) return;
-
-      
-
-      console.log(`Processing section: ${sectionName}`);
-
-      
-
-      // Find subsections within this main section
-
-      const subsections = container.querySelectorAll('.sidebar-item-container .sidebar-item-container, .sidebar-section');
-
-      
-
-      if (subsections.length === 0) {
-
-        // No subsections, collect all direct links
-
-        const directLinks = container.querySelectorAll('a.sidebar-item-text[href]');
-
-        if (directLinks.length > 0) {
-
-          navStructure[sectionName] = {
-
-            'Pages': {
-
-              pages: Array.from(directLinks).map(link => ({
-
-                text: link.textContent.trim(),
-
-                href: link.getAttribute('href')
-
-              }))
+                }
 
             }
-
-          };
-
-        }
-
-      } else {
-
-        // Has subsections
-
-        navStructure[sectionName] = {};
-
-        
-
-        subsections.forEach(subsection => {
-
-          // Find subsection header
-
-          const subsectionHeader = subsection.querySelector('.sidebar-item-text:not([href])');
-
-          let subsectionName = 'Pages';
-
-          
-
-          if (subsectionHeader) {
-
-            subsectionName = subsectionHeader.textContent.trim();
-
-          } else {
-
-            // Try to get subsection name from first link or parent structure
-
-            const firstLink = subsection.querySelector('a.sidebar-item-text[href]');
-
-            if (firstLink) {
-
-              // Extract subsection name from path or use a generic name
-
-              const href = firstLink.getAttribute('href');
-
-              if (href.includes('Build 2025')) {
-
-                subsectionName = 'Build Conference 2025';
-
-              } else if (href.includes('Azure')) {
-
-                subsectionName = '☁️ Azure';
-
-              } else if (href.includes('Quarto')) {
-
-                subsectionName = 'Quarto Documentation';
-
-              } else {
-
-                subsectionName = 'Pages';
-
-              }
-
-            }
-
-          }
-
-          
-
-          console.log(`  Processing subsection: ${subsectionName}`);
-
-          
-
-          // Find all links in this subsection
-
-          const links = subsection.querySelectorAll('a.sidebar-item-text[href]');
-
-          if (links.length > 0) {
-
-            navStructure[sectionName][subsectionName] = {
-
-              pages: Array.from(links).map(link => ({
-
-                text: link.textContent.trim(),
-
-                href: link.getAttribute('href')
-
-              }))
-
-            };
-
-          }
 
         });
 
-      }
+    }, 1000);
 
-    });
+});
 
-    
+</script>
+<div id="custom-right-nav" style="display: none;">
 
-    // If extraction didn't work well, enhance with fallback data
+  <div class="toc-title">Related Pages</div>
 
-    if (Object.keys(navStructure).length === 0) {
+  <nav class="toc" role="doc-toc">
 
-      console.log('Dynamic extraction failed completely, using fallback structure');
+    <ul>
 
-      return getFallbackNavStructure();
+      <li><em>Loading...</em></li>
 
-    }
+    </ul>
 
-    
+  </nav>
 
-    // Enhance extracted structure with fallback data where missing
+</div>
 
-    const fallbackStructure = getFallbackNavStructure();
 
-    
 
-    // Ensure Build Conference 2025 has all sessions
+<script>
 
-    if (navStructure['🎉 Events'] && navStructure['🎉 Events']['Build Conference 2025']) {
+document.addEventListener('DOMContentLoaded', function() {
 
-      const extractedPages = navStructure['🎉 Events']['Build Conference 2025'].pages || [];
+  console.log('📋 Related Pages navigation loading...');
 
-      const fallbackPages = fallbackStructure['🎉 Events']['Build Conference 2025'].pages || [];
+  
 
-      
-
-      // Merge pages, preferring fallback for completeness
-
-      const allPages = [...fallbackPages];
-
-      extractedPages.forEach(page => {
-
-        if (!allPages.some(fp => fp.href === page.href)) {
-
-          allPages.push(page);
-
-        }
-
-      });
-
-      
-
-      navStructure['🎉 Events']['Build Conference 2025'].pages = allPages;
-
-    } else if (fallbackStructure['🎉 Events']) {
-
-      // If extraction missed Events section, use fallback
-
-      navStructure['🎉 Events'] = fallbackStructure['🎉 Events'];
-
-    }
-
-    
-
-    // Ensure other sections are complete too
-
-    Object.keys(fallbackStructure).forEach(sectionKey => {
-
-      if (!navStructure[sectionKey]) {
-
-        navStructure[sectionKey] = fallbackStructure[sectionKey];
-
-      } else {
-
-        // Merge subsections
-
-        Object.keys(fallbackStructure[sectionKey]).forEach(subsectionKey => {
-
-          if (!navStructure[sectionKey][subsectionKey]) {
-
-            navStructure[sectionKey][subsectionKey] = fallbackStructure[sectionKey][subsectionKey];
-
-          }
-
-        });
-
-      }
-
-    });
-
-    
-
-    console.log('Final merged navigation structure:', navStructure);
-
-    return navStructure;
-
-  }
-
-
-
-  // Enhanced navigation structure that exactly mirrors _quarto.yml hierarchy  
-
-  function getFallbackNavStructure() {
-
-    return {
-
-      'Events': {
-
-        'Build Conference 2025': {
-
-          // Main overview page
-
-          overview: { text: 'Conference Overview', href: '202506 Build 2025/Readme.md' },
-
-          // All the BRK/DEM sessions as subsections
-
-          sessions: {
-
-            'BRK101: AI-Powered .NET Modernization': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK101 Dotnet app modernization/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK103: Microsoft Developers Use AI': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK103 Microsoft Developers Use AI/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK103 Microsoft Developers Use AI/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK104: Building Next Gen Apps with AI & .NET': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK104 Building the Next Generation of Apps with AI and .NET/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK104 Building the Next Generation of Apps with AI and .NET/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK106: .NET Aspire AI & Cloud': {
-
-              pages: [
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK106 Elevating Development with .NET Aspire AI/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK114: What\'s New in C# 14': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK114 C# 14 Language Features and Beyond/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK114 C# 14 Language Features and Beyond/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK119: Debug Like a Pro': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK119 Debug Like a Pro - Improve Your Efficiency/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK119 Debug Like a Pro - Improve Your Efficiency/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK122: ASP.NET Core & Blazor Future': {
-
-              pages: [
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK122 Supercharge Your Git workflow with VS Code/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK123: Build AI Apps with Microsoft Graph': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK123 Build AI Apps with Microsoft Graph Data/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK123 Build AI Apps with Microsoft Graph Data/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK127: AI and Dev Box Developer Potential': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK127 Unleash developer potential with AI and Dev Box/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK127 Unleash developer potential with AI and Dev Box/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK141: RAG for Enterprise Agents': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK141 RAG for enterprise agents with Azure AI Search/SUMMARY.md' }
-
-              ]
-
-            },
-
-            'BRK155: Azure AI Foundry - App & Agent Factory': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK155 Azure AI Foundry - app and Agent Factory/SUMMARY.md' }
-
-              ]
-
-            },
-
-            'BRK163: M365 Agents SDK Custom Engine Development': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK163 Create agents for 365 Copilot with 365 Agents SDK/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK163 Create agents for 365 Copilot with 365 Agents SDK/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK165: Building Agents for Microsoft 365 Copilot': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK165 Building agents for Microsoft 365 Copilot/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK165 Building agents for Microsoft 365 Copilot/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK176: Multi-Agent Solutions with Copilot Studio': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK176 agent solutions with Copilot Studio and M365 Agents SDK/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK176 agent solutions with Copilot Studio and M365 Agents SDK/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK195: Inside Azure Innovations': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK195 Inside Azure innovations with Mark Russinovich/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK195 Inside Azure innovations with Mark Russinovich/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK199: Accelerate Modernization': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK199 Accelerate Modernization/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK199 Accelerate Modernization/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK204: Microsoft Databases': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK204 Whats new in Microsoft Databases/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK204 Whats new in Microsoft Databases/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK223: Windows AI Foundry': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK223 An overview of Windows AI Foundry/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK223 An overview of Windows AI Foundry/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK224: Integrate AI using Windows AI APIs': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK224 Integrate AI using Windows AI APIs/SUMMARY.md' }
-
-              ]
-
-            },
-
-            'BRK225: Windows ML - Bring Your Own Model': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK225 Bring your own model to Windows using Windows ML/SUMMARY.md' }
-
-              ]
-
-            },
-
-            'BRK226: Windows Developer Tools': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK226 Boost Development Productivity/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK226 Boost Development Productivity/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK229: MCP on Windows for Agentic Apps': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK229 Unlock agents for your apps using MCP on Windows/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK229 Unlock agents for your apps using MCP on Windows/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK229: Introducing Copilot Solutions': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK229 Introducing Copilot Solutions/SUMMARY.md' }
-
-              ]
-
-            },
-
-            'DEM508: .NET Aspire Testing': {
-
-              pages: [
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM508 Streamlining Application Testing with .NET Aspire and Playwright/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM509: Essential AI Prompts': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM509 Essential AI Prompts for Developers/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM509 Essential AI Prompts for Developers/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM515: Write Better C#': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM515 Write better C# code/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM515 Write better C# code/README.GPT5.md' }
-
-              ]
-
-            },
-
-            'DEM517: MCP Server': {
-
-              pages: [
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM517 Build, Deploy, & Use Your First MCP Server/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM518: Direct C# File Execution': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM518 dotnet run app/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM518 dotnet run app/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM519: Agent Mode for Serious Developers': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM519 Agent mode for serious developers/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM519 Agent mode for serious developers/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM520: Local AI Development': {
-
-              pages: [
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM520 Local AI Development with Foundry Local and .NET Aspire/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM524: Running LLMs Locally': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM524 Running Large Language Models on your local machine/SUMMARY.md' }
-
-              ]
-
-            },
-
-            'DEM571: PowerToys Extensions': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM571 Extending your application with powertoys/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM571 Extending your application with powertoys/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM581: Transforming Microsoft Learn with AI': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM581 Transforming Microsoft Learn with AI/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM581 Transforming Microsoft Learn with AI/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'ODFP957: Sentry & Copilot AI Debugging': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/ODFP957 Sentry and Copilot Integration for AI Debugging/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/ODFP957 Sentry and Copilot Integration for AI Debugging/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'STUDIO14: Agents & Azure AI Foundry': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/STUDIO14 Agents AI and Azure AI Foundry/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/STUDIO14 Agents AI and Azure AI Foundry/README.Sonnet4.md' }
-
-              ]
-
-            }
-
-          }
-
-        }
-
-      },
-
-      'Tools': {
-
-        'Development Tools': {
-
-          pages: [
-
-            { text: 'Git Command Line', href: '20250709 Manage GitRepo from commandline/README.md' },
-
-            { text: 'HTTP Files Testing', href: '20250711 Use http files for easy and repeatable test/README.md' },
-
-            { text: 'HTTP Files (Extended)', href: '20250713 Use http files for easy and repeatable test/README.md' }
-
-          ]
-
-        },
-
-        'Quarto Documentation': {
-
-          pages: [
-
-            { text: 'Using Quarto', href: '20250712 Use QUARTO doc for Github repos doc/README.md' },
-
-            { text: 'Quarto.yml document structure', href: '20250712 Use QUARTO doc for Github repos doc/002.01. Quarto.yml document structure.md' },
-
-            { text: 'Quarto specific markdown features', href: '20250712 Use QUARTO doc for Github repos doc/002.02. Quarto specific markdown features.md' },
-
-            { text: 'Quarto Theming and Styling', href: '20250712 Use QUARTO doc for Github repos doc/002.03. Quarto Theming and Styling.md' }
-
-          ]
-
-        }
-
-      },
-
-      'Issues & Solutions': {
-
-        'Development Issues': {
-
-          pages: [
-
-            { text: 'VS Clone Error Fix (solved)', href: '_ISSUES/20250709 fatal error cloning a repo with Visual Studio/README.md' }
-
-          ]
-
-        }
-
-      },
-
-      'Other Technologies': {
-
-        'DIY Projects': {
-
-          pages: [
-
-            { text: 'DIY Li-Ion Battery Packs', href: '20250815 DIY Battery Pack/README.md' }
-
-          ]
-
-        }
-
-      },
-
-      'Culture & Travel': {
-
-        'Travel Experiences': {
-
-          pages: [
-
-            { text: 'Paris Cultural Journey 2025', href: 'Travel/Paris 2025/README.md' }
-
-          ]
-
-        }
-
-      }
-
-    };
-
-  }
-
-
+  // Handle responsive layout function
 
   function handleResponsiveLayout() {
 
@@ -2777,7 +2167,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       customNav.style.display = 'none';
 
-    } else {
+    } else if (customNav.classList.contains('has-content')) {
 
       customNav.style.display = 'block';
 
@@ -2785,7 +2175,1025 @@ document.addEventListener('DOMContentLoaded', function() {
 
   }
 
+  
 
+  // Multiple initialization strategies to ensure it works across all page types
+
+  function initializeRightNav() {
+
+    console.log('🚀 Initializing right navigation...');
+
+    createCustomRightNav();
+
+    handleResponsiveLayout();
+
+    
+
+    // Additional attempt after a short delay for any page type
+
+    setTimeout(() => {
+
+      renderRightNav();
+
+    }, 100);
+
+  }
+
+  
+
+  // Try immediately for any page
+
+  initializeRightNav();
+
+  
+
+  // Wait for Quarto to finish loading (works for all page types)
+
+  setTimeout(initializeRightNav, 500);
+
+  
+
+  // Also try when the page is fully loaded (universal)
+
+  window.addEventListener('load', function() {
+
+    console.log('📄 Page fully loaded, attempting right nav render...');
+
+    setTimeout(function() {
+
+      if (!document.querySelector('#custom-right-nav .has-content')) {
+
+        console.log('🔄 Right nav not yet rendered, trying again...');
+
+        createCustomRightNav();
+
+      }
+
+      renderRightNav();
+
+    }, 200);
+
+  });
+
+  
+
+  // Universal fallback after page load for any menu structure
+
+  setTimeout(() => {
+
+    console.log('⏰ Final fallback attempt for right nav...');
+
+    renderRightNav();
+
+  }, 2000);
+
+  
+
+  // Handle window resize (universal)
+
+  window.addEventListener('resize', handleResponsiveLayout);
+
+  
+
+  // Dynamic navigation structure - reads from Quarto's rendered sidebar
+
+  function extractNavigationFromSidebar() {
+
+    const sidebar = document.querySelector('#quarto-sidebar');
+
+    if (!sidebar) {
+
+      console.log('❌ Sidebar not found');
+
+      return null;
+
+    }
+
+    
+
+    // Look for the main sidebar content structure - IMPROVED selectors
+
+    const sidebarContent = sidebar.querySelector('.sidebar-menu-container, .sidebar-content, .sidebar-navigation, .sidebar-menu');
+
+    if (!sidebarContent) {
+
+      console.log('❌ Sidebar content not found, available classes:', sidebar.className);
+
+      console.log('❌ Sidebar children:', Array.from(sidebar.children).map(c => c.className).join(', '));
+
+      // Fallback: try to use the sidebar itself
+
+      return extractItemsDirectly(sidebar);
+
+    }
+
+    
+
+    console.log('✅ Found sidebar content:', sidebarContent.className);
+
+    return extractItemsDirectly(sidebarContent);
+
+  }
+
+
+
+  // Extract navigation items directly from container
+
+  function extractItemsDirectly(container) {
+
+    const items = [];
+
+    
+
+    // Find all navigation items recursively with proper level tracking
+
+    function extractItems(element, level = 0) {
+
+      const childItems = [];
+
+      const directChildren = Array.from(element.children);
+
+      
+
+      directChildren.forEach(child => {
+
+        // Look for sidebar items at any level
+
+        if (child.classList.contains('sidebar-item') || 
+
+            child.classList.contains('sidebar-item-container') ||
+
+            child.classList.contains('sidebar-section')) {
+
+          const item = extractSidebarItem(child, level);
+
+          if (item) {
+
+            childItems.push(item);
+
+          }
+
+        } else if (child.tagName === 'UL' || child.tagName === 'OL') {
+
+          // Handle list structures
+
+          const listItems = extractItems(child, level);
+
+          childItems.push(...listItems);
+
+        } else if (child.children.length > 0) {
+
+          // Recurse into other containers
+
+          const nestedItems = extractItems(child, level);
+
+          childItems.push(...nestedItems);
+
+        }
+
+      });
+
+      
+
+      return childItems;
+
+    }
+
+    
+
+    function extractSidebarItem(itemElement, level) {
+
+      const textElement = itemElement.querySelector('.sidebar-item-text');
+
+      if (!textElement) return null;
+
+      
+
+      const item = {
+
+        text: textElement.textContent.trim(),
+
+        level: level,
+
+        href: textElement.getAttribute('href'),
+
+        isSection: !textElement.hasAttribute('href'),
+
+        children: []
+
+      };
+
+      
+
+      // FIXED: Find child containers more accurately
+
+      const childContainers = itemElement.querySelectorAll(':scope > .sidebar-item-container, :scope > .sidebar-section, :scope > ul, :scope > .sidebar-items');
+
+      
+
+      childContainers.forEach(childContainer => {
+
+        // Extract children at the next level
+
+        const childItems = extractItems(childContainer, level + 1);
+
+        item.children.push(...childItems);
+
+      });
+
+      
+
+      // Also check for nested sidebar items directly under this item
+
+      const directNestedItems = itemElement.querySelectorAll(':scope .sidebar-item');
+
+      directNestedItems.forEach(nestedItem => {
+
+        if (nestedItem !== itemElement) { // Avoid self-reference
+
+          const nestedItemData = extractSidebarItem(nestedItem, level + 1);
+
+          if (nestedItemData && !item.children.some(child => child.text === nestedItemData.text)) {
+
+            item.children.push(nestedItemData);
+
+          }
+
+        }
+
+      });
+
+      
+
+      console.log(`📝 Extracted item: "${item.text}" (level ${level}, ${item.children.length} children)`);
+
+      return item;
+
+    }
+
+    
+
+    const allItems = extractItems(container, 0);
+
+    console.log('📊 Total extracted navigation items:', allItems.length);
+
+    
+
+    return allItems;
+
+  }
+
+
+
+  // Find current page in navigation structure
+
+  function findCurrentPageInNav(items, currentPath) {
+
+    if (!items || items.length === 0) return null;
+
+    
+
+    const normalizedCurrentPath = currentPath.toLowerCase().replace(/\\/g, '/');
+
+    
+
+    console.log('🔍 Searching for path:', normalizedCurrentPath);
+
+    
+
+    function searchItems(itemList, parentChain = []) {
+
+      for (const item of itemList) {
+
+        if (item.href) {
+
+          const itemHref = item.href.toLowerCase().replace(/\\/g, '/').replace('.md', '');
+
+          
+
+          // Generic matching strategies - no filename assumptions
+
+          const isExactMatch = normalizedCurrentPath === itemHref;
+
+          const isContainedMatch = normalizedCurrentPath.includes(itemHref) || itemHref.includes(normalizedCurrentPath);
+
+          const isFilenameMatch = normalizedCurrentPath.endsWith(itemHref.split('/').pop());
+
+          
+
+          // Generic path-based matching - works for any file in same directory
+
+          const isSameDirectoryMatch = (
+
+            normalizedCurrentPath.split('/').slice(0, -1).join('/') === 
+
+            itemHref.split('/').slice(0, -1).join('/')
+
+          ) && (
+
+            // Only match if the filenames are related (same base name or common patterns)
+
+            normalizedCurrentPath.split('/').pop().replace(/\.(html|md)$/, '') === 
+
+            itemHref.split('/').pop().replace(/\.(html|md)$/, '') ||
+
+            // Or if one contains the other (like "summary" in "project-summary")
+
+            normalizedCurrentPath.split('/').pop().includes(itemHref.split('/').pop()) ||
+
+            itemHref.split('/').pop().includes(normalizedCurrentPath.split('/').pop())
+
+          );
+
+          
+
+          const isMatch = isExactMatch || isContainedMatch || isFilenameMatch || isSameDirectoryMatch;
+
+          
+
+          if (isMatch) {
+
+            console.log('🎯 Found current page: "' + item.text + '"');
+
+            console.log('   📄 Current path: ' + normalizedCurrentPath);
+
+            console.log('   🔗 Item href: ' + itemHref);
+
+            console.log('   ✅ Match type: ' + (isExactMatch ? 'exact' : isContainedMatch ? 'contained' : isFilenameMatch ? 'filename' : 'same-directory'));
+
+            
+
+            // FIXED: For leaf nodes, determine siblings correctly
+
+            // If this item has no children, its siblings are other items at the same level
+
+            let siblings = [];
+
+            
+
+            if (!item.children || item.children.length === 0) {
+
+              // This is a leaf node - find its siblings
+
+              // Siblings are other items in the same itemList
+
+              siblings = itemList.filter(sibling => sibling !== item && sibling.href);
+
+              console.log(`📄 Found ${siblings.length} siblings for leaf node: ${item.text}`);
+
+              console.log('📄 Siblings:', siblings.map(s => s.text));
+
+            } else {
+
+              // This is a section node - show its children
+
+              siblings = item.children.filter(child => child.href);
+
+              console.log(`📂 Found ${siblings.length} children for section node: ${item.text}`);
+
+            }
+
+            
+
+            return {
+
+              currentItem: item,
+
+              parentChain: parentChain,
+
+              siblings: siblings,
+
+              children: item.children || []
+
+            };
+
+          }
+
+        }
+
+        
+
+        // Search in children
+
+        if (item.children && item.children.length > 0) {
+
+          const result = searchItems(item.children, [...parentChain, item]);
+
+          if (result) return result;
+
+        }
+
+      }
+
+      
+
+      return null;
+
+    }
+
+
+
+    return searchItems(items);
+
+  }
+
+  
+
+  function createCustomRightNav() {
+
+    console.log('🏗️ Creating custom right nav...');
+
+    
+
+    // Try multiple container strategies for right sidebar
+
+    const containerSelectors = [
+
+      '#quarto-margin-sidebar',
+
+      '.margin-sidebar', 
+
+      '#quarto-sidebar-toc',
+
+      '.toc-right'
+
+    ];
+
+    
+
+    let targetContainer = null;
+
+    for (const selector of containerSelectors) {
+
+      targetContainer = document.querySelector(selector);
+
+      if (targetContainer) {
+
+        console.log('✅ Found right sidebar container:', selector);
+
+        break;
+
+      }
+
+    }
+
+
+
+    if (!targetContainer) {
+
+      console.log('❌ Right sidebar container not found, available elements:');
+
+      console.log('   #quarto-margin-sidebar:', !!document.querySelector('#quarto-margin-sidebar'));
+
+      console.log('   .margin-sidebar:', !!document.querySelector('.margin-sidebar'));
+
+      console.log('   #quarto-sidebar-toc:', !!document.querySelector('#quarto-sidebar-toc'));
+
+      return;
+
+    }
+
+
+
+    // Check if custom nav already exists
+
+    const existing = document.querySelector('#custom-right-nav');
+
+    if (existing) {
+
+      existing.remove();
+
+    }
+
+
+
+    // Create the custom nav element with proper styling
+
+    const customNav = document.createElement('div');
+
+    customNav.id = 'custom-right-nav';
+
+    customNav.className = 'toc-right';
+
+    customNav.innerHTML = `
+
+      <div class="toc-title">Related Pages</div>
+
+      <nav class="toc" role="doc-toc">
+
+        <ul>
+
+          <li><em>Loading...</em></li>
+
+        </ul>
+
+      </nav>
+
+    `;
+
+
+
+    // Insert into the proper Quarto right sidebar container
+
+    const existingToc = targetContainer.querySelector('.toc-right, #TOC, .table-of-contents');
+
+    if (existingToc) {
+
+      existingToc.parentNode.insertBefore(customNav, existingToc.nextSibling);
+
+      console.log('✅ Inserted custom nav after existing TOC');
+
+    } else {
+
+      targetContainer.appendChild(customNav);
+
+      console.log('✅ Appended custom nav to container');
+
+    }
+
+
+
+    // Now render the navigation
+
+    setTimeout(() => {
+
+      renderRightNav();
+
+    }, 100);
+
+  }
+
+
+
+  // Get current page path, accounting for different environments
+
+  function getCurrentPagePath() {
+
+    let path = window.location.pathname;
+
+    
+
+    // Handle different URL structures
+
+    if (path === '/' || path === '') {
+
+      return 'index';
+
+    }
+
+    
+
+    // Remove leading slash and decode URI components
+
+    path = path.replace(/^\//, '');
+
+    try {
+
+      path = decodeURIComponent(path);
+
+    } catch (e) {
+
+      // If decoding fails, use original path
+
+      console.log('⚠️ URI decoding failed, using original path');
+
+    }
+
+    
+
+    // Convert .html back to source file extensions for matching
+
+    path = path.replace('.html', '');
+
+    
+
+    console.log('📍 Current path detected:', path);
+
+    return path;
+
+  }
+
+  
+
+  // Find the relevant section for the current page
+
+  function findCurrentSection(currentPath) {
+
+    console.log('🔍 Looking for section for path:', currentPath);
+
+    
+
+    // Handle home page special case
+
+    if (!currentPath || currentPath === '/' || currentPath === '' || currentPath === 'index') {
+
+      return {
+
+        sectionName: 'Home',
+
+        subsectionName: 'Quick Navigation',
+
+        subsectionData: {
+
+          pages: [
+
+            { text: 'Build Conference 2025', href: '202506 Build 2025/Readme.html' },
+
+            { text: 'Development Tools', href: '20250712 Use QUARTO doc for Github repos doc/README.html' },
+
+            { text: 'Azure Resources', href: '20250702 Azure Naming conventions/README.html' }
+
+          ]
+
+        }
+
+      };
+
+    }
+
+    
+
+    // ALWAYS check for Build Conference pages first
+
+    if (currentPath.includes('202506 build 2025') || 
+
+        currentPath.toLowerCase().includes('build conference 2025') || 
+
+        currentPath.toLowerCase().includes('build 2025') ||
+
+        currentPath.includes('Build 2025') ||
+
+        currentPath.includes('BRK') || currentPath.includes('DEM') ||
+
+        currentPath.includes('build-2025')) {
+
+      console.log('🏢 Detected Build Conference 2025 page, forcing Build section');
+
+      return getBuildConference2025Section(currentPath);
+
+    }
+
+    
+
+    // Try to extract navigation structure from sidebar
+
+    const navItems = extractNavigationFromSidebar();
+
+    console.log('📊 Extracted navigation items count:', navItems ? navItems.length : 0);
+
+    
+
+    if (navItems && navItems.length > 0) {
+
+      // Find current page in navigation
+
+      const pageLocation = findCurrentPageInNav(navItems, currentPath);
+
+      if (pageLocation) {
+
+        const { currentItem, parentChain, siblings, children } = pageLocation;
+
+        
+
+        console.log('✅ Page location found:', {
+
+          currentItem: currentItem.text,
+
+          parentChain: parentChain.map(p => p.text),
+
+          childrenCount: children.length,
+
+          siblingsCount: siblings.length
+
+        });
+
+        
+
+        // FIXED: Always show siblings for leaf nodes, children for section nodes
+
+        if (children.length > 0) {
+
+          // Current page has children - show children
+
+          console.log(`📂 Showing children for section node: ${currentItem.text}`);
+
+          return {
+
+            sectionName: parentChain.length > 0 ? parentChain[0].text : 'Navigation',
+
+            subsectionName: `${currentItem.text} - Child Pages`,
+
+            subsectionData: {
+
+              pages: children.map(child => ({
+
+                text: child.text,
+
+                href: child.href || '#',
+
+                isSection: child.isSection
+
+              }))
+
+            };
+
+        } else if (siblings.length > 0) {
+
+          // Current page is a leaf - show siblings
+
+          console.log(`📄 Showing ${siblings.length} siblings for leaf node: ${currentItem.text}`);
+
+          const parentSection = parentChain.length > 0 ? parentChain[parentChain.length - 1] : null;
+
+          
+
+          return {
+
+            sectionName: parentChain.length > 0 ? parentChain[0].text : 'Navigation',
+
+            subsectionName: parentSection ? `${parentSection.text} - Related Pages` : 'Related Pages',
+
+            subsectionData: {
+
+              pages: siblings.map(sibling => ({
+
+                text: sibling.text,
+
+                href: sibling.href,
+
+                isSection: false
+
+              }))
+
+            };
+
+        }
+
+      }
+
+    }
+
+    
+
+    // If everything fails, use fallback
+
+    console.log('❌ Using fallback section for path:', currentPath);
+
+    return getFallbackSection(currentPath);
+
+  }
+
+
+
+  // Special handler for Build Conference 2025 pages
+
+  function getBuildConference2025Section(currentPath) {
+
+    console.log('🏢 Building Build Conference 2025 section');
+
+    
+
+    // Extract all Build 2025 session links from the current sidebar
+
+    const sidebar = document.querySelector('#quarto-sidebar');
+
+    const buildSessions = [];
+
+    
+
+    if (sidebar) {
+
+      // Look for Build Conference section in sidebar
+
+      const allLinks = sidebar.querySelectorAll('a.sidebar-item-text[href]');
+
+      allLinks.forEach(link => {
+
+        const href = link.getAttribute('href');
+
+        const text = link.textContent.trim();
+
+        if (href && text && (href.includes('202506 Build 2025') || href.includes('Build Conference') || href.includes('BRK') || href.includes('DEM'))) {
+
+          buildSessions.push({
+
+            text: text,
+
+            href: href
+
+          });
+
+        }
+
+      });
+
+    }
+
+    
+
+    // If we found sessions from sidebar, use them
+
+    if (buildSessions.length > 0) {
+
+      console.log(`🎯 Found ${buildSessions.length} Build sessions from sidebar`);
+
+      
+
+      // FIXED: Filter to get proper sibling sessions based on current page
+
+      let relevantSessions = [];
+
+      
+
+      // For "Conference Overview", show main session categories
+
+      if (currentPath.includes('Readme') || currentPath.includes('readme')) {
+
+        relevantSessions = buildSessions.filter(session => 
+
+          session.text !== 'Conference Overview' && 
+
+          (session.text.includes('Summary') || session.text.includes('Session Details') || 
+
+           session.text.includes('BRK') || session.text.includes('DEM'))
+
+        ).slice(0, 12); // Limit to avoid overwhelming
+
+      } else {
+
+        // For specific sessions, show related sessions
+
+        relevantSessions = buildSessions.filter(session => {
+
+          // Exclude the current page itself
+
+          return !currentPath.includes(session.href.replace('.md', '').replace('.html', ''));
+
+        }).slice(0, 10);
+
+      }
+
+      
+
+      return {
+
+        sectionName: 'Build Conference 2025',
+
+        subsectionName: 'Conference Sessions',
+
+        subsectionData: {
+
+          pages: relevantSessions
+
+        }
+
+      };
+
+    }
+
+    
+
+    // Fallback: Hardcoded Build 2025 sessions for when sidebar parsing fails
+
+    console.log('📋 Using fallback Build 2025 sessions');
+
+    return {
+
+      sectionName: 'Build Conference 2025',
+
+      subsectionName: 'Featured Sessions',
+
+      subsectionData: {
+
+        pages: [
+
+          { text: 'Conference Overview', href: '202506 Build 2025/Readme.html' },
+
+          { text: 'BRK101: AI-Powered .NET Modernization', href: '202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html' },
+
+          { text: 'BRK106: .NET Aspire AI & Cloud', href: '202506 Build 2025/BRK106 Elevating Development with .NET Aspire AI/README.Sonnet4.html' },
+
+          { text: 'BRK114: What\'s New in C# 14', href: '202506 Build 2025/BRK114 C# 14 Language Features and Beyond/README.Sonnet4.html' },
+
+          { text: 'BRK119: Debug Like a Pro', href: '202506 Build 2025/BRK119 Debug Like a Pro - Improve Your Efficiency/README.Sonnet4.html' },
+
+          { text: 'BRK122: ASP.NET Core & Blazor', href: '202506 Build 2025/BRK122 Supercharge Your Git workflow with VS Code/README.Sonnet4.html' },
+
+          { text: 'DEM508: .NET Aspire Testing', href: '202506 Build 2025/DEM508 Streamlining Application Testing with .NET Aspire and Playwright/README.Sonnet4.html' },
+
+          { text: 'DEM520: Local AI Development', href: '202506 Build 2025/DEM520 Local AI Development with Foundry Local and .NET Aspire/README.Sonnet4.html' },
+
+          { text: 'DEM517: MCP Servers', href: '202506 Build 2025/DEM517 Build, Deploy, & Use Your First MCP Server/README.Sonnet4.html' }
+
+        ]
+
+      }
+
+    };
+
+  }
+
+
+
+  // Generic fallback when navigation detection fails
+
+  function getFallbackSection(currentPath) {
+
+    console.log('🔄 Using generic fallback section for:', currentPath);
+
+    
+
+    // Try to determine section from path
+
+    if (currentPath.includes('azure') || currentPath.includes('Azure')) {
+
+      return {
+
+        sectionName: 'Azure Development',
+
+        subsectionName: 'Azure Resources',
+
+        subsectionData: {
+
+          pages: [
+
+            { text: 'Azure Naming Conventions', href: '20250702 Azure Naming conventions/README.html' },
+
+            { text: 'Table Storage Access', href: '20250704 TableStorageAccess options/README.html' },
+
+            { text: 'CosmosDB Access Options', href: '20250706 CosmosDB Access options/README.html' }
+
+          ]
+
+        }
+
+      };
+
+    }
+
+    
+
+    if (currentPath.includes('quarto') || currentPath.includes('Quarto')) {
+
+      return {
+
+        sectionName: 'Development Tools',
+
+        subsectionName: 'Documentation Tools',
+
+        subsectionData: {
+
+          pages: [
+
+            { text: 'Using Quarto', href: '20250712 Use QUARTO doc for Github repos doc/README.html' },
+
+            { text: 'Quarto.yml Structure', href: '20250712 Use QUARTO doc for Github repos doc/002.01. Quarto.yml document structure.html' },
+
+            { text: 'Quarto Markdown Features', href: '20250712 Use QUARTO doc for Github repos doc/002.02. Quarto specific markdown features.html' },
+
+            { text: 'Quarto Theming', href: '20250712 Use QUARTO doc for Github repos doc/002.03. Quarto Theming and Styling.html' }
+
+          ]
+
+        }
+
+      };
+
+    }
+
+    
+
+    // Generic fallback for ANY page - this ensures something always shows
+
+    return {
+
+      sectionName: 'Navigation',
+
+      subsectionName: 'Quick Links',
+
+      subsectionData: {
+
+        pages: [
+
+          { text: 'Home', href: 'index.html' },
+
+          { text: 'Build Conference 2025', href: '202506 Build 2025/Readme.html' },
+
+          { text: 'Development Tools', href: '20250712 Use QUARTO doc for Github repos doc/README.html' },
+
+          { text: 'Azure Resources', href: '20250702 Azure Naming conventions/README.html' }
+
+        ]
+
+      }
+
+    };
+
+  }
+
+  
+
+  // Render the right navigation based on the current page context
 
   function renderRightNav() {
 
@@ -2811,7 +3219,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!currentSection) {
 
-      // Hide if no relevant section found
+      // Hide if no relevant section found - this should NEVER happen now
+
+      console.log('❌ No section found - this should not happen with fallbacks');
 
       customNav.style.display = 'none';
 
@@ -2873,6 +3283,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+    // FIXED: Show context information for leaf nodes
+
+    if (currentPath.includes('202506 Build 2025') || currentPath.includes('build 2025')) {
+
+      const contextInfo = document.createElement('li');
+
+      const contextDiv = document.createElement('div');
+
+      contextDiv.textContent = 'Related conference sessions';
+
+      contextDiv.style.cssText = 'color: #666; font-style: italic; padding: 2px 8px; margin-left: 8px; font-size: 0.8em; background-color: #f0f8ff; border-left: 2px solid #2780e3; border-radius: 3px; margin-bottom: 6px;';
+
+      contextInfo.appendChild(contextDiv);
+
+      navList.appendChild(contextInfo);
+
+    }
+
+
+
     // Add all pages in the subsection
 
     if (subsectionData.pages) {
@@ -2883,9 +3313,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
 
-        if (page.isHeader) {
+        if (page.isInfo) {
 
-          // Session headers (non-clickable)
+          // Info messages (non-clickable)
+
+          const info = document.createElement('div');
+
+          info.textContent = page.text;
+
+          info.style.cssText = 'color: #888; font-style: italic; padding: 4px 8px; margin-left: 8px; font-size: 0.85em;';
+
+          li.appendChild(info);
+
+        } else if (page.isSection && !page.href) {
+
+          // Section headers (non-clickable)
 
           const header = document.createElement('div');
 
@@ -2912,6 +3354,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Handle relative paths - ensure they work with GitHub Pages
 
             if (!href.startsWith('/')) {
+
+              href = href.startsWith('./') ? href.substring(2) : href;
 
               href = '/' + href;
 
@@ -2947,11 +3391,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
           a.addEventListener('mouseleave', () => {
 
-            a.style.color = '#666';
+            const isCurrentPage = isCurrentPageHighlighted(page, currentPath);
 
-            a.style.borderLeft = '2px solid transparent';
+            a.style.color = isCurrentPage ? '#2780e3' : '#666';
 
-            a.style.backgroundColor = 'transparent';
+            a.style.borderLeft = isCurrentPage ? '3px solid #2780e3' : '2px solid transparent';
+
+            a.style.backgroundColor = isCurrentPage ? '#e7f3ff' : 'transparent';
 
           });
 
@@ -2959,15 +3405,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           // Highlight current page
 
-          const pageBasePath = page.href.replace(/^.*\//, '').replace('.md', '');
-
-          const currentBasePath = currentPath.replace(/^.*\//, '').replace('.html', '').replace('.md', '');
-
-          if (pageBasePath === currentBasePath || 
-
-              currentPath.includes(page.href.replace('.md', '')) || 
-
-              page.href.includes(currentPath.replace('.html', ''))) {
+          if (isCurrentPageHighlighted(page, currentPath)) {
 
             a.style.fontWeight = 'bold';
 
@@ -2999,375 +3437,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
   }
 
+  
 
+  // Check if the current page is highlighted in the navigation
 
-  function createCustomRightNav() {
+  function isCurrentPageHighlighted(page, currentPath) {
 
-    // Try multiple container strategies
-
-    const containerSelectors = [
-
-      '#quarto-margin-sidebar',
-
-      '.margin-sidebar', 
-
-      '#quarto-sidebar-toc',
-
-      '.sidebar-navigation'
-
-    ];
+    if (!page.href) return false;
 
     
 
-    let targetContainer = null;
+    const pageBasePath = page.href.replace(/^.*\//, '').replace('.md', '');
 
-    for (const selector of containerSelectors) {
-
-      targetContainer = document.querySelector(selector);
-
-      if (targetContainer) {
-
-        break;
-
-      }
-
-    }
-
-
-
-    if (!targetContainer) {
-
-      // Fallback to body for mobile or other layouts
-
-      targetContainer = document.body;
-
-    }
-
-
-
-    // Check if custom nav already exists
-
-    const existing = document.querySelector('#custom-right-nav');
-
-    if (existing) {
-
-      existing.remove();
-
-    }
-
-
-
-    // Create the custom nav element with proper styling
-
-    const customNav = document.createElement('div');
-
-    customNav.id = 'custom-right-nav';
-
-    customNav.className = 'toc-right';
-
-    customNav.innerHTML = `
-
-      <div class="toc-title">Related Pages</div>
-
-      <nav class="toc" role="doc-toc">
-
-        <ul>
-
-          <li><em>Loading...</em></li>
-
-        </ul>
-
-      </nav>
-
-    `;
-
-
-
-    // Insert into the proper Quarto sidebar container
-
-    const existingToc = targetContainer.querySelector('.toc-right, #TOC, .table-of-contents');
-
-    if (existingToc) {
-
-      existingToc.parentNode.insertBefore(customNav, existingToc.nextSibling);
-
-    } else {
-
-      targetContainer.appendChild(customNav);
-
-    }
-
-
-
-    // Now render the navigation
-
-    setTimeout(() => {
-
-      renderRightNav();
-
-    }, 100);
-
-  }
-
-
-
-  function getCurrentPagePath() {
-
-    let path = window.location.pathname;
+    const currentBasePath = currentPath.replace(/^.*\//, '').replace('.html', '').replace('.md', '');
 
     
 
-    // Handle different URL structures
+    return pageBasePath === currentBasePath || 
 
-    if (path === '/' || path === '') {
+           currentPath.includes(page.href.replace('.md', '')) || 
 
-      return 'index';
-
-    }
-
-    
-
-    // Remove leading slash and decode URI components
-
-    path = path.replace(/^\//, '');
-
-    try {
-
-      path = decodeURIComponent(path);
-
-    } catch (e) {
-
-      // If decoding fails, use original path
-
-    }
-
-    
-
-    // Convert .html back to source file extensions for matching
-
-    path = path.replace('.html', '');
-
-    
-
-    console.log('Current path detected:', path); // Debug log
-
-    return path;
-
-  }
-
-
-
-  function findCurrentSection(currentPath) {
-
-    console.log('🔍 Looking for section for path:', currentPath);
-
-    
-
-    const navStructure = getFallbackNavStructure();
-
-    const normalizedCurrentPath = currentPath.toLowerCase().replace(/\\/g, '/');
-
-    
-
-    // Handle home page special case
-
-    if (!currentPath || currentPath === '/' || currentPath === '' || currentPath === 'index') {
-
-      return {
-
-        sectionName: 'Home',
-
-        subsectionName: 'Featured Sections',
-
-        subsectionData: {
-
-          pages: [
-
-            { text: 'Build Conference 2025', href: '202506 Build 2025/Readme.md' },
-
-            { text: 'Development Tools', href: '20250712 Use QUARTO doc for Github repos doc/README.md' },
-
-            { text: 'Culture & Travel', href: 'Travel/Paris 2025/README.md' }
-
-          ]
-
-        }
-
-      };
-
-    }
-
-    
-
-    // Special handling for Build Conference structure
-
-    if (normalizedCurrentPath.includes('202506 build 2025')) {
-
-      const buildSection = navStructure['Events']['Build Conference 2025'];
-
-      
-
-      console.log('📅 Detected Build Conference path');
-
-      
-
-      // Check if we're on the main Build Conference overview page
-
-      const overviewHref = buildSection.overview.href.toLowerCase().replace(/\\/g, '/').replace('.md', '');
-
-      if (normalizedCurrentPath.includes(overviewHref) || overviewHref.includes(normalizedCurrentPath)) {
-
-        console.log('✅ On Build Conference overview - showing all sessions');
-
-        
-
-        // Show all session titles as children
-
-        const allSessions = [];
-
-        Object.keys(buildSection.sessions).forEach(sessionName => {
-
-          allSessions.push({ text: sessionName, href: '#session', isHeader: true });
-
-        });
-
-        
-
-        return {
-
-          sectionName: 'Events',
-
-          subsectionName: 'Build Conference 2025 - All Sessions',
-
-          subsectionData: { pages: allSessions }
-
-        };
-
-      }
-
-      
-
-      // Check if we're in a specific session
-
-      for (const [sessionName, sessionData] of Object.entries(buildSection.sessions)) {
-
-        if (sessionData.pages) {
-
-          const matchingPage = sessionData.pages.find(page => {
-
-            const pageHref = page.href.toLowerCase().replace(/\\/g, '/').replace('.md', '');
-
-            const isMatch = normalizedCurrentPath.includes(pageHref) || pageHref.includes(normalizedCurrentPath);
-
-            
-
-            if (isMatch) {
-
-              console.log(`🎯 Found match in session: ${sessionName} - page: ${page.text}`);
-
-            }
-
-            
-
-            return isMatch;
-
-          });
-
-          
-
-          if (matchingPage) {
-
-            console.log(`✅ Found in session: ${sessionName} - showing siblings`);
-
-            // Show sibling pages within this session (Summary + Session Details)
-
-            return {
-
-              sectionName: 'Events',
-
-              subsectionName: sessionName,
-
-              subsectionData: sessionData
-
-            };
-
-          }
-
-        }
-
-      }
-
-    }
-
-    
-
-    // Check other sections (Tools, Issues & Solutions, etc.)
-
-    for (const [sectionName, sections] of Object.entries(navStructure)) {
-
-      if (sectionName === 'Events') continue; // Already handled above
-
-      
-
-      for (const [subsectionName, subsectionData] of Object.entries(sections)) {
-
-        if (!subsectionData.pages) continue;
-
-        
-
-        console.log(`🔍 Checking ${sectionName} > ${subsectionName}`);
-
-        
-
-        // Check if any page in this subsection matches current path
-
-        const matchingPage = subsectionData.pages.find(page => {
-
-          const pageHref = page.href.toLowerCase().replace(/\\/g, '/').replace('.md', '');
-
-          const isMatch = normalizedCurrentPath.includes(pageHref) || pageHref.includes(normalizedCurrentPath);
-
-          
-
-          if (isMatch) {
-
-            console.log(`🎯 Found match in ${subsectionName} - page: ${page.text}`);
-
-          }
-
-          
-
-          return isMatch;
-
-        });
-
-        
-
-        if (matchingPage) {
-
-          console.log(`✅ Found in subsection: ${subsectionName} - showing siblings`);
-
-          return {
-
-            sectionName,
-
-            subsectionName,
-
-            subsectionData
-
-          };
-
-        }
-
-      }
-
-    }
-
-    
-
-    console.log('❌ No matching section found for path:', normalizedCurrentPath);
-
-    return null;
+           page.href.includes(currentPath.replace('.html', ''));
 
   }
 
@@ -3379,7 +3469,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <style>
 
-/* Professional custom navigation styling */
+/* Professional Related Pages navigation styling - RIGHT SIDEBAR ONLY */
 
 #custom-right-nav {
 
@@ -3569,7 +3659,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
 
-  /* In larger screens, position in sidebar */
+  /* In larger screens, position in right sidebar */
 
   .page-columns .margin-sidebar #custom-right-nav {
 

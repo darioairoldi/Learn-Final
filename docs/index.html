@@ -2002,6 +2002,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
 
+  // Handle responsive layout function
+
+  function handleResponsiveLayout() {
+
+    const customNav = document.querySelector('#custom-right-nav');
+
+    if (!customNav) return;
+
+    
+
+    const isMobile = window.innerWidth <= 800;
+
+    if (isMobile) {
+
+      customNav.style.display = 'none';
+
+    } else if (customNav.classList.contains('has-content')) {
+
+      customNav.style.display = 'block';
+
+    }
+
+  }
+
+  
+
   // Multiple initialization strategies to ensure it works across all page types
 
   function initializeRightNav() {
@@ -2096,13 +2122,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    // Look for the main sidebar content structure
+    // Look for the main sidebar content structure - FIXED selectors
 
-    const sidebarContent = sidebar.querySelector('.sidebar-content, .sidebar-navigation');
+    const sidebarContent = sidebar.querySelector('.sidebar-menu-container, .sidebar-content, .sidebar-navigation');
 
     if (!sidebarContent) {
 
-      console.log('❌ Sidebar content not found');
+      console.log('❌ Sidebar content not found, available classes:', sidebar.className);
+
+      console.log('❌ Sidebar children:', Array.from(sidebar.children).map(c => c.className).join(', '));
 
       return null;
 
@@ -2110,7 +2138,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    console.log('✅ Found sidebar content, extracting structure...');
+    console.log('✅ Found sidebar content:', sidebarContent.className);
 
     
 
@@ -2182,9 +2210,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
       
 
-      // Find child items
+      // Find child items - IMPROVED selector
 
-      const childContainers = itemElement.querySelectorAll(':scope > .sidebar-item-container, :scope > .sidebar-section');
+      const childContainers = itemElement.querySelectorAll(':scope > .sidebar-item-container, :scope > .sidebar-section, :scope > ul');
 
       childContainers.forEach(childContainer => {
 
@@ -2217,6 +2245,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Find current page in navigation structure
 
   function findCurrentPageInNav(items, currentPath) {
+
+    if (!items || items.length === 0) return null;
+
+    
 
     const normalizedCurrentPath = currentPath.toLowerCase().replace(/\\/g, '/');
 
@@ -2288,19 +2320,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
             
 
+            // FIXED: For leaf nodes, determine siblings correctly
+
+            // If this item has no children, its siblings are other items at the same level
+
+            let siblings = [];
+
+            
+
+            if (!item.children || item.children.length === 0) {
+
+              // This is a leaf node - find its siblings
+
+              // Siblings are other items in the same itemList
+
+              siblings = itemList.filter(sibling => sibling !== item && sibling.href);
+
+              console.log(`📄 Found ${siblings.length} siblings for leaf node: ${item.text}`);
+
+              console.log('📄 Siblings:', siblings.map(s => s.text));
+
+            } else {
+
+              // This is a section node - show its children
+
+              siblings = item.children.filter(child => child.href);
+
+              console.log(`📂 Found ${siblings.length} children for section node: ${item.text}`);
+
+            }
+
+            
+
             return {
 
               currentItem: item,
 
               parentChain: parentChain,
 
-              siblings: itemList,
+              siblings: siblings,
 
               children: item.children || []
 
             };
 
           }
+
+        }
+
+        
+
+        // Search in children
+
+        if (item.children && item.children.length > 0) {
+
+          const result = searchItems(item.children, [...parentChain, item]);
+
+          if (result) return result;
 
         }
 
@@ -2322,6 +2398,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function createCustomRightNav() {
 
+    console.log('🏗️ Creating custom right nav...');
+
+    
+
     // Try multiple container strategies for right sidebar
 
     const containerSelectors = [
@@ -2330,7 +2410,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
       '.margin-sidebar', 
 
-      '#quarto-sidebar-toc'
+      '#quarto-sidebar-toc',
+
+      '.toc-right'
 
     ];
 
@@ -2344,6 +2426,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (targetContainer) {
 
+        console.log('✅ Found right sidebar container:', selector);
+
         break;
 
       }
@@ -2354,7 +2438,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!targetContainer) {
 
-      console.log('❌ Right sidebar container not found');
+      console.log('❌ Right sidebar container not found, available elements:');
+
+      console.log('   #quarto-margin-sidebar:', !!document.querySelector('#quarto-margin-sidebar'));
+
+      console.log('   .margin-sidebar:', !!document.querySelector('.margin-sidebar'));
+
+      console.log('   #quarto-sidebar-toc:', !!document.querySelector('#quarto-sidebar-toc'));
 
       return;
 
@@ -2408,9 +2498,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
       existingToc.parentNode.insertBefore(customNav, existingToc.nextSibling);
 
+      console.log('✅ Inserted custom nav after existing TOC');
+
     } else {
 
       targetContainer.appendChild(customNav);
+
+      console.log('✅ Appended custom nav to container');
 
     }
 
@@ -2500,7 +2594,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
           pages: [
 
-            { text: 'Browse sidebar for more content', href: '#', isInfo: true }
+            { text: 'Build Conference 2025', href: '202506 Build 2025/Readme.html' },
+
+            { text: 'Development Tools', href: '20250712 Use QUARTO doc for Github repos doc/README.html' },
+
+            { text: 'Azure Resources', href: '20250702 Azure Naming conventions/README.html' }
 
           ]
 
@@ -2512,115 +2610,381 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    // Extract navigation structure from sidebar
+    // ALWAYS check for Build Conference pages first
+
+    if (currentPath.includes('202506 build 2025') || 
+
+        currentPath.toLowerCase().includes('build conference 2025') || 
+
+        currentPath.toLowerCase().includes('build 2025') ||
+
+        currentPath.includes('Build 2025') ||
+
+        currentPath.includes('BRK') || currentPath.includes('DEM') ||
+
+        currentPath.includes('build-2025')) {
+
+      console.log('🏢 Detected Build Conference 2025 page, forcing Build section');
+
+      return getBuildConference2025Section(currentPath);
+
+    }
+
+    
+
+    // Try to extract navigation structure from sidebar
 
     const navItems = extractNavigationFromSidebar();
 
-    if (!navItems || navItems.length === 0) {
-
-      console.log('❌ No navigation items found');
-
-      return null;
-
-    }
+    console.log('📊 Extracted navigation items count:', navItems ? navItems.length : 0);
 
     
 
-    // Find current page in navigation
+    if (navItems && navItems.length > 0) {
 
-    const pageLocation = findCurrentPageInNav(navItems, currentPath);
+      // Find current page in navigation
 
-    if (!pageLocation) {
+      const pageLocation = findCurrentPageInNav(navItems, currentPath);
 
-      console.log('❌ Current page not found in navigation');
+      if (pageLocation) {
 
-      return null;
+        const { currentItem, parentChain, siblings, children } = pageLocation;
 
-    }
+        
 
-    
+        console.log('✅ Page location found:', {
 
-    const { currentItem, parentChain, siblings, children } = pageLocation;
+          currentItem: currentItem.text,
 
-    
+          parentChain: parentChain.map(p => p.text),
 
-    console.log('✅ Page location found:', {
+          childrenCount: children.length,
 
-      currentItem: currentItem.text,
+          siblingsCount: siblings.length
 
-      parentChain: parentChain.map(p => p.text),
+        });
 
-      childrenCount: children.length,
+        
 
-      siblingsCount: siblings.length
+        // FIXED: Always show siblings for leaf nodes, children for section nodes
 
-    });
+        if (children.length > 0) {
 
-    
+          // Current page has children - show children
 
-    // Determine what to show based on the page type and location
+          console.log(`📂 Showing children for section node: ${currentItem.text}`);
 
-    if (children.length > 0) {
+          return {
 
-      // Current page has children - show children
+            sectionName: parentChain.length > 0 ? parentChain[0].text : 'Navigation',
 
-      console.log(`📂 Showing children for: ${currentItem.text}`);
+            subsectionName: `${currentItem.text} - Child Pages`,
 
-      return {
+            subsectionData: {
 
-        sectionName: parentChain.length > 0 ? parentChain[0].text : 'Navigation',
+              pages: children.map(child => ({
 
-        subsectionName: `${currentItem.text} - Children`,
+                text: child.text,
 
-        subsectionData: {
+                href: child.href || '#',
 
-          pages: children.map(child => ({
+                isSection: child.isSection
 
-            text: child.text,
+              }))
 
-            href: child.href || '#',
+            };
 
-            isSection: child.isSection
+        } else if (siblings.length > 0) {
 
-          }))
+          // Current page is a leaf - show siblings
+
+          console.log(`📄 Showing ${siblings.length} siblings for leaf node: ${currentItem.text}`);
+
+          const parentSection = parentChain.length > 0 ? parentChain[parentChain.length - 1] : null;
+
+          
+
+          return {
+
+            sectionName: parentChain.length > 0 ? parentChain[0].text : 'Navigation',
+
+            subsectionName: parentSection ? `${parentSection.text} - Related Pages` : 'Related Pages',
+
+            subsectionData: {
+
+              pages: siblings.map(sibling => ({
+
+                text: sibling.text,
+
+                href: sibling.href,
+
+                isSection: false
+
+              }))
+
+            };
 
         }
 
-      };
+      }
 
-    } else {
+    }
 
-      // Current page is a leaf - show siblings
+    
 
-      console.log(`📄 Showing siblings for: ${currentItem.text}`);
+    // If everything fails, use fallback
 
-      const parentSection = parentChain.length > 0 ? parentChain[parentChain.length - 1] : null;
+    console.log('❌ Using fallback section for path:', currentPath);
+
+    return getFallbackSection(currentPath);
+
+  }
+
+
+
+  // Special handler for Build Conference 2025 pages
+
+  function getBuildConference2025Section(currentPath) {
+
+    console.log('🏢 Building Build Conference 2025 section');
+
+    
+
+    // Extract all Build 2025 session links from the current sidebar
+
+    const sidebar = document.querySelector('#quarto-sidebar');
+
+    const buildSessions = [];
+
+    
+
+    if (sidebar) {
+
+      // Look for Build Conference section in sidebar
+
+      const allLinks = sidebar.querySelectorAll('a.sidebar-item-text[href]');
+
+      allLinks.forEach(link => {
+
+        const href = link.getAttribute('href');
+
+        const text = link.textContent.trim();
+
+        if (href && text && (href.includes('202506 Build 2025') || href.includes('Build Conference') || href.includes('BRK') || href.includes('DEM'))) {
+
+          buildSessions.push({
+
+            text: text,
+
+            href: href
+
+          });
+
+        }
+
+      });
+
+    }
+
+    
+
+    // If we found sessions from sidebar, use them
+
+    if (buildSessions.length > 0) {
+
+      console.log(`🎯 Found ${buildSessions.length} Build sessions from sidebar`);
+
+      
+
+      // FIXED: Filter to get proper sibling sessions based on current page
+
+      let relevantSessions = [];
+
+      
+
+      // For "Conference Overview", show main session categories
+
+      if (currentPath.includes('Readme') || currentPath.includes('readme')) {
+
+        relevantSessions = buildSessions.filter(session => 
+
+          session.text !== 'Conference Overview' && 
+
+          (session.text.includes('Summary') || session.text.includes('Session Details') || 
+
+           session.text.includes('BRK') || session.text.includes('DEM'))
+
+        ).slice(0, 12); // Limit to avoid overwhelming
+
+      } else {
+
+        // For specific sessions, show related sessions
+
+        relevantSessions = buildSessions.filter(session => {
+
+          // Exclude the current page itself
+
+          return !currentPath.includes(session.href.replace('.md', '').replace('.html', ''));
+
+        }).slice(0, 10);
+
+      }
 
       
 
       return {
 
-        sectionName: parentChain.length > 0 ? parentChain[0].text : 'Navigation',
+        sectionName: 'Build Conference 2025',
 
-        subsectionName: parentSection ? `${parentSection.text} - Pages` : 'Related Pages',
+        subsectionName: 'Conference Sessions',
 
         subsectionData: {
 
-          pages: siblings.filter(sibling => sibling.href).map(sibling => ({
-
-            text: sibling.text,
-
-            href: sibling.href,
-
-            isSection: false
-
-          }))
+          pages: relevantSessions
 
         }
 
       };
 
     }
+
+    
+
+    // Fallback: Hardcoded Build 2025 sessions for when sidebar parsing fails
+
+    console.log('📋 Using fallback Build 2025 sessions');
+
+    return {
+
+      sectionName: 'Build Conference 2025',
+
+      subsectionName: 'Featured Sessions',
+
+      subsectionData: {
+
+        pages: [
+
+          { text: 'Conference Overview', href: '202506 Build 2025/Readme.html' },
+
+          { text: 'BRK101: AI-Powered .NET Modernization', href: '202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html' },
+
+          { text: 'BRK106: .NET Aspire AI & Cloud', href: '202506 Build 2025/BRK106 Elevating Development with .NET Aspire AI/README.Sonnet4.html' },
+
+          { text: 'BRK114: What\'s New in C# 14', href: '202506 Build 2025/BRK114 C# 14 Language Features and Beyond/README.Sonnet4.html' },
+
+          { text: 'BRK119: Debug Like a Pro', href: '202506 Build 2025/BRK119 Debug Like a Pro - Improve Your Efficiency/README.Sonnet4.html' },
+
+          { text: 'BRK122: ASP.NET Core & Blazor', href: '202506 Build 2025/BRK122 Supercharge Your Git workflow with VS Code/README.Sonnet4.html' },
+
+          { text: 'DEM508: .NET Aspire Testing', href: '202506 Build 2025/DEM508 Streamlining Application Testing with .NET Aspire and Playwright/README.Sonnet4.html' },
+
+          { text: 'DEM520: Local AI Development', href: '202506 Build 2025/DEM520 Local AI Development with Foundry Local and .NET Aspire/README.Sonnet4.html' },
+
+          { text: 'DEM517: MCP Servers', href: '202506 Build 2025/DEM517 Build, Deploy, & Use Your First MCP Server/README.Sonnet4.html' }
+
+        ]
+
+      }
+
+    };
+
+  }
+
+
+
+  // Generic fallback when navigation detection fails
+
+  function getFallbackSection(currentPath) {
+
+    console.log('🔄 Using generic fallback section for:', currentPath);
+
+    
+
+    // Try to determine section from path
+
+    if (currentPath.includes('azure') || currentPath.includes('Azure')) {
+
+      return {
+
+        sectionName: 'Azure Development',
+
+        subsectionName: 'Azure Resources',
+
+        subsectionData: {
+
+          pages: [
+
+            { text: 'Azure Naming Conventions', href: '20250702 Azure Naming conventions/README.html' },
+
+            { text: 'Table Storage Access', href: '20250704 TableStorageAccess options/README.html' },
+
+            { text: 'CosmosDB Access Options', href: '20250706 CosmosDB Access options/README.html' }
+
+          ]
+
+        }
+
+      };
+
+    }
+
+    
+
+    if (currentPath.includes('quarto') || currentPath.includes('Quarto')) {
+
+      return {
+
+        sectionName: 'Development Tools',
+
+        subsectionName: 'Documentation Tools',
+
+        subsectionData: {
+
+          pages: [
+
+            { text: 'Using Quarto', href: '20250712 Use QUARTO doc for Github repos doc/README.html' },
+
+            { text: 'Quarto.yml Structure', href: '20250712 Use QUARTO doc for Github repos doc/002.01. Quarto.yml document structure.html' },
+
+            { text: 'Quarto Markdown Features', href: '20250712 Use QUARTO doc for Github repos doc/002.02. Quarto specific markdown features.html' },
+
+            { text: 'Quarto Theming', href: '20250712 Use QUARTO doc for Github repos doc/002.03. Quarto Theming and Styling.html' }
+
+          ]
+
+        }
+
+      };
+
+    }
+
+    
+
+    // Generic fallback for ANY page - this ensures something always shows
+
+    return {
+
+      sectionName: 'Navigation',
+
+      subsectionName: 'Quick Links',
+
+      subsectionData: {
+
+        pages: [
+
+          { text: 'Home', href: 'index.html' },
+
+          { text: 'Build Conference 2025', href: '202506 Build 2025/Readme.html' },
+
+          { text: 'Development Tools', href: '20250712 Use QUARTO doc for Github repos doc/README.html' },
+
+          { text: 'Azure Resources', href: '20250702 Azure Naming conventions/README.html' }
+
+        ]
+
+      }
+
+    };
 
   }
 
@@ -2652,7 +3016,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!currentSection) {
 
-      // Hide if no relevant section found
+      // Hide if no relevant section found - this should NEVER happen now
+
+      console.log('❌ No section found - this should not happen with fallbacks');
 
       customNav.style.display = 'none';
 
@@ -2711,6 +3077,26 @@ document.addEventListener('DOMContentLoaded', function() {
     sectionHeader.style.cssText = 'color: #2780e3; margin-bottom: 8px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;';
 
     navList.appendChild(sectionHeader);
+
+
+
+    // FIXED: Show context information for leaf nodes
+
+    if (currentPath.includes('202506 Build 2025') || currentPath.includes('build 2025')) {
+
+      const contextInfo = document.createElement('li');
+
+      const contextDiv = document.createElement('div');
+
+      contextDiv.textContent = 'Related conference sessions';
+
+      contextDiv.style.cssText = 'color: #666; font-style: italic; padding: 2px 8px; margin-left: 8px; font-size: 0.8em; background-color: #f0f8ff; border-left: 2px solid #2780e3; border-radius: 3px; margin-bottom: 6px;';
+
+      contextInfo.appendChild(contextDiv);
+
+      navList.appendChild(contextInfo);
+
+    }
 
 
 
@@ -2784,7 +3170,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           a.textContent = page.text || page.title || 'Untitled';
 
-          a.style.cssText = 'color: #666; text-decoration: none; display: block; padding: 4px 8px; margin-left: 16px; border-left: 2px solid transparent; transition: all 0.2s ease;';
+          a.style.cssText = 'color: #666; text-decoration: none; display: block; padding: 4px 8px; margin-left: 16px; border-left: 2px solid transparent; transition: all 0.2s ease; font-size: 0.9em;';
 
           
 
@@ -2854,31 +3240,253 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function isCurrentPageHighlighted(page, currentPath) {
 
-    const normalizedCurrentPath = currentPath.toLowerCase().replace(/\\/g, '/');
-
-    const itemHref = page.href ? page.href.toLowerCase().replace(/\\/g, '/').replace('.md', '') : '';
+    if (!page.href) return false;
 
     
 
-    return normalizedCurrentPath === itemHref;
+    const pageBasePath = page.href.replace(/^.*\//, '').replace('.md', '');
+
+    const currentBasePath = currentPath.replace(/^.*\//, '').replace('.html', '').replace('.md', '');
+
+    
+
+    return pageBasePath === currentBasePath || 
+
+           currentPath.includes(page.href.replace('.md', '')) || 
+
+           page.href.includes(currentPath.replace('.html', ''));
 
   }
-
-
-
-  // Initial population of the right nav based on the current page
-
-  setTimeout(() => {
-
-    console.log('⏳ Attempting initial right nav render...');
-
-    renderRightNav();
-
-  }, 500);
 
 });
 
 </script>
+
+
+
+<style>
+
+/* Professional Related Pages navigation styling - RIGHT SIDEBAR ONLY */
+
+#custom-right-nav {
+
+  width: 100%;
+
+  background: #f8f9fa;
+
+  border: 1px solid #e9ecef;
+
+  border-radius: 6px;
+
+  padding: 12px;
+
+  margin-top: 16px;
+
+  font-size: 0.9rem;
+
+  max-height: 70vh;
+
+  overflow-y: auto;
+
+  scroll-behavior: smooth;
+
+}
+
+
+
+#custom-right-nav .toc-title {
+
+  font-weight: 600;
+
+  font-size: 1rem;
+
+  color: #2780e3;
+
+  margin-bottom: 12px;
+
+  padding-bottom: 6px;
+
+  border-bottom: 2px solid #2780e3;
+
+}
+
+
+
+#custom-right-nav ul {
+
+  list-style: none;
+
+  padding: 0;
+
+  margin: 0;
+
+}
+
+
+
+#custom-right-nav li {
+
+  margin: 2px 0;
+
+}
+
+
+
+#custom-right-nav a {
+
+  color: #666;
+
+  text-decoration: none;
+
+  display: block;
+
+  padding: 3px 8px;
+
+  border-radius: 4px;
+
+  transition: all 0.2s ease;
+
+  font-size: 0.9em;
+
+  line-height: 1.3;
+
+}
+
+
+
+#custom-right-nav a:hover {
+
+  background-color: #e7f3ff;
+
+  color: #2780e3;
+
+  text-decoration: none;
+
+}
+
+
+
+/* Compact view for longer lists */
+
+#custom-right-nav.has-many-pages {
+
+  font-size: 0.85rem;
+
+}
+
+
+
+#custom-right-nav.has-many-pages li {
+
+  margin: 1px 0;
+
+}
+
+
+
+#custom-right-nav.has-many-pages a {
+
+  padding: 2px 6px;
+
+  font-size: 0.85em;
+
+}
+
+
+
+/* Scrollbar styling */
+
+#custom-right-nav::-webkit-scrollbar {
+
+  width: 6px;
+
+}
+
+
+
+#custom-right-nav::-webkit-scrollbar-track {
+
+  background: #f1f1f1;
+
+  border-radius: 3px;
+
+}
+
+
+
+#custom-right-nav::-webkit-scrollbar-thumb {
+
+  background: #c1c1c1;
+
+  border-radius: 3px;
+
+}
+
+
+
+#custom-right-nav::-webkit-scrollbar-thumb:hover {
+
+  background: #a8a8a8;
+
+}
+
+
+
+/* Responsive behavior */
+
+@media (max-width: 800px) {
+
+  #custom-right-nav {
+
+    display: none; /* Hide on mobile to save space */
+
+  }
+
+}
+
+
+
+@media (min-width: 801px) {
+
+  #custom-right-nav {
+
+    display: block;
+
+  }
+
+  
+
+  /* In larger screens, position in right sidebar */
+
+  .page-columns .margin-sidebar #custom-right-nav {
+
+    position: sticky;
+
+    top: 2rem;
+
+  }
+
+}
+
+
+
+/* For very long lists, add zebra striping */
+
+#custom-right-nav.has-many-pages li:nth-child(even) a {
+
+  background-color: rgba(0,0,0,0.02);
+
+}
+
+
+
+#custom-right-nav.has-many-pages li:nth-child(even) a:hover {
+
+  background-color: #e7f3ff;
+
+}
+
+</style>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
