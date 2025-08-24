@@ -409,15 +409,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!currentSection) {
       // Hide if no relevant section found
       customNav.style.display = 'none';
-      if (window.innerWidth <= 800) {
-        // On mobile, show a simple overview
-        const navList = customNav.querySelector('ul');
-        navList.innerHTML = `
-          <li>- 🎉 Events → Build Conference 2025</li>
-          <li>- 💻 Technologies → ☁️ Azure</li>
-          <li>- 🎭 Culture & Travel → Travel Experiences</li>
-        `;
-      }
       return;
     }
 
@@ -430,6 +421,9 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('Nav list not found'); // Debug log
       return;
     }
+
+    // Calculate page count first
+    const pageCount = subsectionData.pages ? subsectionData.pages.length : 0;
 
     // Show the custom nav
     customNav.style.display = 'block';
@@ -446,7 +440,6 @@ document.addEventListener('DOMContentLoaded', function() {
     navList.innerHTML = '';
 
     // Add section header with page count
-    const pageCount = subsectionData.pages ? subsectionData.pages.length : 0;
     const sectionHeader = document.createElement('li');
     sectionHeader.innerHTML = `<strong>${subsectionName}</strong> <span style="color: #888; font-size: 0.8em;">(${pageCount} pages)</span>`;
     sectionHeader.style.cssText = 'color: #2780e3; margin-bottom: 8px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;';
@@ -461,7 +454,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Construct proper href path
         let href = page.href;
         if (href && !href.startsWith('http')) {
-          // Handle relative paths
+          // Handle relative paths - ensure they work with GitHub Pages
           if (!href.startsWith('/')) {
             href = '/' + href;
           }
@@ -515,7 +508,8 @@ document.addEventListener('DOMContentLoaded', function() {
         a.addEventListener('click', (e) => {
           if (a.href) {
             console.log('Navigating to:', a.href);
-            window.location.href = a.href;
+            // Let the browser handle the navigation naturally
+            return true;
           }
         });
 
@@ -610,18 +604,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle different URL structures
     if (path === '/' || path === '') {
-      // Try to get path from the page title or breadcrumb
-      const breadcrumb = document.querySelector('.breadcrumb-item.active, .quarto-title .title');
-      if (breadcrumb) {
-        console.log('Using breadcrumb for path detection'); // Debug log
-      }
-      
-      // Try to get from the HTML page's data attributes or meta tags
-      const pageId = document.querySelector('main').getAttribute('data-page') || 
-                    document.querySelector('meta[name="quarto:page"]')?.getAttribute('content');
-      if (pageId) {
-        path = pageId;
-      }
+      return 'index';
     }
     
     // Remove leading slash and decode URI components
@@ -632,27 +615,10 @@ document.addEventListener('DOMContentLoaded', function() {
       // If decoding fails, use original path
     }
     
-    // Try alternative methods for path detection
-    if (!path || path === '') {
-      // Check document title
-      const title = document.title;
-      console.log('Document title:', title); // Debug log
-      
-      // Check URL hash and search params
-      const hash = window.location.hash;
-      const search = window.location.search;
-      console.log('Hash:', hash, 'Search:', search); // Debug log
-      
-      // If we still don't have a path, try to extract from URL
-      const fullPath = window.location.href;
-      const match = fullPath.match(/\/([^?#]+)/);
-      if (match) {
-        path = match[1];
-      }
-    }
+    // Convert .html back to source file extensions for matching
+    path = path.replace('.html', '');
     
-    console.log('Current path:', path); // Debug log
-    console.log('Full pathname:', window.location.pathname); // Debug log
+    console.log('Current path detected:', path); // Debug log
     return path;
   }
 
@@ -662,22 +628,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Use the enhanced navigation structure (dynamic + fallback merged)
     let finalNavStructure = extractNavigationFromSidebar();
     
-    // Double-check that we have complete Build 2025 data
-    if (finalNavStructure['🎉 Events'] && finalNavStructure['🎉 Events']['Build Conference 2025']) {
-      const buildPages = finalNavStructure['🎉 Events']['Build Conference 2025'].pages;
-      console.log(`Build 2025 pages count: ${buildPages.length}`);
-      
-      // If we don't have enough Build pages, force use of fallback
-      if (buildPages.length < 30) {
-        console.log('Not enough Build pages detected, using enhanced fallback');
-        finalNavStructure = getFallbackNavStructure();
-      }
-    }
-    
-    console.log('Using navigation structure:', finalNavStructure);
-    
     // Handle home page special case
-    if (!currentPath || currentPath === '/' || currentPath === '') {
+    if (!currentPath || currentPath === '/' || currentPath === '' || currentPath === 'index') {
       console.log('Home page detected, showing featured sections'); // Debug log
       return {
         sectionName: '🏠 Home',
@@ -693,16 +645,10 @@ document.addEventListener('DOMContentLoaded', function() {
       };
     }
     
-    // Normalize the current path for comparison with better URL handling
-    let normalizedCurrentPath = currentPath.replace('.html', '').replace('.md', '').toLowerCase();
-    
-    // Handle URL encoding - try both encoded and decoded versions
-    const decodedPath = decodeURIComponent(normalizedCurrentPath);
-    const encodedPath = normalizedCurrentPath.replace(/\s/g, '%20');
+    // Normalize the current path for comparison
+    let normalizedCurrentPath = currentPath.toLowerCase().replace(/\\/g, '/');
     
     console.log('Normalized current path:', normalizedCurrentPath); 
-    console.log('Decoded path:', decodedPath);
-    console.log('Encoded path:', encodedPath);
     
     // Check subsections first (prioritize specific subsections)
     for (const [sectionName, subsections] of Object.entries(finalNavStructure)) {
@@ -717,35 +663,21 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if any page in this subsection matches current path
         const matchingPage = subsectionData.pages.find(page => {
           const pageHref = page.href || '';
-          const normalizedPageHref = pageHref.replace('.html', '').replace('.md', '').toLowerCase();
+          const normalizedPageHref = pageHref.toLowerCase().replace(/\\/g, '/').replace('.md', '');
           
-          console.log(`    Comparing paths with page: "${pageHref}"`);
-          console.log(`    Normalized: "${normalizedCurrentPath}" vs "${normalizedPageHref}"`);
+          console.log(`    Comparing paths: "${normalizedCurrentPath}" vs "${normalizedPageHref}"`);
           
-          // Try multiple variations of both paths
-          const currentPaths = [normalizedCurrentPath, decodedPath, encodedPath];
-          const pagePaths = [
-            normalizedPageHref,
-            normalizedPageHref.replace(/\s/g, '%20'),
-            decodeURIComponent(normalizedPageHref)
-          ];
+          // Try multiple matching strategies
+          const isExactMatch = normalizedCurrentPath === normalizedPageHref;
+          const isContainedMatch = normalizedCurrentPath.includes(normalizedPageHref) || normalizedPageHref.includes(normalizedCurrentPath);
+          const isPathMatch = normalizedCurrentPath.endsWith(normalizedPageHref.split('/').pop()) || normalizedPageHref.endsWith(normalizedCurrentPath.split('/').pop());
           
-          // Check if any combination matches
-          let isMatch = false;
-          for (const currentVariant of currentPaths) {
-            for (const pageVariant of pagePaths) {
-              if (currentVariant.includes(pageVariant) || 
-                  pageVariant.includes(currentVariant) ||
-                  currentVariant === pageVariant) {
-                isMatch = true;
-                console.log(`    ✓ Match found: "${currentVariant}" matches "${pageVariant}"`);
-                break;
-              }
-            }
-            if (isMatch) break;
+          const isMatch = isExactMatch || isContainedMatch || isPathMatch;
+          
+          if (isMatch) {
+            console.log(`    ✓ Match found with strategy: ${isExactMatch ? 'exact' : isContainedMatch ? 'contained' : 'path'}`);
           }
           
-          console.log(`    Match result: ${isMatch}`);
           return isMatch;
         });
         
