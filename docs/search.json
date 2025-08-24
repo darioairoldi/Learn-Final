@@ -578,5 +578,138 @@
       "Culture & Travel",
       "Paris Cultural Journey 2025"
     ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-1.0-2002---.net-framework-1.0",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-1.0-2002---.net-framework-1.0",
+    "title": "",
+    "section": "C# 1.0 (2002) - .NET Framework 1.0",
+    "text": "C# 1.0 (2002) - .NET Framework 1.0\nCore Language Features:\n\nClasses and Objects - Object-oriented programming foundation with inheritance, encapsulation, and polymorphism\nValue Types and Reference Types - Distinction between stack-allocated value types and heap-allocated reference types\nProperties - Encapsulated field access with get/set accessors\nIndexers - Array-like access to object members using bracket notation\nEvents - Type-safe callback mechanism built on delegates\nOperator Overloading - Custom behavior for operators on user-defined types\nAttributes - Metadata decoration system for types and members\n\nReference: C# 1.0 Language Specification"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-1.1-2003---.net-framework-1.1",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-1.1-2003---.net-framework-1.1",
+    "title": "",
+    "section": "C# 1.1 (2003) - .NET Framework 1.1",
+    "text": "C# 1.1 (2003) - .NET Framework 1.1\nMinor Updates:\n\nAPM Pattern Support - Improved asynchronous programming model support\nPerformance Improvements - Various compiler and runtime optimizations\n\nReference: .NET Framework 1.1 Release Notes"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-2.0-2005---.net-framework-2.0",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-2.0-2005---.net-framework-2.0",
+    "title": "",
+    "section": "C# 2.0 (2005) - .NET Framework 2.0",
+    "text": "C# 2.0 (2005) - .NET Framework 2.0\nMajor Language Features:\n\nGenerics - Type-safe collections and methods with compile-time type checking\nPartial Types - Split type definitions across multiple files for code generation scenarios\nAnonymous Methods - Inline delegate definitions using delegate keyword\nIterators - yield return and yield break for lazy enumeration\nNullable Types - int? syntax for value types that can be null\nCovariance and Contravariance - Basic variance support for delegates\nStatic Classes - Classes that cannot be instantiated and contain only static members\nProperty Accessor Accessibility - Different access levels for get/set accessors\n\nReference: What’s New in C# 2.0"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-3.0-2007---.net-framework-3.5",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-3.0-2007---.net-framework-3.5",
+    "title": "",
+    "section": "C# 3.0 (2007) - .NET Framework 3.5",
+    "text": "C# 3.0 (2007) - .NET Framework 3.5\nMajor Language Features:\n\nLINQ (Language Integrated Query) - Query syntax for data sources with compile-time checking\nExtension Methods - Add methods to existing types without modification\nLambda Expressions - Concise syntax for anonymous functions: x =&gt; x * 2\nExpression Trees - Represent code as data for dynamic query generation\nAnonymous Types - new { Name = \"John\", Age = 30 } for temporary data structures\nAutomatic Properties - public string Name { get; set; } shorthand syntax\nObject and Collection Initializers - Simplified initialization syntax\nImplicitly Typed Local Variables - var keyword for type inference\nPartial Methods - Method declarations without implementations in partial types\n\nReference: What’s New in C# 3.0"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-4.0-2010---.net-framework-4.0",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-4.0-2010---.net-framework-4.0",
+    "title": "",
+    "section": "C# 4.0 (2010) - .NET Framework 4.0",
+    "text": "C# 4.0 (2010) - .NET Framework 4.0\nMajor Language Features:\n\nDynamic Binding - dynamic keyword for runtime type resolution\nNamed and Optional Parameters - Method parameters with default values and named arguments\nGeneric Covariance and Contravariance - out and in keywords for interface and delegate variance\nEmbedded Interop Types - No PIA feature for COM interop simplification\n\nReference: What’s New in C# 4.0"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-5.0-2012---.net-framework-4.5",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-5.0-2012---.net-framework-4.5",
+    "title": "",
+    "section": "C# 5.0 (2012) - .NET Framework 4.5",
+    "text": "C# 5.0 (2012) - .NET Framework 4.5\nMajor Language Features:\n\nAsync and Await - Asynchronous programming with async/await keywords\nCaller Information Attributes - [CallerMemberName], [CallerFilePath], [CallerLineNumber] for debugging\n\nReference: What’s New in C# 5.0"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-6.0-2015---.net-framework-4.6",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-6.0-2015---.net-framework-4.6",
+    "title": "",
+    "section": "C# 6.0 (2015) - .NET Framework 4.6",
+    "text": "C# 6.0 (2015) - .NET Framework 4.6\nMajor Language Features:\n\nStatic Imports - using static to import static members\nException Filters - catch (Exception ex) when (condition) syntax\nAuto-property Initializers - public string Name { get; set; } = \"Default\";\nExpression-bodied Members - public string FullName =&gt; $\"{First} {Last}\";\nNull-conditional Operators - ?. and ?[] for safe member access\nString Interpolation - $\"Hello {name}\" syntax\nnameof Expressions - nameof(variable) for refactor-safe string literals\nIndex Initializers - Dictionary initialization with [key] = value syntax\n\nReference: What’s New in C# 6.0"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-7.0-2017---.net-framework-4.7",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-7.0-2017---.net-framework-4.7",
+    "title": "",
+    "section": "C# 7.0 (2017) - .NET Framework 4.7",
+    "text": "C# 7.0 (2017) - .NET Framework 4.7\nMajor Language Features:\n\nTuples - (int, string) value tuple syntax with named elements\nPattern Matching - is expressions and switch patterns\nOut Variables - int.TryParse(s, out var result) inline declarations\nLocal Functions - Nested function definitions within methods\nMore Expression-bodied Members - Constructors, destructors, property accessors\nThrow Expressions - throw as expression in conditional operators\nBinary Literals and Digit Separators - 0b1010 and 1_000_000 syntax\n\nReference: What’s New in C# 7.0"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-7.1-2017---.net-framework-4.7.1",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-7.1-2017---.net-framework-4.7.1",
+    "title": "",
+    "section": "C# 7.1 (2017) - .NET Framework 4.7.1",
+    "text": "C# 7.1 (2017) - .NET Framework 4.7.1\nMinor Language Features:\n\nAsync Main - async Task Main() method support\nDefault Literal Expressions - default without type specification\nInferred Tuple Element Names - Automatic naming from variable names\nPattern Matching on Generic Type Parameters - Enhanced pattern matching capabilities\n\nReference: What’s New in C# 7.1"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-7.2-2017---.net-framework-4.7.2",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-7.2-2017---.net-framework-4.7.2",
+    "title": "",
+    "section": "C# 7.2 (2017) - .NET Framework 4.7.2",
+    "text": "C# 7.2 (2017) - .NET Framework 4.7.2\nPerformance and Safety Features:\n\nReference Semantics with Value Types - ref struct, ref readonly, in parameters\nNon-trailing Named Arguments - Mixed positional and named arguments\nLeading Underscores in Numeric Literals - _1000 syntax support\nprivate protected Access Modifier - Assembly and inheritance restricted access\nConditional ref Expressions - ref in ternary operations\n\nReference: What’s New in C# 7.2"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-7.3-2018---.net-framework-4.7.2",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-7.3-2018---.net-framework-4.7.2",
+    "title": "",
+    "section": "C# 7.3 (2018) - .NET Framework 4.7.2",
+    "text": "C# 7.3 (2018) - .NET Framework 4.7.2\nPerformance and Usability Features:\n\nEnhanced Generic Constraints - Enum, Delegate, and unmanaged constraints\nTuple Equality - == and != operators for tuples\nExpression Variables in More Places - Extended scope for pattern variables\nAttributes on Backing Fields - [field: SomeAttribute] syntax\nPerformance Improvements - Various ref and stackalloc enhancements\n\nReference: What’s New in C# 7.3"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-8.0-2019---.net-core-3.0",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-8.0-2019---.net-core-3.0",
+    "title": "",
+    "section": "C# 8.0 (2019) - .NET Core 3.0",
+    "text": "C# 8.0 (2019) - .NET Core 3.0\nMajor Language Features:\n\nNullable Reference Types - Compile-time null safety with ? annotations\nAsynchronous Streams - IAsyncEnumerable&lt;T&gt; and await foreach\nRanges and Indices - [1..^1] slice syntax and ^ index operator\nSwitch Expressions - Expression-based switch with =&gt; syntax\nProperty Patterns - Destructuring in pattern matching\nUsing Declarations - Resource management without braces\nStatic Local Functions - Performance optimization for local functions\nDisposable ref structs - IDisposable support for ref struct types\nNull-coalescing Assignment - ??= operator for conditional assignment\n\nReference: What’s New in C# 8.0"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-9.0-2020---.net-5.0",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-9.0-2020---.net-5.0",
+    "title": "",
+    "section": "C# 9.0 (2020) - .NET 5.0",
+    "text": "C# 9.0 (2020) - .NET 5.0\nMajor Language Features:\n\nRecords - Immutable reference types with value semantics\nInit-only Setters - init keyword for immutable properties\nTop-level Programs - Simplified program structure without Main boilerplate\nPattern Matching Enhancements - Relational patterns, logical patterns\nNative ints - nint and nuint for platform-specific integers\nFunction Pointers - Low-level function pointer support\nTarget-typed new Expressions - Type inference for object creation\nStatic Anonymous Functions - static lambdas and local functions\nTarget-typed Conditional Expressions - Better type inference for ternary\nCovariant Return Types - Override methods with more derived return types\nModule Initializers - Assembly-level initialization code\n\nReference: What’s New in C# 9.0"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-10.0-2021---.net-6.0",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-10.0-2021---.net-6.0",
+    "title": "",
+    "section": "C# 10.0 (2021) - .NET 6.0",
+    "text": "C# 10.0 (2021) - .NET 6.0\nMajor Language Features:\n\nGlobal Using Directives - global using for project-wide imports\nFile-scoped Namespaces - Simplified namespace syntax\nRecord Structs - Value type records with similar semantics\nImprovements to Structure Types - Parameterless constructors and field initializers\nInterpolated String Handler - Performance optimization for string interpolation\nLambda Improvements - Natural type inference and attributes\nExtended Property Patterns - Nested property access in patterns\nAllow const Interpolated Strings - Compile-time string interpolation\nRecord Types Can Seal ToString - Prevent further overriding\nAssignment and Declaration in Same Deconstruction - Mixed deconstruction syntax\nAllow AsyncMethodBuilder Attribute on Methods - Custom async builders\n\nReference: What’s New in C# 10.0"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-11.0-2022---.net-7.0",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-11.0-2022---.net-7.0",
+    "title": "",
+    "section": "C# 11.0 (2022) - .NET 7.0",
+    "text": "C# 11.0 (2022) - .NET 7.0\nMajor Language Features:\n\nRaw String Literals - Multi-line strings with \"\"\" syntax\nGeneric Math Support - Static abstract members in interfaces\nGeneric Attributes - Type parameters in attribute declarations\nUTF-8 String Literals - \"text\"u8 byte array syntax\nNewlines in String Interpolation - Multi-line expressions in {}\nList Patterns - Pattern matching for lists and arrays\nFile-local Types - file keyword for assembly-private types\nRequired Members - required keyword for mandatory initialization\nAuto-default Structs - Automatic parameterless constructor\nPattern Match Span&lt;char&gt; on String - Performance optimization\nExtended nameof Scope - Parameter names in attributes\nNumeric IntPtr - Arithmetic operations on IntPtr/UIntPtr\n\nReference: What’s New in C# 11.0"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-12.0-2023---.net-8.0",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-12.0-2023---.net-8.0",
+    "title": "",
+    "section": "C# 12.0 (2023) - .NET 8.0",
+    "text": "C# 12.0 (2023) - .NET 8.0\nMajor Language Features:\n\nPrimary Constructors - Constructor parameters available throughout class\nCollection Expressions - [1, 2, 3] syntax for any collection type\nInline Arrays - Fixed-size arrays as value types\nOptional Parameters in Lambda Expressions - Default values in lambdas\nref readonly Parameters - Efficient large value type passing\nDefault Lambda Parameters - Default values for lambda parameters\nAlias Any Type - using aliases for any type, including tuples\nExperimental Attribute - Mark APIs as experimental\nInterceptors - Source generator method call interception (experimental)\n\nReference: What’s New in C# 12.0"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-13.0-2024---.net-9.0",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-13.0-2024---.net-9.0",
+    "title": "",
+    "section": "C# 13.0 (2024) - .NET 9.0",
+    "text": "C# 13.0 (2024) - .NET 9.0\nMajor Language Features:\n\nParams Collections - params with any collection type, not just arrays\nNew Lock Type - System.Threading.Lock for better performance\nNew Escape Sequence - \\e for escape character (ASCII 27)\nMethod Group Natural Type - Better type inference for method groups\nImplicit Index Access - ^ operator in more contexts\nPartial Properties and Indexers - Split property definitions across files\nOverload Resolution Priority - [OverloadResolutionPriority] attribute\n\nReference: What’s New in C# 13.0"
+  },
+  {
+    "objectID": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-14.0-2025---.net-10.0-previewupcoming",
+    "href": "202506 Build 2025/BRK114 C# 14 Language Features and Beyond/Appendix A - C# Version History and Features.html#c-14.0-2025---.net-10.0-previewupcoming",
+    "title": "",
+    "section": "C# 14.0 (2025) - .NET 10.0 (Preview/Upcoming)",
+    "text": "C# 14.0 (2025) - .NET 10.0 (Preview/Upcoming)\nMajor Language Features (As discussed in this session):\n\nField Keyword in Auto-Properties - Access backing fields with field keyword\nExtension Members - Extension properties, static extension methods, and future operators\nNull Conditional Assignment - ?.= operator for safe assignment\nPartial Events and Constructors - Complete partial member support\nCompound Assignment Operators - Direct overloading of +=, -=, etc.\nDictionary Expressions - {key: value} syntax building on collection expressions\nLambda Type Inference Improvements - Better inference with modifiers\nNameOf Generic Type Fix - Support for unbound generics in nameof\n\nReference: What’s New in C# 14.0 (when available)"
   }
 ]
