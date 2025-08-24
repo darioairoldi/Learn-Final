@@ -7,6 +7,44 @@
   </nav>
 </div>
 
+<style>
+/* Professional Related Pages navigation styling - RIGHT SIDEBAR ONLY */
+#custom-right-nav {
+  width: 100%;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 2rem; /* Add spacing from native TOC */
+  font-size: 0.9rem;
+  max-height: 60vh; /* Reduced from 70vh to leave space for native TOC */
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Ensure our custom nav doesn't interfere with native TOC styling */
+#custom-right-nav.custom-navigation {
+  background: #f0f8ff; /* Slightly different background to distinguish from native TOC */
+  border-color: #2780e3;
+}
+
+#custom-right-nav .toc-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2780e3;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #2780e3;
+}
+
+/* Ensure native TOC is not affected by our styles */
+#TOC, 
+.table-of-contents:not(#custom-right-nav .table-of-contents),
+nav[role="doc-toc"]:not(#custom-right-nav nav) {
+  margin-bottom: 1rem !important;
+}
+</style>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   console.log('📋 Related Pages navigation loading...');
@@ -19,15 +57,22 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
+    // FIXED: Also ensure native TOC is preserved during responsive changes
+    const nativeToc = document.querySelector('#TOC, .table-of-contents, nav[role="doc-toc"]:not(#custom-right-nav nav)');
+    if (nativeToc) {
+      console.log('🔍 handleResponsiveLayout: preserving native TOC visibility');
+      // Don't hide native TOC on mobile - let Quarto handle that
+    }
+    
     const isMobile = window.innerWidth <= 800;
     console.log(`📱 handleResponsiveLayout: width=${window.innerWidth}, isMobile=${isMobile}, hasContent=${customNav.classList.contains('has-content')}`);
     
     if (isMobile) {
       customNav.style.display = 'none';
-      console.log('📱 Hidden nav on mobile');
+      console.log('📱 Hidden custom nav on mobile');
     } else if (customNav.classList.contains('has-content')) {
       customNav.style.display = 'block';
-      console.log('💻 Showing nav on desktop with content');
+      console.log('💻 Showing custom nav on desktop with content');
     } else {
       console.log('💻 Desktop but no content class found');
       // Force show for debugging
@@ -38,31 +83,35 @@ document.addEventListener('DOMContentLoaded', function() {
   // Multiple initialization strategies to ensure it works across all page types
   function initializeRightNav() {
     console.log('🚀 Initializing right navigation...');
-    createCustomRightNav();
-    handleResponsiveLayout();
     
-    // Additional attempt after a short delay for any page type
+    // FIXED: Wait a bit longer to ensure Quarto's native TOC is fully initialized
     setTimeout(() => {
-      renderRightNav();
-    }, 100);
+      createCustomRightNav();
+      handleResponsiveLayout();
+      
+      // Additional attempt after a short delay for any page type
+      setTimeout(() => {
+        renderRightNav();
+      }, 200);
+    }, 300);
   }
   
   // Try immediately for any page
   initializeRightNav();
   
-  // Wait for Quarto to finish loading (works for all page types)
-  setTimeout(initializeRightNav, 500);
+  // FIXED: Wait longer for Quarto to finish loading to avoid TOC conflicts
+  setTimeout(initializeRightNav, 1000);
   
   // Also try when the page is fully loaded (universal)
   window.addEventListener('load', function() {
     console.log('📄 Page fully loaded, attempting right nav render...');
     setTimeout(function() {
-      if (!document.querySelector('#custom-right-nav .has-content')) {
+      if (!document.querySelector('#custom-right-nav.has-content')) {
         console.log('🔄 Right nav not yet rendered, trying again...');
         createCustomRightNav();
       }
       renderRightNav();
-    }, 200);
+    }, 500);
   });
   
   // Universal fallback after page load for any menu structure
@@ -317,7 +366,7 @@ document.addEventListener('DOMContentLoaded', function() {
         right: 20px;
         top: 100px;
         width: 250px;
-        max-height: 70vh;
+        max-height: 60vh;
         overflow-y: auto;
         z-index: 1000;
         background: white;
@@ -338,10 +387,21 @@ document.addEventListener('DOMContentLoaded', function() {
       existing.remove();
     }
 
+    // FIXED: Check if there's already a native Quarto TOC and preserve it
+    const existingToc = targetContainer.querySelector('#TOC, .table-of-contents, nav[role="doc-toc"]:not(#custom-right-nav nav), .toc:not(#custom-right-nav .toc)');
+    console.log('🔍 Found existing TOC:', !!existingToc);
+    if (existingToc) {
+      console.log('✅ Preserving existing Quarto TOC:', existingToc.className, existingToc.id);
+      
+      // Make sure the existing TOC is visible and properly styled
+      existingToc.style.display = '';
+      existingToc.style.visibility = '';
+    }
+
     // Create the custom nav element with proper styling
     const customNav = document.createElement('div');
     customNav.id = 'custom-right-nav';
-    customNav.className = 'toc-right';
+    customNav.className = 'toc-right custom-navigation'; // Added custom class for distinction
     customNav.innerHTML = `
       <div class="toc-title">Related Pages</div>
       <nav class="toc" role="doc-toc">
@@ -351,21 +411,22 @@ document.addEventListener('DOMContentLoaded', function() {
       </nav>
     `;
 
-    // Insert into the proper Quarto right sidebar container
-    const existingToc = targetContainer.querySelector('.toc-right, #TOC, .table-of-contents, [class*="toc"]');
+    // FIXED: Insert AFTER the existing TOC, not before or instead of it
     if (existingToc) {
+      // Add some spacing between TOCs
+      customNav.style.marginTop = '2rem';
       existingToc.parentNode.insertBefore(customNav, existingToc.nextSibling);
-      console.log('✅ Inserted custom nav after existing TOC');
+      console.log('✅ Inserted custom nav AFTER existing TOC to preserve native functionality');
     } else {
       targetContainer.appendChild(customNav);
-      console.log('✅ Appended custom nav to container');
+      console.log('✅ Appended custom nav to container (no existing TOC found)');
     }
 
     console.log('✅ Custom nav created and added to DOM');
     
-    // Force show for debugging
-    customNav.style.display = 'block';
-    customNav.style.visibility = 'visible';
+    // FIXED: Don't force show immediately - let the responsive handler decide
+    // customNav.style.display = 'block';
+    // customNav.style.visibility = 'visible';
 
     // Now render the navigation
     setTimeout(() => {
@@ -409,308 +470,176 @@ document.addEventListener('DOMContentLoaded', function() {
         sectionName: 'Home',
         subsectionName: 'Quick Navigation',
         subsectionData: {
-          pages: [
-            { text: 'Main Sections', href: '#', isInfo: true }
-          ]
+          pages: []
         }
       };
     }
     
-    // Try to extract navigation structure from sidebar
-    const navItems = extractNavigationFromSidebar();
-    console.log('📊 Extracted navigation items count:', navItems ? navItems.length : 0);
+    // Normalize current path for matching
+    const normalizedPath = currentPath.toLowerCase().replace(/\\/g, '/');
     
-    if (navItems && navItems.length > 0) {
-      // Find current page in navigation
-      const pageLocation = findCurrentPageInNav(navItems, currentPath);
-      if (pageLocation) {
-        const { currentItem, parentChain, siblings, children, isLeafNode } = pageLocation;
+    const navData = extractNavigationFromSidebar();
+    if (!navData) {
+      console.log('❌ No navigation data available');
+      return null;
+    }
+    
+    // Try to find the current section by analyzing the navigation data
+    for (const item of navData) {
+      // Check if this item matches the current path
+      if (item.href && normalizedPath === item.href.toLowerCase().replace(/\\/g, '/').replace('.md', '')) {
+        console.log('✅ Current section found in navigation:', item.text);
         
-        console.log('✅ Page location found:', {
-          currentItem: currentItem.text,
-          parentChain: parentChain.map(p => p.text),
-          isLeafNode: isLeafNode,
-          childrenCount: children.length,
-          relatedPagesCount: siblings.length
+        return {
+          sectionName: item.text,
+          subsectionName: null,
+          subsectionData: null
+        };
+      }
+      
+      // Check in children recursively
+      const result = findSectionInChildren(item.children, normalizedPath);
+      if (result) {
+        return result;
+      }
+    }
+    
+    console.log('❌ Current section not found in navigation');
+    return null;
+  }
+
+  // Recursive helper to find section in children
+  function findSectionInChildren(children, path) {
+    for (const child of children) {
+      // Check if this child matches the path
+      if (child.href && path === child.href.toLowerCase().replace(/\\/g, '/').replace('.md', '')) {
+        console.log('✅ Current subsection found in navigation:', child.text);
+        
+        return {
+          sectionName: child.text,
+          subsectionName: null,
+          subsectionData: null
+        };
+      }
+      
+      // Recurse into deeper children
+      const result = findSectionInChildren(child.children, path);
+      if (result) {
+        return result;
+      }
+    }
+    
+    return null;
+  }
+  
+  // Render the right navigation based on the extracted items
+  function renderRightNav() {
+    const navItems = extractNavigationFromSidebar();
+    if (!navItems) return;
+    
+    const customNav = document.querySelector('#custom-right-nav');
+    if (!customNav) return;
+    
+    const currentPath = getCurrentPagePath();
+    const currentNavItem = findCurrentPageInNav(navItems, currentPath);
+    
+    // Mark the current item and its parents as active
+    function markActiveItems(item, isActive = false) {
+      if (!item) return isActive;
+      
+      const itemElement = document.querySelector(`#custom-right-nav [href="${item.href}"]`);
+      if (itemElement) {
+        itemElement.classList.add('active');
+        isActive = true;
+      }
+      
+      // Also mark parents as active (for nested items)
+      if (item.parent) {
+        markActiveItems(item.parent, isActive);
+      }
+      
+      return isActive;
+    }
+    
+    // Clear existing content and render the new navigation
+    function renderItemsList(container, items, level = 0) {
+      container.innerHTML = '';
+      
+      if (!items || items.length === 0) {
+        container.innerHTML = '<li><em>No related pages found</em></li>';
+        return;
+      }
+      
+      const list = document.createElement('ul');
+      list.className = 'nav-list';
+      
+      items.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.className = 'nav-item';
+        
+        // Link element
+        const link = document.createElement('a');
+        link.href = item.href || '#';
+        link.textContent = item.text;
+        link.className = 'nav-link';
+        
+        // Active class for current item
+        if (currentNavItem && currentNavItem.currentItem && currentNavItem.currentItem.text === item.text) {
+          link.classList.add('active');
+        }
+        
+        link.addEventListener('click', function(e) {
+          // Prevent default if it's just a placeholder
+          if (item.href === '#' || !item.href) {
+            e.preventDefault();
+          }
         });
         
-        // FIXED: Use the improved logic with clear naming
-        if (siblings.length > 0) {
-          const pageType = isLeafNode ? 'leaf' : 'section';
-          const relationshipType = isLeafNode ? 'Related Pages' : 'Child Pages';
-          
-          console.log(`📄 Showing ${siblings.length} ${isLeafNode ? 'siblings' : 'children'} for ${pageType} node: ${currentItem.text}`);
-          
-          const parentSection = parentChain.length > 0 ? parentChain[parentChain.length - 1] : null;
-          
-          return {
-            sectionName: parentChain.length > 0 ? parentChain[0].text : 'Navigation',
-            subsectionName: isLeafNode && parentSection 
-              ? `${parentSection.text} - ${relationshipType}` 
-              : `${currentItem.text} - ${relationshipType}`,
-            subsectionData: {
-              pages: siblings.map(sibling => ({
-                text: sibling.text,
-                href: sibling.href,
-                isSection: sibling.isSection || false,
-                level: sibling.level || 0
-              }))
-            }
-          };
-        } else {
-          // Edge case: no related pages found
-          console.log(`⚠️ No related pages found for: ${currentItem.text}`);
-          
-          // Try to show parent's other children as a fallback
-          if (parentChain.length > 0 && isLeafNode) {
-            const parent = parentChain[parentChain.length - 1];
-            if (parent.children && parent.children.length > 1) {
-              const parentSiblings = parent.children.filter(child => 
-                child !== currentItem && child.href && child.href !== '#'
-              );
-              
-              if (parentSiblings.length > 0) {
-                console.log(`📋 Fallback: showing ${parentSiblings.length} other items from parent "${parent.text}"`);
-                return {
-                  sectionName: parentChain.length > 0 ? parentChain[0].text : 'Navigation',
-                  subsectionName: `${parent.text} - All Pages`,
-                  subsectionData: {
-                    pages: parentSiblings.map(sibling => ({
-                      text: sibling.text,
-                      href: sibling.href,
-                      isSection: false,
-                      level: sibling.level || 0
-                    }))
-                  }
-                };
-              }
-            }
-          }
-          
-          // Last resort - return minimal structure
-          return {
-            sectionName: 'Navigation',
-            subsectionName: 'Current Section',
-            subsectionData: {
-              pages: [
-                { text: 'No related pages found', href: '#', isInfo: true }
-              ]
-            }
-          };
+        listItem.appendChild(link);
+        
+        // Recursively render children if they exist
+        if (item.children && item.children.length > 0) {
+          const childContainer = document.createElement('div');
+          childContainer.className = 'child-nav-container';
+          renderItemsList(childContainer, item.children, level + 1);
+          listItem.appendChild(childContainer);
         }
+        
+        list.appendChild(listItem);
+      });
+      
+      container.appendChild(list);
+    }
+    
+    const navContainer = customNav.querySelector('.toc > ul');
+    if (navContainer) {
+      // Clear existing content
+      navContainer.innerHTML = '';
+      
+      if (currentNavItem) {
+        // Show current item and its siblings/children
+        const { currentItem, siblings, children } = currentNavItem;
+        
+        renderItemsList(navContainer, siblings || children);
+        
+        // Mark the current item as active
+        markActiveItems(currentItem);
+      } else {
+        // Just render the top-level items
+        renderItemsList(navContainer, navItems);
       }
     }
     
-    // If everything fails, use fallback
-    console.log('❌ Using fallback section for path:', currentPath);
-    return getFallbackSection(currentPath);
-  }
-
-  // Generic fallback when navigation detection fails
-  function getFallbackSection(currentPath) {
-    console.log('🔄 Using generic fallback section for:', currentPath);
-    
-    // Extract any available links from the sidebar as a last resort
-    const sidebar = document.querySelector('#quarto-sidebar');
-    const availableLinks = [];
-    
-    if (sidebar) {
-      const allLinks = sidebar.querySelectorAll('a.sidebar-item-text[href]');
-      allLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        const text = link.textContent.trim();
-        if (href && text && href !== '#') {
-          availableLinks.push({
-            text: text,
-            href: href,
-            level: 0 // Default level for fallback items
-          });
-        }
-      });
-    }
-    
-    // If we found links from sidebar, use them
-    if (availableLinks.length > 0) {
-      console.log(`🎯 Found ${availableLinks.length} links from sidebar for fallback`);
-      
-      // Filter out the current page and take first 10 items
-      const relevantLinks = availableLinks.filter(link => {
-        const linkPath = link.href.replace('.md', '').replace('.html', '').toLowerCase();
-        const currentPathNormalized = currentPath.toLowerCase();
-        return !currentPathNormalized.includes(linkPath) && !linkPath.includes(currentPathNormalized);
-      }).slice(0, 10);
-      
-      return {
-        sectionName: 'Navigation',
-        subsectionName: `Available Pages (${relevantLinks.length} items)`,
-        subsectionData: {
-          pages: relevantLinks
-        }
-      };
-    }
-    
-    // Absolute fallback - generic message
-    return {
-      sectionName: 'Navigation',
-      subsectionName: 'Navigation',
-      subsectionData: {
-        pages: [
-          { text: 'No related pages found', href: '#', isInfo: true }
-        ]
-      }
-    };
-  }
-  
-  // Render the right navigation based on the current page context
-  function renderRightNav() {
-    console.log('🎨 renderRightNav called');
-    const customNav = document.querySelector('#custom-right-nav');
-    if (!customNav) {
-      console.log('❌ Custom nav element not found');
-      return;
-    }
-
-    const currentPath = getCurrentPagePath();
-    const currentSection = findCurrentSection(currentPath);
-
-    if (!currentSection) {
-      // Hide if no relevant section found - this should NEVER happen now
-      console.log('❌ No section found - this should not happen with fallbacks');
-      customNav.style.display = 'none';
-      return;
-    }
-
-    console.log('✅ Found section for path:', currentSection);
-    
-    const { sectionName, subsectionName, subsectionData } = currentSection;
-    const navList = customNav.querySelector('ul');
-    
-    if (!navList) {
-      console.log('❌ Nav list not found');
-      return;
-    }
-
-    // Calculate page count first
-    const pageCount = subsectionData.pages ? subsectionData.pages.length : 0;
-
-    // Show the custom nav
-    customNav.style.display = 'block';
     customNav.classList.add('has-content');
-    
-    // Clear existing content
-    navList.innerHTML = '';
-
-    // Add section header with page count
-    const sectionHeader = document.createElement('li');
-    sectionHeader.innerHTML = `<strong>${subsectionName}</strong> <span style="color: #888; font-size: 0.8em;">(${pageCount} items)</span>`;
-    sectionHeader.style.cssText = 'color: #2780e3; margin-bottom: 8px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;';
-    navList.appendChild(sectionHeader);
-
-    // Add all pages in the subsection with proper hierarchical styling
-    if (subsectionData.pages) {
-      subsectionData.pages.forEach((page, index) => {
-        const li = document.createElement('li');
-        
-        if (page.isInfo) {
-          // Info messages (non-clickable)
-          const info = document.createElement('div');
-          info.textContent = page.text;
-          info.style.cssText = 'color: #888; font-style: italic; padding: 4px 8px; margin-left: 8px; font-size: 0.85em;';
-          li.appendChild(info);
-        } else if (page.isSection && !page.href) {
-          // Section headers (non-clickable) - FIXED: Proper indentation based on level
-          const header = document.createElement('div');
-          header.textContent = page.text;
-          const indentLevel = (page.level || 0) * 16; // 16px per level
-          header.style.cssText = `font-weight: 600; color: #444; padding: 4px 8px; margin-left: ${8 + indentLevel}px; font-size: 0.85em; border-left: 3px solid #2780e3; background: #f0f8ff;`;
-          header.className = 'nav-section';
-          li.appendChild(header);
-        } else {
-          // Regular pages (clickable) - FIXED: Proper indentation based on level
-          const a = document.createElement('a');
-          
-          // Construct proper href path
-          let href = page.href;
-          if (href && !href.startsWith('http') && !href.startsWith('#')) {
-            // Handle relative paths - ensure they work with GitHub Pages
-            if (!href.startsWith('/')) {
-              href = href.startsWith('./') ? href.substring(2) : href;
-              href = '/' + href;
-            }
-            // Convert .md to .html for web navigation
-            href = href.replace('.md', '.html');
-          }
-          
-          a.href = href;
-          a.textContent = page.text || page.title || 'Untitled';
-          
-          // FIXED: Calculate proper indentation based on hierarchical level
-          const indentLevel = (page.level || 0) * 20; // 20px per level for better visual hierarchy
-          const baseIndent = 16; // Base indent for all items
-          const totalIndent = baseIndent + indentLevel;
-          
-          a.style.cssText = `color: #666; text-decoration: none; display: block; padding: 4px 8px; margin-left: ${totalIndent}px; border-left: 2px solid transparent; transition: all 0.2s ease; font-size: 0.9em;`;
-          
-          // FIXED: Add hierarchical CSS classes for better styling
-          const levelClass = `nav-level-${Math.min(page.level || 0, 2)}`;
-          a.className = levelClass;
-          
-          // Hover effect
-          a.addEventListener('mouseenter', () => {
-            a.style.color = '#2780e3';
-            a.style.borderLeft = '2px solid #2780e3';
-            a.style.backgroundColor = '#f8f9fa';
-          });
-          a.addEventListener('mouseleave', () => {
-            const isCurrentPage = isCurrentPageHighlighted(page, currentPath);
-            a.style.color = isCurrentPage ? '#2780e3' : '#666';
-            a.style.borderLeft = isCurrentPage ? '3px solid #2780e3' : '2px solid transparent';
-            a.style.backgroundColor = isCurrentPage ? '#e7f3ff' : 'transparent';
-          });
-
-          // Highlight current page
-          if (isCurrentPageHighlighted(page, currentPath)) {
-            a.style.fontWeight = 'bold';
-            a.style.color = '#2780e3';
-            a.style.backgroundColor = '#e7f3ff';
-            a.style.borderLeft = '3px solid #2780e3';
-          }
-          
-          li.appendChild(a);
-        }
-        
-        navList.appendChild(li);
-      });
-    }
-
-    console.log(`🎨 Rendered ${pageCount} items for section: ${subsectionName}`);
-    
-    // Force final visibility and debugging
-    customNav.style.display = 'block';
-    customNav.style.visibility = 'visible';
-    customNav.classList.add('has-content');
-    
-    console.log('🎨 Final nav state:', {
-      display: customNav.style.display,
-      visibility: customNav.style.visibility,
-      hasContentClass: customNav.classList.contains('has-content'),
-      childrenCount: navList.children.length
-    });
-    
-    // Re-trigger responsive layout after content is added
     handleResponsiveLayout();
+    
+    // Debugging output
+    console.log('📜 Navigation rendered:', navItems);
   }
   
-  // Check if the current page is highlighted in the navigation
-  function isCurrentPageHighlighted(page, currentPath) {
-    if (!page.href) return false;
-    
-    const pageBasePath = page.href.replace(/^.*\//, '').replace('.md', '');
-    const currentBasePath = currentPath.replace(/^.*\//, '').replace('.html', '').replace('.md', '');
-    
-    return pageBasePath === currentBasePath || 
-           currentPath.includes(page.href.replace('.md', '')) || 
-           page.href.includes(currentPath.replace('.html', ''));
-  }
+  // Initial right navigation setup
+  setTimeout(() => {
+    createCustomRightNav();
+  }, 1000);
 });
 </script>
