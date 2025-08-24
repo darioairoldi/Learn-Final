@@ -275,6 +275,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Try multiple container strategies for right sidebar with more debugging
     const containerSelectors = [
+      '#quarto-margin-sidebar',
+      '.margin-sidebar', 
+      '#quarto-sidebar-toc',
+      '.toc-right',
+      '.page-columns .margin-sidebar',
+      '[class*="margin"]',
+      '.page-layout-article .margin-sidebar'
+    ];
+    
+    console.log('🔍 Searching for right sidebar containers...');
+    
     let targetContainer = null;
     for (const selector of containerSelectors) {
       const found = document.querySelector(selector);
