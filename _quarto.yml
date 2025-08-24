@@ -126,7 +126,8 @@ website:
     collapse-level: 3
     contents:
       - href: index.qmd
-        text: "🏠 Home"
+        text: "Home"
+        icon: house-fill
       
       - section: "🎉 Events"
         contents:
