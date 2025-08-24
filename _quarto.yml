@@ -129,7 +129,8 @@ website:
         text: "Home"
         icon: house-fill
       
-      - section: "🎉 Events"
+      - section: "Events"
+        icon: calendar-event
         contents:
           - section: "Build Conference 2025"
             href: "202506 Build 2025/Readme.md"
@@ -325,7 +326,8 @@ website:
                   - href: "202506 Build 2025/STUDIO14 Agents AI and Azure AI Foundry/README.Sonnet4.md"
                     text: "Session Details"
       
-      - section: "🛠️ Tools"
+      - section: "Tools"
+        icon: tools
         contents:
           - section: "Development Tools"
             href: "20250709 Manage GitRepo from commandline/README.md"
@@ -348,7 +350,8 @@ website:
               - href: "20250713 Use http files for easy and repeatable test/README.md"
                 text: "HTTP Files (Extended)"
       
-      - section: "🔧 Issues & Solutions"
+      - section: "Issues & Solutions"
+        icon: wrench-adjustable
         contents:
           - section: "Development Issues"
             href: "_ISSUES/20250709 fatal error cloning a repo with Visual Studio/README.md"
@@ -356,12 +359,14 @@ website:
               - href: "_ISSUES/20250709 fatal error cloning a repo with Visual Studio/README.md"
                 text: "VS Clone Error Fix (solved)"
       - text: "---"
-      - section: "⚡ Other Technologies"
+      - section: "Other Technologies"
+        icon: lightning-charge
         contents:
           - text: "DIY Li-Ion Battery Packs"
             href: "20250815 DIY Battery Pack/README.md"
       - text: "---"
-      - section: "🎭 Culture & Travel"
+      - section: "Culture & Travel"
+        icon: geo-alt
         contents:
           - text: "Paris Cultural Journey 2025"
             href: "Travel/Paris 2025/README.md"
