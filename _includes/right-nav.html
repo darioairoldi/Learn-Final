@@ -684,6 +684,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     console.log(`🎨 Rendered ${pageCount} items for section: ${subsectionName}`);
+    
+    // Force final visibility and debugging
+    customNav.style.display = 'block';
+    customNav.style.visibility = 'visible';
+    customNav.classList.add('has-content');
+    
+    console.log('🎨 Final nav state:', {
+      display: customNav.style.display,
+      visibility: customNav.style.visibility,
+      hasContentClass: customNav.classList.contains('has-content'),
+      childrenCount: navList.children.length
+    });
+    
+    // Re-trigger responsive layout after content is added
+    handleResponsiveLayout();
   }
   
   // Check if the current page is highlighted in the navigation
