@@ -1,0 +1,158 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Dario’s Learning Journey",
+    "section": "",
+    "text": "Welcome (index) to my technical learning hub! This repository documents my journey through modern development technologies, featuring comprehensive conference notes, practical Azure guides, and real-world development solutions.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#featured-articles",
+    "href": "index.html#featured-articles",
+    "title": "Dario’s Learning Journey",
+    "section": "🌟 Featured Articles",
+    "text": "🌟 Featured Articles\n\nMost Popular by Subject\n\n🤖 AI & Modern Development\n\n.NET Aspire: AI, Cloud, and Beyond ⭐️ (Build 2025 session)\nComprehensive guide to .NET Aspire’s evolution from local development tool to full-stack platform\nLocal AI Development with Foundry (Build 2025 session)\nHands-on demonstration of running AI models locally with .NET integration\nAI-Infused Mobile Development (Build 2025 session)\nBuilding intelligent mobile apps with .NET MAUI and AI capabilities\n\n\n\n🌐 Web Development & Architecture\n\nFuture of Web Development with ASP.NET Core ⭐️ (Build 2025 session)\nDeep dive into .NET 10 features, Blazor enhancements, and modern web patterns\nModel Context Protocol (MCP) Servers (Build 2025 session)\nBuilding and deploying your first MCP server for AI integration\n\n\n\n☁️ Azure Development\n\nAzure Naming Conventions Guide ⭐️\nComprehensive naming standards for Azure resources across environments\nTable Storage Access Patterns\nBest practices for Azure Table Storage implementation\nCosmosDB Access Strategies\nOptimizing CosmosDB access patterns and performance\n\n\n\n🧪 Testing & Quality Assurance\n\nTesting with .NET Aspire and Playwright (Build 2025 session)\nModern testing approaches for cloud-native applications\nHTTP Files for API Testing\nStreamlined API testing with HTTP files",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#latest-content-july-2025",
+    "href": "index.html#latest-content-july-2025",
+    "title": "Dario’s Learning Journey",
+    "section": "📅 Latest Content (July 2025)",
+    "text": "📅 Latest Content (July 2025)\n\nRecent Additions\n\n[Jul 13] HTTP Files Testing Strategy - Enhanced API testing workflows\n[Jul 12] Quarto Documentation Setup - Professional docs with GitHub Pages\n\n[Jul 12] HTTP Files for Testing - Repeatable API test scenarios\n[Jul 09] Git Command Line Mastery - Efficient repository management\n[Jul 06] CosmosDB Access Patterns - Database optimization techniques\n[Jul 05] Table Storage Solutions - Azure storage best practices\n[Jul 02] Azure Naming Standards - Enterprise-grade naming conventions\n\n\n\nBuild 2025 Conference Coverage\nMicrosoft Build 2025 sessions with actionable insights and practical examples:\n\n\n\nSession\nFocus\nComplexity\nDuration\n\n\n\n\nBRK106\n.NET Aspire & AI\nAdvanced\n45 min\n\n\nBRK122\nASP.NET Core Future\nIntermediate\n45 min\n\n\nBRK123\n.NET MAUI + AI\nIntermediate\n45 min\n\n\nDEM508\nTesting Strategies\nBeginner\n20 min\n\n\nDEM517\nMCP Servers\nAdvanced\n30 min\n\n\nDEM520\nLocal AI\nBeginner\n15 min",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#quick-navigation",
+    "href": "index.html#quick-navigation",
+    "title": "Dario’s Learning Journey",
+    "section": "🎯 Quick Navigation",
+    "text": "🎯 Quick Navigation\n\nBy Technology Stack\n\n\n🔷 .NET Ecosystem\n\n.NET Aspire Development (Build 2025 session)\nASP.NET Core & Blazor (Build 2025 session)\n.NET MAUI Mobile Apps (Build 2025 session)\nTesting with Playwright (Build 2025 session)\n\n\n\n☁️ Azure Services\n\nResource Naming\nTable Storage\nCosmosDB\nBest Practices\n\n\n\n🛠️ Development Tools\n\nGit Command Line\nHTTP File Testing\nQuarto Documentation\n\n\n\n🤖 AI Integration\n\nLocal AI Development (Build 2025 session)\nMCP Servers (Build 2025 session)\nAI-Powered Mobile Apps (Build 2025 session)",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#getting-started",
+    "href": "index.html#getting-started",
+    "title": "Dario’s Learning Journey",
+    "section": "🚀 Getting Started",
+    "text": "🚀 Getting Started\n\nFor Developers New to the Topics\n\nStart with Azure Naming Conventions for foundational knowledge\nExplore HTTP File Testing for immediate productivity gains\nDeep dive into .NET Aspire for modern application development\n\n\n\nFor Conference Attendees\nBrowse the Build 2025 session notes for detailed breakdowns with timestamps, code examples, and actionable takeaways.\n\n\nFor Azure Practitioners\nFocus on the Azure development guides for production-ready patterns and enterprise best practices.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#content-highlights",
+    "href": "index.html#content-highlights",
+    "title": "Dario’s Learning Journey",
+    "section": "🎯 Content Highlights",
+    "text": "🎯 Content Highlights\nEach article includes:\n\nExecutive summaries for quick understanding\nCode examples with practical implementations\n\nBest practices from real-world experience\nReference links to official documentation\nTroubleshooting tips for common issues",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#repository-stats",
+    "href": "index.html#repository-stats",
+    "title": "Dario’s Learning Journey",
+    "section": "📈 Repository Stats",
+    "text": "📈 Repository Stats\n\n20+ Technical Articles covering modern development practices\n6 Conference Sessions from Microsoft Build 2025\nMultiple Azure Services with hands-on examples\nRegular Updates with latest industry insights\n\n\nBuilt with Quarto • Hosted on GitHub Pages • Updated July 2025\n\n💡 Tip: Use the search functionality (Ctrl+F) to quickly find specific technologies or concepts across all articles.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/Readme.html",
+    "href": "202506 Build 2025/Readme.html",
+    "title": "",
+    "section": "",
+    "text": "Code",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/Readme.html#table-of-contents",
+    "href": "202506 Build 2025/Readme.html#table-of-contents",
+    "title": "",
+    "section": "Table of Contents",
+    "text": "Table of Contents\n\n🤖 DEM520 - Local AI Development with Foundry Local and .NET Aspire\n🧪 DEM508 - Streamlining Application Testing with .NET Aspire and Playwright\n🌐 BRK122 - The Future of Web Development with ASP.NET Core & Blazor\n🔗 DEM517 - Build, Deploy, & Use Your First Model Context Protocol (MCP) Server\n📋 BRK106 - Elevating Development with .NET Aspire: AI, Cloud, and Beyond",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/Readme.html#build-presentations",
+    "href": "202506 Build 2025/Readme.html#build-presentations",
+    "title": "",
+    "section": "Build Presentations",
+    "text": "Build Presentations\n\n1. 🤖 DEM520 - Local AI Development with Foundry Local and .NET Aspire\nSummary: A focused demonstration on local AI development using Microsoft’s Foundry Local platform integrated with .NET Aspire. The session addresses the challenges and benefits of running AI models locally versus cloud-based solutions.\nDuration: ~13 minutes live demonstration\n\n\n\n2. 🧪 DEM508 - Streamlining Application Testing with .NET Aspire and Playwright\nSummary: A comprehensive demonstration showing how to combine .NET Aspire with Playwright for robust end-to-end testing of distributed applications. The session provides practical examples and real-world scenarios for implementing effective testing workflows.\nSpeaker: Jeff Fritz\n\n\n\n3. 🌐 BRK122 - The Future of Web Development with ASP.NET Core & Blazor\nSummary: A comprehensive overview of the future direction of web development using ASP.NET Core and Blazor. This session covers major focus areas for .NET 10, including performance improvements, developer productivity enhancements, AI integration, and modern development workflows.\nSpeakers: Daniel Roth, Mike Kistler\n\n\n\n4. 🔗 DEM517 - Build, Deploy, & Use Your First Model Context Protocol (MCP) Server\nSummary: An in-depth exploration of Model Context Protocol (MCP), Microsoft’s open standard for connecting AI applications to external data sources and tools. The session covers architecture, deployment options, and practical implementation strategies.\nSpeakers: James Montemagno, Katie Savage\n\n\n\n5. 📋 BRK106 - Elevating Development with .NET Aspire: AI, Cloud, and Beyond\nSummary: This breakout session explores the evolution of .NET Aspire from a local development tool to a comprehensive platform for building, testing, and deploying modern applications. The session covers significant advances in AI integration, multi-language support, and developer productivity enhancements.\nSpeakers: Damian Edwards, David Fowler, Maddy Montaquila, Devis Lucato",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/Readme.html#session-formats",
+    "href": "202506 Build 2025/Readme.html#session-formats",
+    "title": "",
+    "section": "Session Formats",
+    "text": "Session Formats\n\nBRK106: Breakout session with multiple speakers and comprehensive coverage\nBRK122: Breakout session focusing on web development future and ASP.NET Core/Blazor\nDEM508: Technical demonstration with practical code examples\nDEM517: Deep-dive technical session with architecture focus\nDEM520: Short-format live demonstration with hands-on coding",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/Readme.html#common-themes",
+    "href": "202506 Build 2025/Readme.html#common-themes",
+    "title": "",
+    "section": "Common Themes",
+    "text": "Common Themes\nAll sessions emphasize:\n\nDeveloper productivity and modern development workflows\nIntegration patterns between Microsoft technologies\nReal-world applications and practical implementation\nFuture-forward approaches to software development\nEnterprise-scale solutions and best practices",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/Readme.html#additional-resources",
+    "href": "202506 Build 2025/Readme.html#additional-resources",
+    "title": "",
+    "section": "Additional Resources",
+    "text": "Additional Resources\nEach session folder contains:\n\nDetailed markdown notes with code examples\nSupporting images and diagrams\nLinks to official Microsoft Build sessions\nReferences to related documentation and tools",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK123 Build AI Apps with Microsoft Graph Data/SUMMARY.html",
+    "href": "202506 Build 2025/BRK123 Build AI Apps with Microsoft Graph Data/SUMMARY.html",
+    "title": "",
+    "section": "",
+    "text": "Code\n\n\n\n\n.NET MAUI allows you to create multi-platform apps for iOS, Android, macOS, and Windows. See how you can boost your productivity with AI enhancements in GitHub Copilot and Visual Studio and learn how the entire development lifecycle is being transformed with .NET Aspire. Join us and see how intelligent productivity tools and beautiful controls and components come together to build native and hybrid apps with .NET MAUI’s latest features.\nAI Summary Introduction to WebVTT and Interaction: The session begins with a friendly greeting and casual conversation, where the speaker acknowledges the audience and sets a relaxed tone for the discussion.\nOverview of Presentation and Topics: The session aims to cover the integration of AI into mobile and desktop applications, specifically focusing on .NET MAUI. The discussion includes insights on app development strategies and the influence of AI technologies in enhancing app functionalities.\nInteractive Engagement and Guest Introductions: The speaker involves the audience by asking about their previous night’s activities and introduces other guests who contribute to the conversation on app development and AI.\nTechnical Insights and AI Integration: Delving into the technical aspects, the speaker explores the approach to building intelligent apps by incorporating AI, which allows apps to perform complex tasks that go beyond deterministic functions. Examples and strategies for embedding AI within apps are discussed.\nAudience Interaction and Future Directions: The speaker maintains engagement with the audience, inviting questions and comments while introducing emerging themes and advancements in app development with AI.\nConclusion and Resource Sharing: The session wraps up by summarizing key points and sharing resources for further learning or action, emphasizing community building and continual improvement in AI-infused app development.",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK123: Build AI Apps with Microsoft Graph",
+      "Summary"
+    ]
+  }
+]
