@@ -675,25 +675,28 @@ body > .custom-toc-addition {
   line-height: 1.4;
 }
 
-/* Reduce gap between icons and first-level titles */
+/* Base sidebar item text styling - reduce left spacing */
 #quarto-sidebar .sidebar-item-text {
   display: flex;
   align-items: center;
-  padding: 0.4rem 0.8rem; /* Reduced padding */
-  gap: 0.5rem; /* Reduce gap between icon and text */
-  margin: 0.1rem 0; /* Reduce vertical margins */
+  padding: 0.2rem 0.4rem; /* Reduced left/right padding from 0.8rem to 0.4rem */
+  gap: 0.4rem; /* Reduce gap between icon and text */
+  margin: 0.05rem 0; /* Reduce vertical margins */
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 /* Top-level items (Level 0) - "Home", "Events", "Tools", etc. */
 #quarto-sidebar > .sidebar-navigation > .sidebar-item > .sidebar-item-text {
   font-weight: 600;
   font-size: 0.95rem;
-  padding-left: 0.8rem;
+  padding-left: 0.4rem; /* Reduced from 0.8rem */
 }
 
 /* First nested level (Level 1) - "Build Conference 2025", "Development Tools", etc. */
 #quarto-sidebar .sidebar-item .sidebar-item > .sidebar-item-text {
-  padding-left: 1.5rem !important; /* Proper indentation for level 1 */
+  padding-left: 1.2rem !important; /* Reduced from 1.5rem for better alignment */
   font-size: 0.9rem;
   color: #666;
   font-weight: 500;
@@ -701,7 +704,7 @@ body > .custom-toc-addition {
 
 /* Second nested level (Level 2) - "Conference Overview", "Git Command Line", etc. */
 #quarto-sidebar .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
-  padding-left: 2.2rem !important; /* Proper indentation for level 2 */
+  padding-left: 2.0rem !important; /* Reduced from 2.2rem for better alignment */
   font-size: 0.85rem;
   color: #777;
   font-weight: 400;
@@ -709,46 +712,45 @@ body > .custom-toc-addition {
 
 /* Third nested level (Level 3) - Deep nested items */
 #quarto-sidebar .sidebar-item .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
-  padding-left: 2.9rem !important; /* Proper indentation for level 3 */
+  padding-left: 2.8rem !important; /* Reduced from 2.9rem for better alignment */
   font-size: 0.8rem;
   color: #888;
 }
 
 /* Alternative selector approach for better specificity */
 #quarto-sidebar .sidebar-item-container .sidebar-item-text {
-  padding-left: 1.5rem !important;
+  padding-left: 1.2rem !important;
 }
 
 #quarto-sidebar .sidebar-item-container .sidebar-item-container .sidebar-item-text {
-  padding-left: 2.2rem !important;
+  padding-left: 2.0rem !important;
 }
 
 #quarto-sidebar .sidebar-item-container .sidebar-item-container .sidebar-item-container .sidebar-item-text {
-  padding-left: 2.9rem !important;
-}
-
-/* Improve overall sidebar spacing */
-#quarto-sidebar .sidebar-item {
-  margin-bottom: 0.05rem; /* Reduce spacing between items */
-}
-
-/* Ensure proper text wrapping for long titles */
-#quarto-sidebar .sidebar-item-text {
-  word-wrap: break-word;
-  white-space: normal;
-  overflow-wrap: break-word;
+  padding-left: 2.8rem !important;
 }
 
 /* Fix icon alignment within sidebar items */
 #quarto-sidebar .sidebar-item-text i,
 #quarto-sidebar .sidebar-item-text .bi {
   flex-shrink: 0; /* Prevent icon from shrinking */
-  width: 1.1em; /* Fixed width for consistent alignment */
+  width: 1.0em; /* Reduced from 1.1em */
   text-align: center;
+  margin-right: 0.4rem; /* Explicit right margin */
+}
+
+/* Improve overall sidebar spacing */
+#quarto-sidebar .sidebar-item {
+  margin-bottom: 0.02rem; /* Further reduced spacing between items */
 }
 
 /* Hover states for better UX */
 #quarto-sidebar .sidebar-item-text:hover {
-  background-color: #f8f9fa;
+  background-color: rgba(248, 249, 250, 0.8);
   border-radius: 4px;
+}
+
+/* Specific fix for sidebar-link class if it exists */
+#quarto-sidebar .sidebar-link {
+  padding: 0.2rem 0.4rem !important;
 }
