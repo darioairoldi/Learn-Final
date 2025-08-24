@@ -112,45 +112,31 @@ document.addEventListener('DOMContentLoaded', function() {
     if (hasChildren) {
       console.log('📂 This is a section node with children - showing child pages');
       
-      // For section nodes, show children
+      // For section nodes, show ONLY immediate children (not grandchildren)
       const childItems = [];
       
-      // Look for children in various possible container structures
-      const childContainers = activeItemContainer.querySelectorAll(
-        '.sidebar-item-container, .sidebar-section, ul, ol, .sidebar-items'
-      );
-      
-      // If no dedicated containers, look for direct child sidebar items
-      if (childContainers.length === 0) {
-        const directChildren = activeItemContainer.querySelectorAll('.sidebar-item .sidebar-item-text[href]');
-        directChildren.forEach(child => {
-          const href = child.getAttribute('href');
-          if (href && href !== '#' && !child.classList.contains('active')) {
-            childItems.push({
-              text: child.textContent.trim(),
-              href: href,
-              isActive: child.classList.contains('active')
-            });
-          }
-        });
-      } else {
-        // Look within child containers
-        childContainers.forEach(container => {
-          const childLinks = container.querySelectorAll('.sidebar-item-text[href]');
-          childLinks.forEach(child => {
-            const href = child.getAttribute('href');
+      // Find the immediate child container
+      const immediateChildContainer = activeItemContainer.querySelector('.sidebar-item-container, .sidebar-section, ul');
+      if (immediateChildContainer) {
+        // Get only DIRECT children of this container (not nested grandchildren)
+        const directChildren = immediateChildContainer.querySelectorAll(':scope > .sidebar-item');
+        
+        directChildren.forEach(childItem => {
+          const childTextElement = childItem.querySelector('.sidebar-item-text[href]');
+          if (childTextElement) {
+            const href = childTextElement.getAttribute('href');
             if (href && href !== '#') {
               childItems.push({
-                text: child.textContent.trim(),
+                text: childTextElement.textContent.trim(),
                 href: href,
-                isActive: child.classList.contains('active')
+                isActive: childTextElement.classList.contains('active')
               });
             }
-          });
+          }
         });
       }
       
-      console.log(`📂 Found ${childItems.length} child pages:`, childItems.map(s => s.text));
+      console.log(`📂 Found ${childItems.length} immediate child pages:`, childItems.map(s => s.text));
       return childItems;
       
     } else {
