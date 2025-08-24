@@ -1,5 +1,65 @@
 /* Custom styles for Learning Journey site */
 
+/* Import Bootstrap Icons first */
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css');
+
+/* Ensure Bootstrap Icons font loads properly */
+@font-face {
+    font-family: 'bootstrap-icons';
+    src: url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/fonts/bootstrap-icons.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/fonts/bootstrap-icons.woff') format('woff');
+    font-display: swap;
+}
+
+/* Force Bootstrap Icons to load and display */
+.bi::before,
+[class^="bi-"]::before,
+[class*=" bi-"]::before {
+    font-family: 'bootstrap-icons' !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Navbar icon fixes */
+.navbar .nav-link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    color: white !important;
+}
+
+.navbar .nav-link .bi {
+    color: white !important;
+    font-size: 1.1em !important;
+    line-height: 1 !important;
+}
+
+/* GitHub icon specific styling */
+.navbar .nav-link[aria-label*="GitHub"] {
+    font-size: 1.2em;
+}
+
+.navbar .nav-link[aria-label*="GitHub"]::before {
+    content: "\f3ed";
+    font-family: 'bootstrap-icons' !important;
+    color: white !important;
+    margin-right: 0.25rem;
+}
+
+/* Home icon specific styling */
+.navbar .nav-link[href*="index"]::before {
+    content: "\f425";
+    font-family: 'bootstrap-icons' !important;
+    color: white !important;
+    margin-right: 0.25rem;
+}
+
 /* Enhanced compact metadata styling */
 .quarto-title-block .quarto-title-meta {
   margin-top: 1rem;
