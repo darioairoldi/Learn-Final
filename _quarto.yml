@@ -33,8 +33,9 @@ website:
     search: true
     title: "Learning Hub"
     left:
-      - text: "🏠 Home"
+      - icon: house-fill
         href: index.qmd
+        text: "Home"
       - text: "Events"
         menu:
           - href: "202506 Build 2025/Readme.md"
@@ -115,7 +116,7 @@ website:
         menu:
           - href: "Travel/Paris 2025/README.md"
             text: "Paris Cultural Journey 2025"
-      - text: "📋"
+      - icon: github
         href: "https://github.com/darioairoldi/Learn"
         aria-label: "GitHub Repository"
 
