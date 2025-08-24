@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Handle window resize
   window.addEventListener('resize', handleResponsiveLayout);
   
-  // OPTIMIZED: Find only the current page and its siblings, not entire navigation tree
+  // OPTIMIZED: Find current page siblings OR children if it's a section
   function findCurrentPageSiblings() {
     const sidebar = document.querySelector('#quarto-sidebar');
     if (!sidebar) {
@@ -105,33 +105,84 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('✅ Found active item:', activeItem.textContent.trim());
     
-    // Find the parent container of the active item
-    const parentContainer = activeItem.closest('.sidebar-item').parentElement;
-    if (!parentContainer) {
-      console.log('❌ Parent container not found');
-      return [];
-    }
+    // Check if this is a section node (has children) or a leaf node
+    const activeItemContainer = activeItem.closest('.sidebar-item');
+    const hasChildren = activeItemContainer.querySelector('.sidebar-item-container, .sidebar-section, ul');
     
-    // Extract only siblings at the same level
-    const siblingItems = [];
-    const siblings = parentContainer.querySelectorAll(':scope > .sidebar-item');
-    
-    siblings.forEach(sibling => {
-      const textElement = sibling.querySelector('.sidebar-item-text');
-      if (textElement && textElement.hasAttribute('href')) {
-        const href = textElement.getAttribute('href');
-        if (href && href !== '#') {
-          siblingItems.push({
-            text: textElement.textContent.trim(),
-            href: href,
-            isActive: textElement.classList.contains('active') || href.includes(currentPath)
+    if (hasChildren) {
+      console.log('📂 This is a section node with children - showing child pages');
+      
+      // For section nodes, show children
+      const childItems = [];
+      
+      // Look for children in various possible container structures
+      const childContainers = activeItemContainer.querySelectorAll(
+        '.sidebar-item-container, .sidebar-section, ul, ol, .sidebar-items'
+      );
+      
+      // If no dedicated containers, look for direct child sidebar items
+      if (childContainers.length === 0) {
+        const directChildren = activeItemContainer.querySelectorAll('.sidebar-item .sidebar-item-text[href]');
+        directChildren.forEach(child => {
+          const href = child.getAttribute('href');
+          if (href && href !== '#' && !child.classList.contains('active')) {
+            childItems.push({
+              text: child.textContent.trim(),
+              href: href,
+              isActive: child.classList.contains('active')
+            });
+          }
+        });
+      } else {
+        // Look within child containers
+        childContainers.forEach(container => {
+          const childLinks = container.querySelectorAll('.sidebar-item-text[href]');
+          childLinks.forEach(child => {
+            const href = child.getAttribute('href');
+            if (href && href !== '#') {
+              childItems.push({
+                text: child.textContent.trim(),
+                href: href,
+                isActive: child.classList.contains('active')
+              });
+            }
           });
-        }
+        });
       }
-    });
-    
-    console.log(`✅ Found ${siblingItems.length} sibling pages:`, siblingItems.map(s => s.text));
-    return siblingItems;
+      
+      console.log(`📂 Found ${childItems.length} child pages:`, childItems.map(s => s.text));
+      return childItems;
+      
+    } else {
+      console.log('📄 This is a leaf node - showing sibling pages');
+      
+      // For leaf nodes, show siblings (original logic)
+      const parentContainer = activeItemContainer.parentElement;
+      if (!parentContainer) {
+        console.log('❌ Parent container not found');
+        return [];
+      }
+      
+      const siblingItems = [];
+      const siblings = parentContainer.querySelectorAll(':scope > .sidebar-item');
+      
+      siblings.forEach(sibling => {
+        const textElement = sibling.querySelector('.sidebar-item-text');
+        if (textElement && textElement.hasAttribute('href')) {
+          const href = textElement.getAttribute('href');
+          if (href && href !== '#') {
+            siblingItems.push({
+              text: textElement.textContent.trim(),
+              href: href,
+              isActive: textElement.classList.contains('active') || href.includes(currentPath)
+            });
+          }
+        }
+      });
+      
+      console.log(`📄 Found ${siblingItems.length} sibling pages:`, siblingItems.map(s => s.text));
+      return siblingItems;
+    }
   }
 
   function createCustomRightNav() {
