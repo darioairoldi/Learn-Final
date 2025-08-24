@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>readme-cosmosdbquerycostmetrics – Dario's Learning Journey</title>
+<title>quarto-specific-markdown-features – Dario's Learning Journey</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,6 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../20250712 Use QUARTO doc for Github repos doc/002.03. Quarto Theming and Styling.html" rel="next">
+<link href="../20250712 Use QUARTO doc for Github repos doc/001.01. Quarto.yml document structure.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -73,6 +75,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-3a5c9839406ebf6b9042eb0df0f87657.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/kbd/kbd.js"></script>
+<link href="../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -314,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../20250709 Manage GitRepo from commandline/README.html">Tools</a></li><li class="breadcrumb-item"><a href="../20250709 Manage GitRepo from commandline/README.html">Development Tools</a></li><li class="breadcrumb-item"><a href="../20250712 Use QUARTO doc for Github repos doc/README.html">Quarto Documentation</a></li><li class="breadcrumb-item"><a href="../20250712 Use QUARTO doc for Github repos doc/003.01. Quarto specific markdown features.html">Quarto specific markdown features</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -1144,11 +1148,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="../20250712 Use QUARTO doc for Github repos doc/README.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto Documentation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-40" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-40" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-40" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-40" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../20250712 Use QUARTO doc for Github repos doc/README.html" class="sidebar-item-text sidebar-link">
@@ -1163,7 +1167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../20250712 Use QUARTO doc for Github repos doc/003.01. Quarto specific markdown features.html" class="sidebar-item-text sidebar-link">
+  <a href="../20250712 Use QUARTO doc for Github repos doc/003.01. Quarto specific markdown features.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Quarto specific markdown features</span></a>
   </div>
 </li>
@@ -1268,180 +1272,538 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On This Page</h2>
    
   <ul>
-  <li><a href="#cosmosdb-query-cost-metrics-with-diginsight" id="toc-cosmosdb-query-cost-metrics-with-diginsight" class="nav-link active" data-scroll-target="#cosmosdb-query-cost-metrics-with-diginsight">CosmosDB Query Cost Metrics with Diginsight</a>
+  <li><a href="#quarto-specific-markdown-features" id="toc-quarto-specific-markdown-features" class="nav-link active" data-scroll-target="#quarto-specific-markdown-features">Quarto-Specific Markdown Features</a>
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works">How It Works</a>
+  <li><a href="#table-of-contents" id="toc-table-of-contents" class="nav-link" data-scroll-target="#table-of-contents">Table of Contents</a></li>
+  <li><a href="#div-blocks-and-fenced-divs" id="toc-div-blocks-and-fenced-divs" class="nav-link" data-scroll-target="#div-blocks-and-fenced-divs">Div Blocks and Fenced Divs</a>
   <ul class="collapse">
-  <li><a href="#activity-based-metric-collection" id="toc-activity-based-metric-collection" class="nav-link" data-scroll-target="#activity-based-metric-collection">Activity-Based Metric Collection</a></li>
-  <li><a href="#security-considerations" id="toc-security-considerations" class="nav-link" data-scroll-target="#security-considerations">Security Considerations</a></li>
+  <li><a href="#basic-div-syntax" id="toc-basic-div-syntax" class="nav-link" data-scroll-target="#basic-div-syntax">Basic Div Syntax</a></li>
+  <li><a href="#nested-divs" id="toc-nested-divs" class="nav-link" data-scroll-target="#nested-divs">Nested Divs</a></li>
+  <li><a href="#multiple-classes-and-attributes" id="toc-multiple-classes-and-attributes" class="nav-link" data-scroll-target="#multiple-classes-and-attributes">Multiple Classes and Attributes</a></li>
   </ul></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a>
+  <li><a href="#css-classes-and-styling" id="toc-css-classes-and-styling" class="nav-link" data-scroll-target="#css-classes-and-styling">CSS Classes and Styling</a>
   <ul class="collapse">
-  <li><a href="#register-the-query-cost-metrics" id="toc-register-the-query-cost-metrics" class="nav-link" data-scroll-target="#register-the-query-cost-metrics">1. Register the Query Cost Metrics</a></li>
-  <li><a href="#use-observable-extensions" id="toc-use-observable-extensions" class="nav-link" data-scroll-target="#use-observable-extensions">2. Use Observable Extensions</a></li>
-  <li><a href="#configure-metrics-export" id="toc-configure-metrics-export" class="nav-link" data-scroll-target="#configure-metrics-export">3. Configure Metrics Export</a></li>
+  <li><a href="#applying-css-classes" id="toc-applying-css-classes" class="nav-link" data-scroll-target="#applying-css-classes">Applying CSS Classes</a></li>
+  <li><a href="#custom-css-integration" id="toc-custom-css-integration" class="nav-link" data-scroll-target="#custom-css-integration">Custom CSS Integration</a></li>
+  <li><a href="#inline-styling" id="toc-inline-styling" class="nav-link" data-scroll-target="#inline-styling">Inline Styling</a></li>
   </ul></li>
-  <li><a href="#metric-details" id="toc-metric-details" class="nav-link" data-scroll-target="#metric-details">Metric Details</a>
+  <li><a href="#grid-layouts" id="toc-grid-layouts" class="nav-link" data-scroll-target="#grid-layouts">Grid Layouts</a>
   <ul class="collapse">
-  <li><a href="#metric-name" id="toc-metric-name" class="nav-link" data-scroll-target="#metric-name">Metric Name</a></li>
-  <li><a href="#tags" id="toc-tags" class="nav-link" data-scroll-target="#tags">Tags</a></li>
+  <li><a href="#basic-grid-structure" id="toc-basic-grid-structure" class="nav-link" data-scroll-target="#basic-grid-structure">Basic Grid Structure</a></li>
+  <li><a href="#complex-grid-layouts" id="toc-complex-grid-layouts" class="nav-link" data-scroll-target="#complex-grid-layouts">Complex Grid Layouts</a></li>
+  <li><a href="#responsive-breakpoints" id="toc-responsive-breakpoints" class="nav-link" data-scroll-target="#responsive-breakpoints">Responsive Breakpoints</a></li>
   </ul></li>
-  <li><a href="#example-usage" id="toc-example-usage" class="nav-link" data-scroll-target="#example-usage">Example Usage</a></li>
-  <li><a href="#monitoring-and-alerting" id="toc-monitoring-and-alerting" class="nav-link" data-scroll-target="#monitoring-and-alerting">Monitoring and Alerting</a></li>
-  <li><a href="#integration-with-existing-metrics" id="toc-integration-with-existing-metrics" class="nav-link" data-scroll-target="#integration-with-existing-metrics">Integration with Existing Metrics</a></li>
+  <li><a href="#callout-blocks" id="toc-callout-blocks" class="nav-link" data-scroll-target="#callout-blocks">Callout Blocks</a>
+  <ul class="collapse">
+  <li><a href="#standard-callout-types" id="toc-standard-callout-types" class="nav-link" data-scroll-target="#standard-callout-types">Standard Callout Types</a></li>
+  <li><a href="#customized-callouts" id="toc-customized-callouts" class="nav-link" data-scroll-target="#customized-callouts">Customized Callouts</a></li>
+  </ul></li>
+  <li><a href="#code-execution" id="toc-code-execution" class="nav-link" data-scroll-target="#code-execution">Code Execution</a>
+  <ul class="collapse">
+  <li><a href="#python-code-execution" id="toc-python-code-execution" class="nav-link" data-scroll-target="#python-code-execution">Python Code Execution</a></li>
+  <li><a href="#r-code-execution" id="toc-r-code-execution" class="nav-link" data-scroll-target="#r-code-execution">R Code Execution</a></li>
+  <li><a href="#code-block-options" id="toc-code-block-options" class="nav-link" data-scroll-target="#code-block-options">Code Block Options</a></li>
+  </ul></li>
+  <li><a href="#cross-references" id="toc-cross-references" class="nav-link" data-scroll-target="#cross-references">Cross-References</a>
+  <ul class="collapse">
+  <li><a href="#section-references" id="toc-section-references" class="nav-link" data-scroll-target="#section-references">Section References</a></li>
+  <li><a href="#figure-references" id="toc-figure-references" class="nav-link" data-scroll-target="#figure-references">Figure References</a></li>
+  <li><a href="#table-references" id="toc-table-references" class="nav-link" data-scroll-target="#table-references">Table References</a></li>
+  </ul></li>
+  <li><a href="#figures-and-tables" id="toc-figures-and-tables" class="nav-link" data-scroll-target="#figures-and-tables">Figures and Tables</a>
+  <ul class="collapse">
+  <li><a href="#enhanced-figures" id="toc-enhanced-figures" class="nav-link" data-scroll-target="#enhanced-figures">Enhanced Figures</a></li>
+  <li><a href="#figure-layouts" id="toc-figure-layouts" class="nav-link" data-scroll-target="#figure-layouts">Figure Layouts</a></li>
+  <li><a href="#enhanced-tables" id="toc-enhanced-tables" class="nav-link" data-scroll-target="#enhanced-tables">Enhanced Tables</a></li>
+  </ul></li>
+  <li><a href="#mathematical-expressions" id="toc-mathematical-expressions" class="nav-link" data-scroll-target="#mathematical-expressions">Mathematical Expressions</a>
+  <ul class="collapse">
+  <li><a href="#inline-math" id="toc-inline-math" class="nav-link" data-scroll-target="#inline-math">Inline Math</a></li>
+  <li><a href="#display-math" id="toc-display-math" class="nav-link" data-scroll-target="#display-math">Display Math</a></li>
+  <li><a href="#numbered-equations" id="toc-numbered-equations" class="nav-link" data-scroll-target="#numbered-equations">Numbered Equations</a></li>
+  </ul></li>
+  <li><a href="#interactive-elements" id="toc-interactive-elements" class="nav-link" data-scroll-target="#interactive-elements">Interactive Elements</a>
+  <ul class="collapse">
+  <li><a href="#tabsets" id="toc-tabsets" class="nav-link" data-scroll-target="#tabsets">Tabsets</a></li>
+  <li><a href="#accordions" id="toc-accordions" class="nav-link" data-scroll-target="#accordions">Accordions</a></li>
+  </ul></li>
+  <li><a href="#custom-shortcodes" id="toc-custom-shortcodes" class="nav-link" data-scroll-target="#custom-shortcodes">Custom Shortcodes</a>
+  <ul class="collapse">
+  <li><a href="#built-in-shortcodes" id="toc-built-in-shortcodes" class="nav-link" data-scroll-target="#built-in-shortcodes">Built-in Shortcodes</a></li>
+  <li><a href="#custom-shortcode-definition" id="toc-custom-shortcode-definition" class="nav-link" data-scroll-target="#custom-shortcode-definition">Custom Shortcode Definition</a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a>
+  <ul class="collapse">
+  <li><a href="#consistent-styling" id="toc-consistent-styling" class="nav-link" data-scroll-target="#consistent-styling">1. Consistent Styling</a></li>
+  <li><a href="#accessibility" id="toc-accessibility" class="nav-link" data-scroll-target="#accessibility">2. Accessibility</a></li>
+  <li><a href="#performance" id="toc-performance" class="nav-link" data-scroll-target="#performance">3. Performance</a></li>
+  <li><a href="#maintainability" id="toc-maintainability" class="nav-link" data-scroll-target="#maintainability">4. Maintainability</a></li>
+  <li><a href="#cross-platform-compatibility" id="toc-cross-platform-compatibility" class="nav-link" data-scroll-target="#cross-platform-compatibility">5. Cross-Platform Compatibility</a></li>
+  </ul></li>
+  <li><a href="#example-complete-layout" id="toc-example-complete-layout" class="nav-link" data-scroll-target="#example-complete-layout">Example: Complete Layout</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/darioairoldi/Learn/edit/main/20250817 Query Cost Metrics with Diginsight/README-CosmosDbQueryCostMetrics.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/darioairoldi/Learn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/darioairoldi/Learn/edit/main/20250712 Use QUARTO doc for Github repos doc/003.01. Quarto specific markdown features.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/darioairoldi/Learn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7"></h1></header><div class="quarto-title-block"><div class="quarto-title-tools-only"><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../20250709 Manage GitRepo from commandline/README.html">Tools</a></li><li class="breadcrumb-item"><a href="../20250709 Manage GitRepo from commandline/README.html">Development Tools</a></li><li class="breadcrumb-item"><a href="../20250712 Use QUARTO doc for Github repos doc/README.html">Quarto Documentation</a></li><li class="breadcrumb-item"><a href="../20250712 Use QUARTO doc for Github repos doc/003.01. Quarto specific markdown features.html">Quarto specific markdown features</a></li></ol></nav><h1 class="title display-7"></h1></header><div class="quarto-title-block"><div class="quarto-title-tools-only"><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 
 
 
 
-<section id="cosmosdb-query-cost-metrics-with-diginsight" class="level1">
-<h1>CosmosDB Query Cost Metrics with Diginsight</h1>
-<p>This document explains how to collect and monitor CosmosDB query costs using Diginsight’s metrics infrastructure.</p>
+<section id="quarto-specific-markdown-features" class="level1">
+<h1>Quarto-Specific Markdown Features</h1>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The Diginsight.Components.Azure package now includes automatic collection of CosmosDB query costs as metrics. These metrics are collected every time a CosmosDB query is executed and include detailed tags for analysis.</p>
+<p>Quarto extends standard Markdown with powerful features that enable rich, interactive content creation. This guide covers the unique Quarto markdown syntax that goes beyond traditional Markdown capabilities.</p>
 </section>
-<section id="how-it-works" class="level2">
-<h2 class="anchored" data-anchor-id="how-it-works">How It Works</h2>
-<section id="activity-based-metric-collection" class="level3">
-<h3 class="anchored" data-anchor-id="activity-based-metric-collection">Activity-Based Metric Collection</h3>
-<p>The query cost metrics follow the same pattern as Diginsight’s <code>span_duration</code> metrics:</p>
-<ol type="1">
-<li><p><strong>Activity Tagging</strong>: When CosmosDB operations are performed using the <code>*Observable</code> extension methods, the query details are automatically tagged on the current activity:</p>
+<section id="table-of-contents" class="level2">
+<h2 class="anchored" data-anchor-id="table-of-contents">Table of Contents</h2>
 <ul>
-<li><code>query</code>: The SQL query text or operation type</li>
-<li><code>container</code>: The CosmosDB container name</li>
-<li><code>database</code>: The CosmosDB database name</li>
-</ul></li>
-<li><p><strong>Cost Recording</strong>: When a query completes in <code>ReadNextObservableAsync</code>, the Request Units (RU) cost is set as a <code>query_cost</code> tag on the activity.</p></li>
-<li><p><strong>Metric Collection</strong>: The <code>QueryCostMetricRecorder</code> listens for activity completion events and records the <code>query_cost</code> metric with these tags:</p>
-<ul>
-<li><code>query</code>: The SQL query text</li>
-<li><code>method</code>: The current activity operation name</li>
-<li><code>entrymethod</code>: The root operation name in the activity chain</li>
-<li><code>application</code>: The application name</li>
-<li><code>container</code>: CosmosDB container name</li>
-<li><code>database</code>: CosmosDB database name</li>
-</ul></li>
-</ol>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#div-blocks-and-fenced-divs">Div Blocks and Fenced Divs</a></li>
+<li><a href="#css-classes-and-styling">CSS Classes and Styling</a></li>
+<li><a href="#grid-layouts">Grid Layouts</a></li>
+<li><a href="#callout-blocks">Callout Blocks</a></li>
+<li><a href="#code-execution">Code Execution</a></li>
+<li><a href="#cross-references">Cross-References</a></li>
+<li><a href="#figures-and-tables">Figures and Tables</a></li>
+<li><a href="#mathematical-expressions">Mathematical Expressions</a></li>
+<li><a href="#interactive-elements">Interactive Elements</a></li>
+<li><a href="#custom-shortcodes">Custom Shortcodes</a></li>
+<li><a href="#best-practices">Best Practices</a></li>
+</ul>
 </section>
-<section id="security-considerations" class="level3">
-<h3 class="anchored" data-anchor-id="security-considerations">Security Considerations</h3>
-<p><strong>Important</strong>: The implementation excludes sensitive information from logs: - <strong>Continuation tokens</strong> are never logged in activity payloads for security reasons - Only query text, container, and database names are included in observability data - Request options that might contain sensitive data are excluded from logged payloads</p>
+<section id="div-blocks-and-fenced-divs" class="level2">
+<h2 class="anchored" data-anchor-id="div-blocks-and-fenced-divs">Div Blocks and Fenced Divs</h2>
+<p>Quarto introduces fenced divs using <code>:::</code> syntax, which allows you to apply CSS classes and attributes to blocks of content.</p>
+<section id="basic-div-syntax" class="level3">
+<h3 class="anchored" data-anchor-id="basic-div-syntax">Basic Div Syntax</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>::: {.class-name}</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Content goes here</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-</section>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<section id="register-the-query-cost-metrics" class="level3">
-<h3 class="anchored" data-anchor-id="register-the-query-cost-metrics">1. Register the Query Cost Metrics</h3>
-<p>Add the query cost metric recorder to your service collection:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>services<span class="op">.</span><span class="fu">AddCosmosDbQueryCostMetrics</span><span class="op">();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="use-observable-extensions" class="level3">
-<h3 class="anchored" data-anchor-id="use-observable-extensions">2. Use Observable Extensions</h3>
-<p>Make sure you’re using the <code>*Observable</code> extension methods from Diginsight.Components.Azure:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Instead of:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">var</span> iterator <span class="op">=</span> container<span class="op">.</span><span class="fu">GetItemQueryIterator</span><span class="op">&lt;</span>MyEntity<span class="op">&gt;(</span>queryDefinition<span class="op">);</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Use:</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">var</span> iterator <span class="op">=</span> container<span class="op">.</span><span class="fu">GetItemQueryIteratorObservable</span><span class="op">&lt;</span>MyEntity<span class="op">&gt;(</span>queryDefinition<span class="op">);</span></span>
+<section id="nested-divs" class="level3">
+<h3 class="anchored" data-anchor-id="nested-divs">Nested Divs</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>::::{.outer-container}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>:::{.inner-section}</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Nested content</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">// When reading results:</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="dt">var</span> response <span class="op">=</span> await iterator<span class="op">.</span><span class="fu">ReadNextObservableAsync</span><span class="op">();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>:::{.another-section}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>More nested content</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>::::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="configure-metrics-export" class="level3">
-<h3 class="anchored" data-anchor-id="configure-metrics-export">3. Configure Metrics Export</h3>
-<p>Configure your metrics infrastructure (e.g., Prometheus, Application Insights) to collect the <code>query_cost</code> histogram:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Example with OpenTelemetry</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>services<span class="op">.</span><span class="fu">AddOpenTelemetry</span><span class="op">()</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">WithMetrics</span><span class="op">(</span>builder <span class="op">=&gt;</span> builder</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">AddMeter</span><span class="op">(</span><span class="st">"Diginsight.Components.Azure"</span><span class="op">)</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">AddPrometheusExporter</span><span class="op">());</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="metric-details" class="level2">
-<h2 class="anchored" data-anchor-id="metric-details">Metric Details</h2>
-<section id="metric-name" class="level3">
-<h3 class="anchored" data-anchor-id="metric-name">Metric Name</h3>
-<ul>
-<li><strong>Name</strong>: <code>query_cost</code></li>
-<li><strong>Type</strong>: Histogram</li>
-<li><strong>Unit</strong>: RU (Request Units)</li>
-<li><strong>Description</strong>: CosmosDB query cost in Request Units</li>
-</ul>
-</section>
-<section id="tags" class="level3">
-<h3 class="anchored" data-anchor-id="tags">Tags</h3>
-<ul>
-<li><code>query</code>: The SQL query text or operation description</li>
-<li><code>method</code>: The current operation method name</li>
-<li><code>entrymethod</code>: The entry point method name</li>
-<li><code>application</code>: The application name</li>
-<li><code>container</code>: CosmosDB container name</li>
-<li><code>database</code>: CosmosDB database name</li>
-</ul>
+<section id="multiple-classes-and-attributes" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-classes-and-attributes">Multiple Classes and Attributes</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>::: {.warning .large-text #warning-section}</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>This is a warning with multiple classes and an ID</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="example-usage" class="level2">
-<h2 class="anchored" data-anchor-id="example-usage">Example Usage</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode csharp code-with-copy"><code class="sourceCode cs"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> OrderService</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">readonly</span> Container _container<span class="op">;</span></span>
+<section id="css-classes-and-styling" class="level2">
+<h2 class="anchored" data-anchor-id="css-classes-and-styling">CSS Classes and Styling</h2>
+<p>Quarto supports extensive CSS integration through class application and custom styling.</p>
+<section id="applying-css-classes" class="level3">
+<h3 class="anchored" data-anchor-id="applying-css-classes">Applying CSS Classes</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>::: {.text-center}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>This text will be centered</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">OrderService</span><span class="op">(</span>Container container<span class="op">)</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        _container <span class="op">=</span> container<span class="op">;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> async Task<span class="op">&lt;</span>List<span class="op">&lt;</span>Order<span class="op">&gt;&gt;</span> <span class="fu">GetOrdersByStatusAsync</span><span class="op">(</span><span class="dt">string</span> status<span class="op">)</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">// This will automatically generate metrics</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="kw">using</span> <span class="dt">var</span> activity <span class="op">=</span> ActivitySource<span class="op">.</span><span class="fu">StartActivity</span><span class="op">(</span><span class="st">"GetOrdersByStatus"</span><span class="op">);</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        activity<span class="op">?.</span><span class="fu">SetTag</span><span class="op">(</span><span class="st">"order_status"</span><span class="op">,</span> status<span class="op">);</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">var</span> queryDefinition <span class="op">=</span> <span class="kw">new</span> <span class="fu">QueryDefinition</span><span class="op">(</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SELECT * FROM c WHERE c.status = @status"</span><span class="op">)</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span><span class="fu">WithParameter</span><span class="op">(</span><span class="st">"@status"</span><span class="op">,</span> status<span class="op">);</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="dt">var</span> iterator <span class="op">=</span> _container<span class="op">.</span><span class="fu">GetItemQueryIteratorObservable</span><span class="op">&lt;</span>Order<span class="op">&gt;(</span>queryDefinition<span class="op">);</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="dt">var</span> orders <span class="op">=</span> <span class="kw">new</span> List<span class="op">&lt;</span>Order<span class="op">&gt;();</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="kw">while</span> <span class="op">(</span>iterator<span class="op">.</span><span class="fu">HasMoreResults</span><span class="op">)</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>            <span class="co">// This call will record query_cost metric</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>            <span class="dt">var</span> response <span class="op">=</span> await iterator<span class="op">.</span><span class="fu">ReadNextObservableAsync</span><span class="op">();</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>            orders<span class="op">.</span><span class="fu">AddRange</span><span class="op">(</span>response<span class="op">);</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> orders<span class="op">;</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>::: {.bg-primary .text-white .p-3}</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>Bootstrap-style classes for background, text color, and padding</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="monitoring-and-alerting" class="level2">
-<h2 class="anchored" data-anchor-id="monitoring-and-alerting">Monitoring and Alerting</h2>
-<p>With the collected metrics, you can:</p>
-<ol type="1">
-<li><strong>Monitor Query Costs</strong>: Track RU consumption patterns over time</li>
-<li><strong>Identify Expensive Queries</strong>: Find queries with high RU costs</li>
-<li><strong>Set Alerts</strong>: Create alerts for unusual RU consumption spikes</li>
-<li><strong>Optimize Performance</strong>: Use query text tags to identify and optimize expensive queries</li>
-</ol>
+<section id="custom-css-integration" class="level3">
+<h3 class="anchored" data-anchor-id="custom-css-integration">Custom CSS Integration</h3>
+<p>You can define custom CSS in your <code>_quarto.yml</code> or in separate CSS files:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> styles.css</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> cosmo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="integration-with-existing-metrics" class="level2">
-<h2 class="anchored" data-anchor-id="integration-with-existing-metrics">Integration with Existing Metrics</h2>
-<p>The query cost metrics integrate seamlessly with Diginsight’s existing observability features:</p>
+<section id="inline-styling" class="level3">
+<h3 class="anchored" data-anchor-id="inline-styling">Inline Styling</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">This text is highlighted</span><span class="co">]</span>{.highlight}</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Red text</span><span class="co">]</span>{style="color: red;"}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="grid-layouts" class="level2">
+<h2 class="anchored" data-anchor-id="grid-layouts">Grid Layouts</h2>
+<p>Quarto provides powerful grid layout capabilities using Bootstrap’s grid system.</p>
+<section id="basic-grid-structure" class="level3">
+<h3 class="anchored" data-anchor-id="basic-grid-structure">Basic Grid Structure</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>::::{.grid}</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-6}</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">### Left Column</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>Content for the left side</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-6}</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">### Right Column</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>Content for the right side</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>::::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="complex-grid-layouts" class="level3">
+<h3 class="anchored" data-anchor-id="complex-grid-layouts">Complex Grid Layouts</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>::::{.grid}</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12}</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">### Full Width Header</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>This spans the entire width</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-4}</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column 1</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>First column content</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-4}</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column 2</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>Second column content</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-4}</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column 3</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>Third column content</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>::::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="responsive-breakpoints" class="level3">
+<h3 class="anchored" data-anchor-id="responsive-breakpoints">Responsive Breakpoints</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-sm-6 .g-col-md-4 .g-col-lg-3}</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>Responsive column that adapts to screen size:</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Mobile: Full width (12 columns)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Small: Half width (6 columns)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Medium: One-third width (4 columns)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Large: One-quarter width (3 columns)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="callout-blocks" class="level2">
+<h2 class="anchored" data-anchor-id="callout-blocks">Callout Blocks</h2>
+<p>Quarto provides built-in callout blocks for highlighting important information.</p>
+<section id="standard-callout-types" class="level3">
+<h3 class="anchored" data-anchor-id="standard-callout-types">Standard Callout Types</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">## Note</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>This is a note callout block.</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Warning</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>This is a warning callout block.</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Important</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>This is an important callout block.</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tip</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>This is a tip callout block.</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Caution</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>This is a caution callout block.</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="customized-callouts" class="level3">
+<h3 class="anchored" data-anchor-id="customized-callouts">Customized Callouts</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon=false}</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">## Custom Note</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Note without an icon</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning collapse="true"}</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Collapsible Warning</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>This warning can be expanded/collapsed</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="code-execution" class="level2">
+<h2 class="anchored" data-anchor-id="code-execution">Code Execution</h2>
+<p>Quarto supports executable code blocks with various engines.</p>
+<section id="python-code-execution" class="level3">
+<h3 class="anchored" data-anchor-id="python-code-execution">Python Code Execution</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sample data</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'x'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], <span class="st">'y'</span>: [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>]}</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="r-code-execution" class="level3">
+<h3 class="anchored" data-anchor-id="r-code-execution">R Code Execution</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># R code block</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">y =</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(x, y)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="code-block-options" class="level3">
+<h3 class="anchored" data-anchor-id="code-block-options">Code Block Options</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># This code runs but doesn't show the code, only output</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello, World!"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="cross-references" class="level2">
+<h2 class="anchored" data-anchor-id="cross-references">Cross-References</h2>
+<p>Quarto provides sophisticated cross-referencing capabilities.</p>
+<section id="section-references" class="level3">
+<h3 class="anchored" data-anchor-id="section-references">Section References</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction {#sec-intro}</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>As discussed in @sec-intro, we can reference sections.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="figure-references" class="level3">
+<h3 class="anchored" data-anchor-id="figure-references">Figure References</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Quarto Logo](logo.png)</span>{#fig-logo}</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>See @fig-logo for the Quarto logo.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="table-references" class="level3">
+<h3 class="anchored" data-anchor-id="table-references">Table References</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>| Column 1 | Column 2 |</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>|----------|----------|</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>| Data 1   | Data 2   |</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>: Sample Table {#tbl-sample}</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>Refer to @tbl-sample for the data.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="figures-and-tables" class="level2">
+<h2 class="anchored" data-anchor-id="figures-and-tables">Figures and Tables</h2>
+<p>Enhanced figure and table capabilities with captions and styling.</p>
+<section id="enhanced-figures" class="level3">
+<h3 class="anchored" data-anchor-id="enhanced-figures">Enhanced Figures</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Caption text](image.png)</span>{#fig-example fig-align="center" width="50%"}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="figure-layouts" class="level3">
+<h3 class="anchored" data-anchor-id="figure-layouts">Figure Layouts</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>::: {#fig-layout layout-ncol=2}</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="al">![Image 1](img1.png)</span>{#fig-img1}</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="al">![Image 2](img2.png)</span>{#fig-img2}</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>Two side-by-side images</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="enhanced-tables" class="level3">
+<h3 class="anchored" data-anchor-id="enhanced-tables">Enhanced Tables</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>| Feature | Standard Markdown | Quarto |</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>|---------|-------------------|--------|</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>| Styling | Limited | Extensive |</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>| Layout | Basic | Advanced |</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>: Comparison Table {#tbl-comparison .striped .hover}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="mathematical-expressions" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-expressions">Mathematical Expressions</h2>
+<p>Quarto supports LaTeX math rendering with various display options.</p>
+<section id="inline-math" class="level3">
+<h3 class="anchored" data-anchor-id="inline-math">Inline Math</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>The equation $E = mc^2$ is Einstein's famous formula.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="display-math" class="level3">
+<h3 class="anchored" data-anchor-id="display-math">Display Math</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>$$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="numbered-equations" class="level3">
+<h3 class="anchored" data-anchor-id="numbered-equations">Numbered Equations</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>$$ {#eq-taylor}</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>Equation @eq-taylor shows the Taylor series.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="interactive-elements" class="level2">
+<h2 class="anchored" data-anchor-id="interactive-elements">Interactive Elements</h2>
+<p>Quarto supports various interactive content types.</p>
+<section id="tabsets" class="level3">
+<h3 class="anchored" data-anchor-id="tabsets">Tabsets</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tab 1</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>Content for tab 1</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tab 2</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>Content for tab 2</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tab 3</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>Content for tab 3</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="accordions" class="level3">
+<h3 class="anchored" data-anchor-id="accordions">Accordions</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset group="accordion"}</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Section 1</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>Accordion content 1</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Section 2</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>Accordion content 2</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="custom-shortcodes" class="level2">
+<h2 class="anchored" data-anchor-id="custom-shortcodes">Custom Shortcodes</h2>
+<p>Quarto allows custom shortcodes for reusable content.</p>
+<section id="built-in-shortcodes" class="level3">
+<h3 class="anchored" data-anchor-id="built-in-shortcodes">Built-in Shortcodes</h3>
+<div class="sourceCode" id="cb26"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>{{&lt; embed notebook.ipynb#fig-plot &gt;}}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="custom-shortcode-definition" class="level3">
+<h3 class="anchored" data-anchor-id="custom-shortcode-definition">Custom Shortcode Definition</h3>
+<p>Create <code>_extensions/shortcodes/highlight.lua</code>:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> highlight<span class="op">(</span><span class="va">args</span><span class="op">,</span> <span class="va">kwargs</span><span class="op">,</span> <span class="va">meta</span><span class="op">)</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">local</span> <span class="va">text</span> <span class="op">=</span> <span class="va">pandoc</span><span class="op">.</span><span class="va">utils</span><span class="op">.</span>stringify<span class="op">(</span><span class="va">args</span><span class="op">[</span><span class="dv">1</span><span class="op">])</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="va">pandoc</span><span class="op">.</span>RawInline<span class="op">(</span><span class="st">'html'</span><span class="op">,</span> <span class="st">'&lt;mark&gt;'</span> <span class="op">..</span> <span class="va">text</span> <span class="op">..</span> <span class="st">'&lt;/mark&gt;'</span><span class="op">)</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use in markdown:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>{{&lt; highlight "This text will be highlighted" &gt;}}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best Practices</h2>
+<section id="consistent-styling" class="level3">
+<h3 class="anchored" data-anchor-id="consistent-styling">1. Consistent Styling</h3>
 <ul>
-<li><strong>Correlation</strong>: Query costs are correlated with activities and traces</li>
-<li><strong>Context</strong>: Full context including entry method and application name</li>
-<li><strong>Consistency</strong>: Same tagging and naming conventions as <code>span_duration</code> metrics</li>
-<li><strong>Security</strong>: Sensitive data like continuation tokens are excluded from logs</li>
+<li>Use semantic class names</li>
+<li>Maintain consistent spacing with grid layouts</li>
+<li>Apply responsive design principles</li>
 </ul>
+</section>
+<section id="accessibility" class="level3">
+<h3 class="anchored" data-anchor-id="accessibility">2. Accessibility</h3>
+<ul>
+<li>Always include alt text for images</li>
+<li>Use proper heading hierarchy</li>
+<li>Ensure sufficient color contrast</li>
+</ul>
+</section>
+<section id="performance" class="level3">
+<h3 class="anchored" data-anchor-id="performance">3. Performance</h3>
+<ul>
+<li>Optimize images for web delivery</li>
+<li>Use lazy loading for heavy content</li>
+<li>Minimize custom CSS and JavaScript</li>
+</ul>
+</section>
+<section id="maintainability" class="level3">
+<h3 class="anchored" data-anchor-id="maintainability">4. Maintainability</h3>
+<ul>
+<li>Document custom CSS classes</li>
+<li>Use variables for repeated styling</li>
+<li>Keep complex layouts modular</li>
+</ul>
+</section>
+<section id="cross-platform-compatibility" class="level3">
+<h3 class="anchored" data-anchor-id="cross-platform-compatibility">5. Cross-Platform Compatibility</h3>
+<ul>
+<li>Test layouts on different screen sizes</li>
+<li>Ensure graceful degradation</li>
+<li>Use standard web technologies</li>
+</ul>
+</section>
+</section>
+<section id="example-complete-layout" class="level2">
+<h2 class="anchored" data-anchor-id="example-complete-layout">Example: Complete Layout</h2>
+<p>Here’s a comprehensive example combining multiple Quarto features:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Project Dashboard"</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">    css: custom.css</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">    grid:</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">      sidebar-width: 250px</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Project Status</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>Current project metrics and updates</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>::::{.grid}</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-8}</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### Main Content</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>Project overview content</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## Metrics</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>Performance metrics</span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reports</span></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>Detailed reports</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-4}</span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sidebar</span></span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>::: {.card}</span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Quick Stats</span></span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Metric 1: 95%</span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Metric 2: 1,234</span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Metric 3: Active</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>::::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="https://quarto.org/docs/authoring/markdown-basics.html">Quarto Markdown Guide</a></li>
+<li><a href="https://getbootstrap.com/docs/5.1/layout/grid/">Bootstrap Grid Documentation</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS Reference</a></li>
+<li><a href="https://pandoc.org/MANUAL.html">Pandoc Manual</a></li>
+</ul>
+<hr>
+<p>This guide covers the essential Quarto-specific markdown features that extend beyond standard Markdown. These features enable the creation of sophisticated, interactive, and beautifully styled documentation websites.</p>
 
 
 <!-- -->
@@ -3651,150 +4013,520 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># CosmosDB Query Cost Metrics with Diginsight</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>This document explains how to collect and monitor CosmosDB query costs using Diginsight's metrics infrastructure.</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>The Diginsight.Components.Azure package now includes automatic collection of CosmosDB query costs as metrics. These metrics are collected every time a CosmosDB query is executed and include detailed tags for analysis.</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## How It Works</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">### Activity-Based Metric Collection</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>The query cost metrics follow the same pattern as Diginsight's <span class="in">`span_duration`</span> metrics:</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Activity Tagging**: When CosmosDB operations are performed using the <span class="in">`*Observable`</span> extension methods, the query details are automatically tagged on the current activity:</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`query`</span>: The SQL query text or operation type</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`container`</span>: The CosmosDB container name</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`database`</span>: The CosmosDB database name</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Cost Recording**: When a query completes in <span class="in">`ReadNextObservableAsync`</span>, the Request Units (RU) cost is set as a <span class="in">`query_cost`</span> tag on the activity.</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Metric Collection**: The <span class="in">`QueryCostMetricRecorder`</span> listens for activity completion events and records the <span class="in">`query_cost`</span> metric with these tags:</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`query`</span>: The SQL query text</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`method`</span>: The current activity operation name</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`entrymethod`</span>: The root operation name in the activity chain</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`application`</span>: The application name</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`container`</span>: CosmosDB container name</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span><span class="in">`database`</span>: CosmosDB database name</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="fu">### Security Considerations</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>**Important**: The implementation excludes sensitive information from logs:</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Continuation tokens** are never logged in activity payloads for security reasons</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Only query text, container, and database names are included in observability data</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Request options that might contain sensitive data are excluded from logged payloads</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Setup</span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. Register the Query Cost Metrics</span></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>Add the query cost metric recorder to your service collection:</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="in">```csharp</span></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>services<span class="op">.</span><span class="fu">AddCosmosDbQueryCostMetrics</span><span class="op">();</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. Use Observable Extensions</span></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>Make sure you're using the <span class="in">`*Observable`</span> extension methods from Diginsight.Components.Azure:</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="in">```csharp</span></span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="co">// Instead of:</span></span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="dt">var</span> iterator <span class="op">=</span> container<span class="op">.</span><span class="fu">GetItemQueryIterator</span><span class="op">&lt;</span>MyEntity<span class="op">&gt;(</span>queryDefinition<span class="op">);</span></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="co">// Use:</span></span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="dt">var</span> iterator <span class="op">=</span> container<span class="op">.</span><span class="fu">GetItemQueryIteratorObservable</span><span class="op">&lt;</span>MyEntity<span class="op">&gt;(</span>queryDefinition<span class="op">);</span></span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="co">// When reading results:</span></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="dt">var</span> response <span class="op">=</span> await iterator<span class="op">.</span><span class="fu">ReadNextObservableAsync</span><span class="op">();</span></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. Configure Metrics Export</span></span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>Configure your metrics infrastructure (e.g., Prometheus, Application Insights) to collect the <span class="in">`query_cost`</span> histogram:</span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a><span class="in">```csharp</span></span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a><span class="co">// Example with OpenTelemetry</span></span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>services<span class="op">.</span><span class="fu">AddOpenTelemetry</span><span class="op">()</span></span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">WithMetrics</span><span class="op">(</span>builder <span class="op">=&gt;</span> builder</span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">AddMeter</span><span class="op">(</span><span class="st">"Diginsight.Components.Azure"</span><span class="op">)</span></span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">AddPrometheusExporter</span><span class="op">());</span></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## Metric Details</span></span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### Metric Name</span></span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Name**: <span class="in">`query_cost`</span></span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Type**: Histogram</span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Unit**: RU (Request Units)</span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Description**: CosmosDB query cost in Request Units</span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tags</span></span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`query`</span>: The SQL query text or operation description</span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`method`</span>: The current operation method name</span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`entrymethod`</span>: The entry point method name</span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`application`</span>: The application name</span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`container`</span>: CosmosDB container name</span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`database`</span>: CosmosDB database name</span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example Usage</span></span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a><span class="in">```csharp</span></span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> OrderService</span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">readonly</span> Container _container<span class="op">;</span></span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">OrderService</span><span class="op">(</span>Container container<span class="op">)</span></span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
-<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>        _container <span class="op">=</span> container<span class="op">;</span></span>
-<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> async Task<span class="op">&lt;</span>List<span class="op">&lt;</span>Order<span class="op">&gt;&gt;</span> <span class="fu">GetOrdersByStatusAsync</span><span class="op">(</span><span class="dt">string</span> status<span class="op">)</span></span>
-<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
-<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>        <span class="co">// This will automatically generate metrics</span></span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>        <span class="kw">using</span> <span class="dt">var</span> activity <span class="op">=</span> ActivitySource<span class="op">.</span><span class="fu">StartActivity</span><span class="op">(</span><span class="st">"GetOrdersByStatus"</span><span class="op">);</span></span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>        activity<span class="op">?.</span><span class="fu">SetTag</span><span class="op">(</span><span class="st">"order_status"</span><span class="op">,</span> status<span class="op">);</span></span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>        <span class="dt">var</span> queryDefinition <span class="op">=</span> <span class="kw">new</span> <span class="fu">QueryDefinition</span><span class="op">(</span></span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SELECT * FROM c WHERE c.status = @status"</span><span class="op">)</span></span>
-<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span><span class="fu">WithParameter</span><span class="op">(</span><span class="st">"@status"</span><span class="op">,</span> status<span class="op">);</span></span>
-<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>        <span class="dt">var</span> iterator <span class="op">=</span> _container<span class="op">.</span><span class="fu">GetItemQueryIteratorObservable</span><span class="op">&lt;</span>Order<span class="op">&gt;(</span>queryDefinition<span class="op">);</span></span>
-<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>        <span class="dt">var</span> orders <span class="op">=</span> <span class="kw">new</span> List<span class="op">&lt;</span>Order<span class="op">&gt;();</span></span>
-<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>        <span class="kw">while</span> <span class="op">(</span>iterator<span class="op">.</span><span class="fu">HasMoreResults</span><span class="op">)</span></span>
-<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span></span>
-<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a>            <span class="co">// This call will record query_cost metric</span></span>
-<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>            <span class="dt">var</span> response <span class="op">=</span> await iterator<span class="op">.</span><span class="fu">ReadNextObservableAsync</span><span class="op">();</span></span>
-<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a>            orders<span class="op">.</span><span class="fu">AddRange</span><span class="op">(</span>response<span class="op">);</span></span>
-<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a>        <span class="kw">return</span> orders<span class="op">;</span></span>
-<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a><span class="fu">## Monitoring and Alerting</span></span>
-<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a>With the collected metrics, you can:</span>
-<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Monitor Query Costs**: Track RU consumption patterns over time</span>
-<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Identify Expensive Queries**: Find queries with high RU costs</span>
-<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Set Alerts**: Create alerts for unusual RU consumption spikes</span>
-<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Optimize Performance**: Use query text tags to identify and optimize expensive queries</span>
-<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a><span class="fu">## Integration with Existing Metrics</span></span>
-<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>The query cost metrics integrate seamlessly with Diginsight's existing observability features:</span>
-<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Correlation**: Query costs are correlated with activities and traces</span>
-<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Context**: Full context including entry method and application name</span>
-<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Consistency**: Same tagging and naming conventions as <span class="in">`span_duration`</span> metrics</span>
-<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Security**: Sensitive data like continuation tokens are excluded from logs</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../20250712 Use QUARTO doc for Github repos doc/001.01. Quarto.yml document structure.html" class="pagination-link" aria-label="Quarto.yml document structure">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Quarto.yml document structure</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../20250712 Use QUARTO doc for Github repos doc/002.03. Quarto Theming and Styling.html" class="pagination-link" aria-label="Quarto Theming and Styling">
+        <span class="nav-page-text">Quarto Theming and Styling</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb30" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Quarto-Specific Markdown Features</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>Quarto extends standard Markdown with powerful features that enable rich, interactive content creation. This guide covers the unique Quarto markdown syntax that goes beyond traditional Markdown capabilities.</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Table of Contents</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Overview</span><span class="co">](#overview)</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Div Blocks and Fenced Divs</span><span class="co">](#div-blocks-and-fenced-divs)</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">CSS Classes and Styling</span><span class="co">](#css-classes-and-styling)</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Grid Layouts</span><span class="co">](#grid-layouts)</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Callout Blocks</span><span class="co">](#callout-blocks)</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Code Execution</span><span class="co">](#code-execution)</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Cross-References</span><span class="co">](#cross-references)</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Figures and Tables</span><span class="co">](#figures-and-tables)</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Mathematical Expressions</span><span class="co">](#mathematical-expressions)</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Interactive Elements</span><span class="co">](#interactive-elements)</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Custom Shortcodes</span><span class="co">](#custom-shortcodes)</span></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Best Practices</span><span class="co">](#best-practices)</span></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Div Blocks and Fenced Divs</span></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>Quarto introduces fenced divs using <span class="in">`:::`</span> syntax, which allows you to apply CSS classes and attributes to blocks of content.</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="fu">### Basic Div Syntax</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>::: {.class-name}</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>Content goes here</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a><span class="fu">### Nested Divs</span></span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>::::{.outer-container}</span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>:::{.inner-section}</span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>Nested content</span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a>:::{.another-section}</span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a>More nested content</span>
+<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple Classes and Attributes</span></span>
+<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a>::: {.warning .large-text #warning-section}</span>
+<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a>This is a warning with multiple classes and an ID</span>
+<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## CSS Classes and Styling</span></span>
+<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a>Quarto supports extensive CSS integration through class application and custom styling.</span>
+<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a><span class="fu">### Applying CSS Classes</span></span>
+<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a>::: {.text-center}</span>
+<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a>This text will be centered</span>
+<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-69"><a href="#cb30-69" aria-hidden="true" tabindex="-1"></a>::: {.bg-primary .text-white .p-3}</span>
+<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a>Bootstrap-style classes for background, text color, and padding</span>
+<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a><span class="fu">### Custom CSS Integration</span></span>
+<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a>You can define custom CSS in your <span class="in">`_quarto.yml`</span> or in separate CSS files:</span>
+<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-78"><a href="#cb30-78" aria-hidden="true" tabindex="-1"></a><span class="in">```yaml</span></span>
+<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb30-80"><a href="#cb30-80" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb30-81"><a href="#cb30-81" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> styles.css</span></span>
+<span id="cb30-82"><a href="#cb30-82" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> cosmo</span></span>
+<span id="cb30-83"><a href="#cb30-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-84"><a href="#cb30-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-85"><a href="#cb30-85" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inline Styling</span></span>
+<span id="cb30-86"><a href="#cb30-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-87"><a href="#cb30-87" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-88"><a href="#cb30-88" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">This text is highlighted</span><span class="co">]</span>{.highlight}</span>
+<span id="cb30-89"><a href="#cb30-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-90"><a href="#cb30-90" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Red text</span><span class="co">]</span>{style="color: red;"}</span>
+<span id="cb30-91"><a href="#cb30-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-92"><a href="#cb30-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-93"><a href="#cb30-93" aria-hidden="true" tabindex="-1"></a><span class="fu">## Grid Layouts</span></span>
+<span id="cb30-94"><a href="#cb30-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-95"><a href="#cb30-95" aria-hidden="true" tabindex="-1"></a>Quarto provides powerful grid layout capabilities using Bootstrap's grid system.</span>
+<span id="cb30-96"><a href="#cb30-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-97"><a href="#cb30-97" aria-hidden="true" tabindex="-1"></a><span class="fu">### Basic Grid Structure</span></span>
+<span id="cb30-98"><a href="#cb30-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-99"><a href="#cb30-99" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-100"><a href="#cb30-100" aria-hidden="true" tabindex="-1"></a>::::{.grid}</span>
+<span id="cb30-101"><a href="#cb30-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-102"><a href="#cb30-102" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-6}</span>
+<span id="cb30-103"><a href="#cb30-103" aria-hidden="true" tabindex="-1"></a><span class="fu">### Left Column</span></span>
+<span id="cb30-104"><a href="#cb30-104" aria-hidden="true" tabindex="-1"></a>Content for the left side</span>
+<span id="cb30-105"><a href="#cb30-105" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-106"><a href="#cb30-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-107"><a href="#cb30-107" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-6}</span>
+<span id="cb30-108"><a href="#cb30-108" aria-hidden="true" tabindex="-1"></a><span class="fu">### Right Column</span></span>
+<span id="cb30-109"><a href="#cb30-109" aria-hidden="true" tabindex="-1"></a>Content for the right side</span>
+<span id="cb30-110"><a href="#cb30-110" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-111"><a href="#cb30-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-112"><a href="#cb30-112" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb30-113"><a href="#cb30-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-114"><a href="#cb30-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-115"><a href="#cb30-115" aria-hidden="true" tabindex="-1"></a><span class="fu">### Complex Grid Layouts</span></span>
+<span id="cb30-116"><a href="#cb30-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-117"><a href="#cb30-117" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-118"><a href="#cb30-118" aria-hidden="true" tabindex="-1"></a>::::{.grid}</span>
+<span id="cb30-119"><a href="#cb30-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-120"><a href="#cb30-120" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12}</span>
+<span id="cb30-121"><a href="#cb30-121" aria-hidden="true" tabindex="-1"></a><span class="fu">### Full Width Header</span></span>
+<span id="cb30-122"><a href="#cb30-122" aria-hidden="true" tabindex="-1"></a>This spans the entire width</span>
+<span id="cb30-123"><a href="#cb30-123" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-124"><a href="#cb30-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-125"><a href="#cb30-125" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-4}</span>
+<span id="cb30-126"><a href="#cb30-126" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column 1</span></span>
+<span id="cb30-127"><a href="#cb30-127" aria-hidden="true" tabindex="-1"></a>First column content</span>
+<span id="cb30-128"><a href="#cb30-128" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-129"><a href="#cb30-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-130"><a href="#cb30-130" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-4}</span>
+<span id="cb30-131"><a href="#cb30-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column 2</span></span>
+<span id="cb30-132"><a href="#cb30-132" aria-hidden="true" tabindex="-1"></a>Second column content</span>
+<span id="cb30-133"><a href="#cb30-133" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-134"><a href="#cb30-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-135"><a href="#cb30-135" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-4}</span>
+<span id="cb30-136"><a href="#cb30-136" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column 3</span></span>
+<span id="cb30-137"><a href="#cb30-137" aria-hidden="true" tabindex="-1"></a>Third column content</span>
+<span id="cb30-138"><a href="#cb30-138" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-139"><a href="#cb30-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-140"><a href="#cb30-140" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb30-141"><a href="#cb30-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-142"><a href="#cb30-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-143"><a href="#cb30-143" aria-hidden="true" tabindex="-1"></a><span class="fu">### Responsive Breakpoints</span></span>
+<span id="cb30-144"><a href="#cb30-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-145"><a href="#cb30-145" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-146"><a href="#cb30-146" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-sm-6 .g-col-md-4 .g-col-lg-3}</span>
+<span id="cb30-147"><a href="#cb30-147" aria-hidden="true" tabindex="-1"></a>Responsive column that adapts to screen size:</span>
+<span id="cb30-148"><a href="#cb30-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Mobile: Full width (12 columns)</span>
+<span id="cb30-149"><a href="#cb30-149" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Small: Half width (6 columns)</span>
+<span id="cb30-150"><a href="#cb30-150" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Medium: One-third width (4 columns)</span>
+<span id="cb30-151"><a href="#cb30-151" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Large: One-quarter width (3 columns)</span>
+<span id="cb30-152"><a href="#cb30-152" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-153"><a href="#cb30-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-154"><a href="#cb30-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-155"><a href="#cb30-155" aria-hidden="true" tabindex="-1"></a><span class="in">## Callout Blocks</span></span>
+<span id="cb30-156"><a href="#cb30-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-157"><a href="#cb30-157" aria-hidden="true" tabindex="-1"></a><span class="in">Quarto provides built-in callout blocks for highlighting important information.</span></span>
+<span id="cb30-158"><a href="#cb30-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-159"><a href="#cb30-159" aria-hidden="true" tabindex="-1"></a><span class="in">### Standard Callout Types</span></span>
+<span id="cb30-160"><a href="#cb30-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-161"><a href="#cb30-161" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-162"><a href="#cb30-162" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.callout-note}</span></span>
+<span id="cb30-163"><a href="#cb30-163" aria-hidden="true" tabindex="-1"></a><span class="in">## Note</span></span>
+<span id="cb30-164"><a href="#cb30-164" aria-hidden="true" tabindex="-1"></a><span class="in">This is a note callout block.</span></span>
+<span id="cb30-165"><a href="#cb30-165" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb30-166"><a href="#cb30-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-167"><a href="#cb30-167" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.callout-warning}</span></span>
+<span id="cb30-168"><a href="#cb30-168" aria-hidden="true" tabindex="-1"></a><span class="in">## Warning</span></span>
+<span id="cb30-169"><a href="#cb30-169" aria-hidden="true" tabindex="-1"></a><span class="in">This is a warning callout block.</span></span>
+<span id="cb30-170"><a href="#cb30-170" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb30-171"><a href="#cb30-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-172"><a href="#cb30-172" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.callout-important}</span></span>
+<span id="cb30-173"><a href="#cb30-173" aria-hidden="true" tabindex="-1"></a><span class="in">## Important</span></span>
+<span id="cb30-174"><a href="#cb30-174" aria-hidden="true" tabindex="-1"></a><span class="in">This is an important callout block.</span></span>
+<span id="cb30-175"><a href="#cb30-175" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb30-176"><a href="#cb30-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-177"><a href="#cb30-177" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.callout-tip}</span></span>
+<span id="cb30-178"><a href="#cb30-178" aria-hidden="true" tabindex="-1"></a><span class="in">## Tip</span></span>
+<span id="cb30-179"><a href="#cb30-179" aria-hidden="true" tabindex="-1"></a><span class="in">This is a tip callout block.</span></span>
+<span id="cb30-180"><a href="#cb30-180" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb30-181"><a href="#cb30-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-182"><a href="#cb30-182" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.callout-caution}</span></span>
+<span id="cb30-183"><a href="#cb30-183" aria-hidden="true" tabindex="-1"></a><span class="in">## Caution</span></span>
+<span id="cb30-184"><a href="#cb30-184" aria-hidden="true" tabindex="-1"></a><span class="in">This is a caution callout block.</span></span>
+<span id="cb30-185"><a href="#cb30-185" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb30-186"><a href="#cb30-186" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-187"><a href="#cb30-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-188"><a href="#cb30-188" aria-hidden="true" tabindex="-1"></a><span class="fu">### Customized Callouts</span></span>
+<span id="cb30-189"><a href="#cb30-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-190"><a href="#cb30-190" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-191"><a href="#cb30-191" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon=false}</span>
+<span id="cb30-192"><a href="#cb30-192" aria-hidden="true" tabindex="-1"></a><span class="fu">## Custom Note</span></span>
+<span id="cb30-193"><a href="#cb30-193" aria-hidden="true" tabindex="-1"></a>Note without an icon</span>
+<span id="cb30-194"><a href="#cb30-194" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-195"><a href="#cb30-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-196"><a href="#cb30-196" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning collapse="true"}</span>
+<span id="cb30-197"><a href="#cb30-197" aria-hidden="true" tabindex="-1"></a><span class="fu">## Collapsible Warning</span></span>
+<span id="cb30-198"><a href="#cb30-198" aria-hidden="true" tabindex="-1"></a>This warning can be expanded/collapsed</span>
+<span id="cb30-199"><a href="#cb30-199" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-200"><a href="#cb30-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-201"><a href="#cb30-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-202"><a href="#cb30-202" aria-hidden="true" tabindex="-1"></a><span class="fu">## Code Execution</span></span>
+<span id="cb30-203"><a href="#cb30-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-204"><a href="#cb30-204" aria-hidden="true" tabindex="-1"></a>Quarto supports executable code blocks with various engines.</span>
+<span id="cb30-205"><a href="#cb30-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-206"><a href="#cb30-206" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python Code Execution</span></span>
+<span id="cb30-207"><a href="#cb30-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-208"><a href="#cb30-208" aria-hidden="true" tabindex="-1"></a><span class="in">````markdown</span></span>
+<span id="cb30-209"><a href="#cb30-209" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb30-210"><a href="#cb30-210" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb30-211"><a href="#cb30-211" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb30-212"><a href="#cb30-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-213"><a href="#cb30-213" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sample data</span></span>
+<span id="cb30-214"><a href="#cb30-214" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'x'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], <span class="st">'y'</span>: [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>]}</span>
+<span id="cb30-215"><a href="#cb30-215" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb30-216"><a href="#cb30-216" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span>
+<span id="cb30-217"><a href="#cb30-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-218"><a href="#cb30-218" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb30-219"><a href="#cb30-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-220"><a href="#cb30-220" aria-hidden="true" tabindex="-1"></a><span class="fu">### R Code Execution</span></span>
+<span id="cb30-221"><a href="#cb30-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-222"><a href="#cb30-222" aria-hidden="true" tabindex="-1"></a><span class="in">````markdown</span></span>
+<span id="cb30-223"><a href="#cb30-223" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb30-224"><a href="#cb30-224" aria-hidden="true" tabindex="-1"></a><span class="co"># R code block</span></span>
+<span id="cb30-225"><a href="#cb30-225" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb30-226"><a href="#cb30-226" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">y =</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb30-227"><a href="#cb30-227" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(x, y)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
+<span id="cb30-228"><a href="#cb30-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-229"><a href="#cb30-229" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb30-230"><a href="#cb30-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-231"><a href="#cb30-231" aria-hidden="true" tabindex="-1"></a><span class="fu">### Code Block Options</span></span>
+<span id="cb30-232"><a href="#cb30-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-233"><a href="#cb30-233" aria-hidden="true" tabindex="-1"></a><span class="in">````markdown</span></span>
+<span id="cb30-234"><a href="#cb30-234" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb30-235"><a href="#cb30-235" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb30-236"><a href="#cb30-236" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb30-237"><a href="#cb30-237" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb30-238"><a href="#cb30-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-239"><a href="#cb30-239" aria-hidden="true" tabindex="-1"></a><span class="co"># This code runs but doesn't show the code, only output</span></span>
+<span id="cb30-240"><a href="#cb30-240" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello, World!"</span>)</span>
+<span id="cb30-241"><a href="#cb30-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-242"><a href="#cb30-242" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb30-243"><a href="#cb30-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-244"><a href="#cb30-244" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cross-References</span></span>
+<span id="cb30-245"><a href="#cb30-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-246"><a href="#cb30-246" aria-hidden="true" tabindex="-1"></a>Quarto provides sophisticated cross-referencing capabilities.</span>
+<span id="cb30-247"><a href="#cb30-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-248"><a href="#cb30-248" aria-hidden="true" tabindex="-1"></a><span class="fu">### Section References</span></span>
+<span id="cb30-249"><a href="#cb30-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-250"><a href="#cb30-250" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-251"><a href="#cb30-251" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction {#sec-intro}</span></span>
+<span id="cb30-252"><a href="#cb30-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-253"><a href="#cb30-253" aria-hidden="true" tabindex="-1"></a>As discussed in @sec-intro, we can reference sections.</span>
+<span id="cb30-254"><a href="#cb30-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-255"><a href="#cb30-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-256"><a href="#cb30-256" aria-hidden="true" tabindex="-1"></a><span class="fu">### Figure References</span></span>
+<span id="cb30-257"><a href="#cb30-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-258"><a href="#cb30-258" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-259"><a href="#cb30-259" aria-hidden="true" tabindex="-1"></a><span class="al">![Quarto Logo](logo.png)</span>{#fig-logo}</span>
+<span id="cb30-260"><a href="#cb30-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-261"><a href="#cb30-261" aria-hidden="true" tabindex="-1"></a>See @fig-logo for the Quarto logo.</span>
+<span id="cb30-262"><a href="#cb30-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-263"><a href="#cb30-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-264"><a href="#cb30-264" aria-hidden="true" tabindex="-1"></a><span class="fu">### Table References</span></span>
+<span id="cb30-265"><a href="#cb30-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-266"><a href="#cb30-266" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-267"><a href="#cb30-267" aria-hidden="true" tabindex="-1"></a>| Column 1 | Column 2 |</span>
+<span id="cb30-268"><a href="#cb30-268" aria-hidden="true" tabindex="-1"></a>|----------|----------|</span>
+<span id="cb30-269"><a href="#cb30-269" aria-hidden="true" tabindex="-1"></a>| Data 1   | Data 2   |</span>
+<span id="cb30-270"><a href="#cb30-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-271"><a href="#cb30-271" aria-hidden="true" tabindex="-1"></a>: Sample Table {#tbl-sample}</span>
+<span id="cb30-272"><a href="#cb30-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-273"><a href="#cb30-273" aria-hidden="true" tabindex="-1"></a>Refer to @tbl-sample for the data.</span>
+<span id="cb30-274"><a href="#cb30-274" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-275"><a href="#cb30-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-276"><a href="#cb30-276" aria-hidden="true" tabindex="-1"></a><span class="fu">## Figures and Tables</span></span>
+<span id="cb30-277"><a href="#cb30-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-278"><a href="#cb30-278" aria-hidden="true" tabindex="-1"></a>Enhanced figure and table capabilities with captions and styling.</span>
+<span id="cb30-279"><a href="#cb30-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-280"><a href="#cb30-280" aria-hidden="true" tabindex="-1"></a><span class="fu">### Enhanced Figures</span></span>
+<span id="cb30-281"><a href="#cb30-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-282"><a href="#cb30-282" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-283"><a href="#cb30-283" aria-hidden="true" tabindex="-1"></a><span class="al">![Caption text](image.png)</span>{#fig-example fig-align="center" width="50%"}</span>
+<span id="cb30-284"><a href="#cb30-284" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-285"><a href="#cb30-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-286"><a href="#cb30-286" aria-hidden="true" tabindex="-1"></a><span class="fu">### Figure Layouts</span></span>
+<span id="cb30-287"><a href="#cb30-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-288"><a href="#cb30-288" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-289"><a href="#cb30-289" aria-hidden="true" tabindex="-1"></a>::: {#fig-layout layout-ncol=2}</span>
+<span id="cb30-290"><a href="#cb30-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-291"><a href="#cb30-291" aria-hidden="true" tabindex="-1"></a><span class="al">![Image 1](img1.png)</span>{#fig-img1}</span>
+<span id="cb30-292"><a href="#cb30-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-293"><a href="#cb30-293" aria-hidden="true" tabindex="-1"></a><span class="al">![Image 2](img2.png)</span>{#fig-img2}</span>
+<span id="cb30-294"><a href="#cb30-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-295"><a href="#cb30-295" aria-hidden="true" tabindex="-1"></a>Two side-by-side images</span>
+<span id="cb30-296"><a href="#cb30-296" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-297"><a href="#cb30-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-298"><a href="#cb30-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-299"><a href="#cb30-299" aria-hidden="true" tabindex="-1"></a><span class="fu">### Enhanced Tables</span></span>
+<span id="cb30-300"><a href="#cb30-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-301"><a href="#cb30-301" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-302"><a href="#cb30-302" aria-hidden="true" tabindex="-1"></a>| Feature | Standard Markdown | Quarto |</span>
+<span id="cb30-303"><a href="#cb30-303" aria-hidden="true" tabindex="-1"></a>|---------|-------------------|--------|</span>
+<span id="cb30-304"><a href="#cb30-304" aria-hidden="true" tabindex="-1"></a>| Styling | Limited | Extensive |</span>
+<span id="cb30-305"><a href="#cb30-305" aria-hidden="true" tabindex="-1"></a>| Layout | Basic | Advanced |</span>
+<span id="cb30-306"><a href="#cb30-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-307"><a href="#cb30-307" aria-hidden="true" tabindex="-1"></a>: Comparison Table {#tbl-comparison .striped .hover}</span>
+<span id="cb30-308"><a href="#cb30-308" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-309"><a href="#cb30-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-310"><a href="#cb30-310" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mathematical Expressions</span></span>
+<span id="cb30-311"><a href="#cb30-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-312"><a href="#cb30-312" aria-hidden="true" tabindex="-1"></a>Quarto supports LaTeX math rendering with various display options.</span>
+<span id="cb30-313"><a href="#cb30-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-314"><a href="#cb30-314" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inline Math</span></span>
+<span id="cb30-315"><a href="#cb30-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-316"><a href="#cb30-316" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-317"><a href="#cb30-317" aria-hidden="true" tabindex="-1"></a>The equation $E = mc^2$ is Einstein's famous formula.</span>
+<span id="cb30-318"><a href="#cb30-318" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-319"><a href="#cb30-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-320"><a href="#cb30-320" aria-hidden="true" tabindex="-1"></a><span class="fu">### Display Math</span></span>
+<span id="cb30-321"><a href="#cb30-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-322"><a href="#cb30-322" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-323"><a href="#cb30-323" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb30-324"><a href="#cb30-324" aria-hidden="true" tabindex="-1"></a>\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}</span>
+<span id="cb30-325"><a href="#cb30-325" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb30-326"><a href="#cb30-326" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-327"><a href="#cb30-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-328"><a href="#cb30-328" aria-hidden="true" tabindex="-1"></a><span class="fu">### Numbered Equations</span></span>
+<span id="cb30-329"><a href="#cb30-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-330"><a href="#cb30-330" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-331"><a href="#cb30-331" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb30-332"><a href="#cb30-332" aria-hidden="true" tabindex="-1"></a>f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n</span>
+<span id="cb30-333"><a href="#cb30-333" aria-hidden="true" tabindex="-1"></a>$$ {#eq-taylor}</span>
+<span id="cb30-334"><a href="#cb30-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-335"><a href="#cb30-335" aria-hidden="true" tabindex="-1"></a>Equation @eq-taylor shows the Taylor series.</span>
+<span id="cb30-336"><a href="#cb30-336" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-337"><a href="#cb30-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-338"><a href="#cb30-338" aria-hidden="true" tabindex="-1"></a><span class="fu">## Interactive Elements</span></span>
+<span id="cb30-339"><a href="#cb30-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-340"><a href="#cb30-340" aria-hidden="true" tabindex="-1"></a>Quarto supports various interactive content types.</span>
+<span id="cb30-341"><a href="#cb30-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-342"><a href="#cb30-342" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tabsets</span></span>
+<span id="cb30-343"><a href="#cb30-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-344"><a href="#cb30-344" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-345"><a href="#cb30-345" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb30-346"><a href="#cb30-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-347"><a href="#cb30-347" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tab 1</span></span>
+<span id="cb30-348"><a href="#cb30-348" aria-hidden="true" tabindex="-1"></a>Content for tab 1</span>
+<span id="cb30-349"><a href="#cb30-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-350"><a href="#cb30-350" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tab 2</span></span>
+<span id="cb30-351"><a href="#cb30-351" aria-hidden="true" tabindex="-1"></a>Content for tab 2</span>
+<span id="cb30-352"><a href="#cb30-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-353"><a href="#cb30-353" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tab 3</span></span>
+<span id="cb30-354"><a href="#cb30-354" aria-hidden="true" tabindex="-1"></a>Content for tab 3</span>
+<span id="cb30-355"><a href="#cb30-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-356"><a href="#cb30-356" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-357"><a href="#cb30-357" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-358"><a href="#cb30-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-359"><a href="#cb30-359" aria-hidden="true" tabindex="-1"></a><span class="fu">### Accordions</span></span>
+<span id="cb30-360"><a href="#cb30-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-361"><a href="#cb30-361" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-362"><a href="#cb30-362" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset group="accordion"}</span>
+<span id="cb30-363"><a href="#cb30-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-364"><a href="#cb30-364" aria-hidden="true" tabindex="-1"></a><span class="fu">## Section 1</span></span>
+<span id="cb30-365"><a href="#cb30-365" aria-hidden="true" tabindex="-1"></a>Accordion content 1</span>
+<span id="cb30-366"><a href="#cb30-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-367"><a href="#cb30-367" aria-hidden="true" tabindex="-1"></a><span class="fu">## Section 2</span></span>
+<span id="cb30-368"><a href="#cb30-368" aria-hidden="true" tabindex="-1"></a>Accordion content 2</span>
+<span id="cb30-369"><a href="#cb30-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-370"><a href="#cb30-370" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-371"><a href="#cb30-371" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-372"><a href="#cb30-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-373"><a href="#cb30-373" aria-hidden="true" tabindex="-1"></a><span class="fu">## Custom Shortcodes</span></span>
+<span id="cb30-374"><a href="#cb30-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-375"><a href="#cb30-375" aria-hidden="true" tabindex="-1"></a>Quarto allows custom shortcodes for reusable content.</span>
+<span id="cb30-376"><a href="#cb30-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-377"><a href="#cb30-377" aria-hidden="true" tabindex="-1"></a><span class="fu">### Built-in Shortcodes</span></span>
+<span id="cb30-378"><a href="#cb30-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-379"><a href="#cb30-379" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-380"><a href="#cb30-380" aria-hidden="true" tabindex="-1"></a>{{&lt; kbd Ctrl+C &gt;}}</span>
+<span id="cb30-381"><a href="#cb30-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-382"><a href="#cb30-382" aria-hidden="true" tabindex="-1"></a>{{&lt; video https://www.youtube.com/watch?v=dQw4w9WgXcQ &gt;}}</span>
+<span id="cb30-383"><a href="#cb30-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-384"><a href="#cb30-384" aria-hidden="true" tabindex="-1"></a>{{&lt; embed notebook.ipynb#fig-plot &gt;}}</span>
+<span id="cb30-385"><a href="#cb30-385" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-386"><a href="#cb30-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-387"><a href="#cb30-387" aria-hidden="true" tabindex="-1"></a><span class="fu">### Custom Shortcode Definition</span></span>
+<span id="cb30-388"><a href="#cb30-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-389"><a href="#cb30-389" aria-hidden="true" tabindex="-1"></a>Create <span class="in">`_extensions/shortcodes/highlight.lua`</span>:</span>
+<span id="cb30-390"><a href="#cb30-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-391"><a href="#cb30-391" aria-hidden="true" tabindex="-1"></a><span class="in">```lua</span></span>
+<span id="cb30-392"><a href="#cb30-392" aria-hidden="true" tabindex="-1"></a><span class="in">function highlight(args, kwargs, meta)</span></span>
+<span id="cb30-393"><a href="#cb30-393" aria-hidden="true" tabindex="-1"></a><span class="in">  local text = pandoc.utils.stringify(args[1])</span></span>
+<span id="cb30-394"><a href="#cb30-394" aria-hidden="true" tabindex="-1"></a><span class="in">  return pandoc.RawInline('html', '&lt;mark&gt;' .. text .. '&lt;/mark&gt;')</span></span>
+<span id="cb30-395"><a href="#cb30-395" aria-hidden="true" tabindex="-1"></a><span class="in">end</span></span>
+<span id="cb30-396"><a href="#cb30-396" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-397"><a href="#cb30-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-398"><a href="#cb30-398" aria-hidden="true" tabindex="-1"></a>Use in markdown:</span>
+<span id="cb30-399"><a href="#cb30-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-400"><a href="#cb30-400" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-401"><a href="#cb30-401" aria-hidden="true" tabindex="-1"></a>{{&lt; highlight "This text will be highlighted" &gt;}}</span>
+<span id="cb30-402"><a href="#cb30-402" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-403"><a href="#cb30-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-404"><a href="#cb30-404" aria-hidden="true" tabindex="-1"></a><span class="fu">## Best Practices</span></span>
+<span id="cb30-405"><a href="#cb30-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-406"><a href="#cb30-406" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. Consistent Styling</span></span>
+<span id="cb30-407"><a href="#cb30-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-408"><a href="#cb30-408" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use semantic class names</span>
+<span id="cb30-409"><a href="#cb30-409" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Maintain consistent spacing with grid layouts</span>
+<span id="cb30-410"><a href="#cb30-410" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Apply responsive design principles</span>
+<span id="cb30-411"><a href="#cb30-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-412"><a href="#cb30-412" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. Accessibility</span></span>
+<span id="cb30-413"><a href="#cb30-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-414"><a href="#cb30-414" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Always include alt text for images</span>
+<span id="cb30-415"><a href="#cb30-415" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use proper heading hierarchy</span>
+<span id="cb30-416"><a href="#cb30-416" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ensure sufficient color contrast</span>
+<span id="cb30-417"><a href="#cb30-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-418"><a href="#cb30-418" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. Performance</span></span>
+<span id="cb30-419"><a href="#cb30-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-420"><a href="#cb30-420" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Optimize images for web delivery</span>
+<span id="cb30-421"><a href="#cb30-421" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use lazy loading for heavy content</span>
+<span id="cb30-422"><a href="#cb30-422" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Minimize custom CSS and JavaScript</span>
+<span id="cb30-423"><a href="#cb30-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-424"><a href="#cb30-424" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. Maintainability</span></span>
+<span id="cb30-425"><a href="#cb30-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-426"><a href="#cb30-426" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Document custom CSS classes</span>
+<span id="cb30-427"><a href="#cb30-427" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use variables for repeated styling</span>
+<span id="cb30-428"><a href="#cb30-428" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Keep complex layouts modular</span>
+<span id="cb30-429"><a href="#cb30-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-430"><a href="#cb30-430" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. Cross-Platform Compatibility</span></span>
+<span id="cb30-431"><a href="#cb30-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-432"><a href="#cb30-432" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test layouts on different screen sizes</span>
+<span id="cb30-433"><a href="#cb30-433" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ensure graceful degradation</span>
+<span id="cb30-434"><a href="#cb30-434" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use standard web technologies</span>
+<span id="cb30-435"><a href="#cb30-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-436"><a href="#cb30-436" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example: Complete Layout</span></span>
+<span id="cb30-437"><a href="#cb30-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-438"><a href="#cb30-438" aria-hidden="true" tabindex="-1"></a>Here's a comprehensive example combining multiple Quarto features:</span>
+<span id="cb30-439"><a href="#cb30-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-440"><a href="#cb30-440" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb30-441"><a href="#cb30-441" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb30-442"><a href="#cb30-442" aria-hidden="true" tabindex="-1"></a>title: "Project Dashboard"</span>
+<span id="cb30-443"><a href="#cb30-443" aria-hidden="true" tabindex="-1"></a>format:</span>
+<span id="cb30-444"><a href="#cb30-444" aria-hidden="true" tabindex="-1"></a>  html:</span>
+<span id="cb30-445"><a href="#cb30-445" aria-hidden="true" tabindex="-1"></a>    css: custom.css</span>
+<span id="cb30-446"><a href="#cb30-446" aria-hidden="true" tabindex="-1"></a>    grid:</span>
+<span id="cb30-447"><a href="#cb30-447" aria-hidden="true" tabindex="-1"></a>      sidebar-width: 250px</span>
+<span id="cb30-448"><a href="#cb30-448" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb30-449"><a href="#cb30-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-450"><a href="#cb30-450" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb30-451"><a href="#cb30-451" aria-hidden="true" tabindex="-1"></a><span class="fu">## Project Status</span></span>
+<span id="cb30-452"><a href="#cb30-452" aria-hidden="true" tabindex="-1"></a>Current project metrics and updates</span>
+<span id="cb30-453"><a href="#cb30-453" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-454"><a href="#cb30-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-455"><a href="#cb30-455" aria-hidden="true" tabindex="-1"></a>::::{.grid}</span>
+<span id="cb30-456"><a href="#cb30-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-457"><a href="#cb30-457" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-8}</span>
+<span id="cb30-458"><a href="#cb30-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-459"><a href="#cb30-459" aria-hidden="true" tabindex="-1"></a><span class="fu">### Main Content</span></span>
+<span id="cb30-460"><a href="#cb30-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-461"><a href="#cb30-461" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb30-462"><a href="#cb30-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-463"><a href="#cb30-463" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb30-464"><a href="#cb30-464" aria-hidden="true" tabindex="-1"></a>Project overview content</span>
+<span id="cb30-465"><a href="#cb30-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-466"><a href="#cb30-466" aria-hidden="true" tabindex="-1"></a><span class="fu">## Metrics</span></span>
+<span id="cb30-467"><a href="#cb30-467" aria-hidden="true" tabindex="-1"></a>Performance metrics</span>
+<span id="cb30-468"><a href="#cb30-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-469"><a href="#cb30-469" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reports</span></span>
+<span id="cb30-470"><a href="#cb30-470" aria-hidden="true" tabindex="-1"></a>Detailed reports</span>
+<span id="cb30-471"><a href="#cb30-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-472"><a href="#cb30-472" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-473"><a href="#cb30-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-474"><a href="#cb30-474" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-475"><a href="#cb30-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-476"><a href="#cb30-476" aria-hidden="true" tabindex="-1"></a>:::{.g-col-12 .g-col-md-4}</span>
+<span id="cb30-477"><a href="#cb30-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-478"><a href="#cb30-478" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sidebar</span></span>
+<span id="cb30-479"><a href="#cb30-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-480"><a href="#cb30-480" aria-hidden="true" tabindex="-1"></a>::: {.card}</span>
+<span id="cb30-481"><a href="#cb30-481" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Quick Stats</span></span>
+<span id="cb30-482"><a href="#cb30-482" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Metric 1: 95%</span>
+<span id="cb30-483"><a href="#cb30-483" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Metric 2: 1,234</span>
+<span id="cb30-484"><a href="#cb30-484" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Metric 3: Active</span>
+<span id="cb30-485"><a href="#cb30-485" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-486"><a href="#cb30-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-487"><a href="#cb30-487" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb30-488"><a href="#cb30-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-489"><a href="#cb30-489" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb30-490"><a href="#cb30-490" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-491"><a href="#cb30-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-492"><a href="#cb30-492" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resources</span></span>
+<span id="cb30-493"><a href="#cb30-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-494"><a href="#cb30-494" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Quarto Markdown Guide</span><span class="co">](https://quarto.org/docs/authoring/markdown-basics.html)</span></span>
+<span id="cb30-495"><a href="#cb30-495" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Bootstrap Grid Documentation</span><span class="co">](https://getbootstrap.com/docs/5.1/layout/grid/)</span></span>
+<span id="cb30-496"><a href="#cb30-496" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">CSS Reference</span><span class="co">](https://developer.mozilla.org/en-US/docs/Web/CSS)</span></span>
+<span id="cb30-497"><a href="#cb30-497" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Pandoc Manual</span><span class="co">](https://pandoc.org/MANUAL.html)</span></span>
+<span id="cb30-498"><a href="#cb30-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-499"><a href="#cb30-499" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb30-500"><a href="#cb30-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-501"><a href="#cb30-501" aria-hidden="true" tabindex="-1"></a>This guide covers the essential Quarto-specific markdown features that extend beyond standard Markdown. These features enable the creation of sophisticated, interactive, and beautifully styled documentation websites.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
@@ -3804,7 +4536,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>Learning Journey - Technical Notes &amp; Insights</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/darioairoldi/Learn/edit/main/20250817 Query Cost Metrics with Diginsight/README-CosmosDbQueryCostMetrics.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/darioairoldi/Learn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/darioairoldi/Learn/edit/main/20250712 Use QUARTO doc for Github repos doc/003.01. Quarto specific markdown features.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/darioairoldi/Learn/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>Last updated: <strong>?meta:date</strong></p>
 </div>

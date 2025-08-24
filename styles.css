@@ -669,73 +669,92 @@ body > .custom-toc-addition {
   }
 }
 
-/* FIXED: Left sidebar hierarchical indentation */
-/* Level 0: Top-level sections like "Tools", "Events" */
+/* FIXED: Left sidebar hierarchical indentation and spacing */
+/* Reset default sidebar spacing */
+#quarto-sidebar {
+  line-height: 1.4;
+}
+
+/* Reduce gap between icons and first-level titles */
 #quarto-sidebar .sidebar-item-text {
-  display: block;
-  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.8rem; /* Reduced padding */
+  gap: 0.5rem; /* Reduce gap between icon and text */
+  margin: 0.1rem 0; /* Reduce vertical margins */
 }
 
-/* Level 1: Second-level items like "Development Tools", "Build Conference 2025" */
-#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item-text {
-  padding-left: 2rem; /* Indent second level */
+/* Top-level items (Level 0) - "Home", "Events", "Tools", etc. */
+#quarto-sidebar > .sidebar-navigation > .sidebar-item > .sidebar-item-text {
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding-left: 0.8rem;
+}
+
+/* First nested level (Level 1) - "Build Conference 2025", "Development Tools", etc. */
+#quarto-sidebar .sidebar-item .sidebar-item > .sidebar-item-text {
+  padding-left: 1.5rem !important; /* Proper indentation for level 1 */
   font-size: 0.9rem;
-  color: #555;
-}
-
-/* Level 2: Third-level items like "Git Command Line", "Conference Overview" */
-#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item .sidebar-item-text {
-  padding-left: 3rem; /* Indent third level */
-  font-size: 0.85rem;
   color: #666;
+  font-weight: 500;
 }
 
-/* Level 3: Fourth-level items */
-#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item .sidebar-item .sidebar-item-text {
-  padding-left: 4rem; /* Indent fourth level */
-  font-size: 0.8rem;
+/* Second nested level (Level 2) - "Conference Overview", "Git Command Line", etc. */
+#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
+  padding-left: 2.2rem !important; /* Proper indentation for level 2 */
+  font-size: 0.85rem;
   color: #777;
+  font-weight: 400;
 }
 
-/* Alternative approach using CSS specificity for nested sidebar items */
+/* Third nested level (Level 3) - Deep nested items */
+#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
+  padding-left: 2.9rem !important; /* Proper indentation for level 3 */
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Alternative selector approach for better specificity */
 #quarto-sidebar .sidebar-item-container .sidebar-item-text {
-  padding-left: 2rem !important;
+  padding-left: 1.5rem !important;
 }
 
 #quarto-sidebar .sidebar-item-container .sidebar-item-container .sidebar-item-text {
-  padding-left: 3rem !important;
+  padding-left: 2.2rem !important;
 }
 
 #quarto-sidebar .sidebar-item-container .sidebar-item-container .sidebar-item-container .sidebar-item-text {
-  padding-left: 4rem !important;
+  padding-left: 2.9rem !important;
 }
 
-/* Ensure proper visual hierarchy with subtle styling differences */
-#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item-text:before {
-  content: "? ";
-  color: #ccc;
-  margin-right: 0.5rem;
-  font-size: 0.8em;
-}
-
+/* Remove tree indicators for cleaner look */
+#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item-text:before,
 #quarto-sidebar .sidebar-item .sidebar-item .sidebar-item .sidebar-item-text:before {
-  content: "  ? ";
-  color: #ddd;
-  margin-right: 0.5rem;
-  font-size: 0.7em;
+  display: none;
 }
 
-/* Debug: Temporary styling to see where elements end up */
-.custom-toc-addition {
-  border: 2px solid #ff6b6b !important;
-  background: #ffe66d !important;
+/* Improve overall sidebar spacing */
+#quarto-sidebar .sidebar-item {
+  margin-bottom: 0.05rem; /* Reduce spacing between items */
 }
 
-.custom-toc-addition h3 {
-  color: #333 !important;
+/* Ensure proper text wrapping for long titles */
+#quarto-sidebar .sidebar-item-text {
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
-.custom-toc-addition a {
-  color: #333 !important;
-  background: rgba(255, 255, 255, 0.8) !important;
+/* Fix icon alignment within sidebar items */
+#quarto-sidebar .sidebar-item-text i,
+#quarto-sidebar .sidebar-item-text .bi {
+  flex-shrink: 0; /* Prevent icon from shrinking */
+  width: 1.1em; /* Fixed width for consistent alignment */
+  text-align: center;
+}
+
+/* Hover states for better UX */
+#quarto-sidebar .sidebar-item-text:hover {
+  background-color: #f8f9fa;
+  border-radius: 4px;
 }
