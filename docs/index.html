@@ -1538,35 +1538,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 
 </main> <!-- /main -->
-<div id="custom-right-nav" style="display: none;">
-
-  <div class="toc-title">Related Pages</div>
-
-  <nav class="toc" role="doc-toc">
-
-    <ul>
-
-      <li><em>Loading...</em></li>
-
-    </ul>
-
-  </nav>
-
-</div>
-
-
-
 <!-- Bootstrap Icons CDN - ensures icons are loaded -->
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
 
 
 
-<!-- Additional right navigation enhancements -->
+<!-- Navbar and general icon fixes -->
 
 <style>
 
-/* Ensure icons display properly */
+/* Ensure icons display properly in navbar */
 
 .navbar .bi {
 
@@ -1650,18 +1632,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-/* Ensure sidebar icons work with emoji fallback */
-
-.sidebar-navigation .sidebar-item-text {
-
-    display: inline-flex;
-
-    align-items: center;
-
-}
-
-
-
 /* Enhanced typography for better readability */
 
 .navbar-brand {
@@ -1706,7 +1676,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    console.log('Icon fix script loaded');
+    console.log('Navbar fixes script loaded');
 
     
 
@@ -1736,7 +1706,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (homeLink && !homeLink.querySelector('.bi')) {
 
-            console.log('Adding home icon');
+            console.log('Adding home icon to navbar');
 
             const icon = document.createElement('i');
 
@@ -1754,7 +1724,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (githubLink && !githubLink.querySelector('.bi')) {
 
-            console.log('Adding github icon');
+            console.log('Adding github icon to navbar');
 
             const icon = document.createElement('i');
 
@@ -1766,7 +1736,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
 
-        // Also try to find any other icon elements that might need fixing
+        // Fix any other icon elements that might need the .bi class
 
         const iconElements = document.querySelectorAll('[class*="bi-"]:not(.bi)');
 
@@ -1787,6 +1757,153 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
+<!-- Sidebar styling and fixes -->
+
+<style>
+
+/* Home link special styling - make it white and prominent */
+
+.sidebar .nav-link[href="index.qmd"],
+
+.sidebar .sidebar-item-text[href="index.qmd"],
+
+.sidebar a[href="index.qmd"],
+
+.sidebar-navigation .sidebar-item-text[href="index.qmd"],
+
+#quarto-sidebar .sidebar-item-text[href="index.qmd"] {
+
+  font-weight: 600 !important;
+
+  font-size: 1.1rem !important;
+
+  color: white !important;
+
+  background: linear-gradient(135deg, #2780e3 0%, #1967d2 100%) !important;
+
+  border: 2px solid #2780e3 !important;
+
+  margin-bottom: 1rem !important;
+
+  padding: 0.8rem 1rem !important;
+
+  border-radius: 12px !important;
+
+  box-shadow: 0 3px 8px rgba(39, 128, 227, 0.3) !important;
+
+  transition: all 0.3s ease !important;
+
+  display: block !important;
+
+}
+
+
+
+.sidebar .nav-link[href="index.qmd"]:hover,
+
+.sidebar .sidebar-item-text[href="index.qmd"]:hover,
+
+.sidebar a[href="index.qmd"]:hover,
+
+.sidebar-navigation .sidebar-item-text[href="index.qmd"]:hover,
+
+#quarto-sidebar .sidebar-item-text[href="index.qmd"]:hover {
+
+  background: linear-gradient(135deg, #1967d2 0%, #1557b0 100%) !important;
+
+  transform: translateX(3px) translateY(-1px) !important;
+
+  box-shadow: 0 6px 16px rgba(39, 128, 227, 0.4) !important;
+
+  border-color: #1967d2 !important;
+
+  color: white !important;
+
+}
+
+
+
+/* Ensure sidebar icons work with emoji fallback */
+
+.sidebar-navigation .sidebar-item-text {
+
+    display: inline-flex;
+
+    align-items: center;
+
+}
+
+
+
+/* Bootstrap Icons spacing fix - add margin between icon and text */
+
+.sidebar .nav-link .bi,
+
+.sidebar .sidebar-item-text .bi,
+
+#quarto-sidebar .sidebar-item-text .bi {
+
+  margin-right: 0.75rem !important;
+
+  font-size: 1.1em !important;
+
+}
+
+
+
+/* General sidebar icon spacing */
+
+.sidebar .nav-link i,
+
+.sidebar .sidebar-item-text i,
+
+#quarto-sidebar .sidebar-item-text i {
+
+  margin-right: 0.75rem !important;
+
+  font-size: 1.1em !important;
+
+}
+
+
+
+/* Force Bootstrap Icons to display with proper spacing in sidebar */
+
+.sidebar .sidebar-item-text .bi::before,
+
+#quarto-sidebar .sidebar-item-text .bi::before {
+
+  margin-right: 0.75rem !important;
+
+}
+
+
+
+/* Section icons spacing */
+
+.sidebar .sidebar-section > .nav-link .bi,
+
+#quarto-sidebar .sidebar-section > .sidebar-item-text .bi {
+
+  margin-right: 0.75rem !important;
+
+}
+
+
+
+/* Also target the Home icon specifically */
+
+.sidebar .sidebar-item-text[href="index.qmd"] .bi-house-fill,
+
+#quarto-sidebar .sidebar-item-text[href="index.qmd"] .bi-house-fill {
+
+  color: white !important;
+
+  margin-right: 0.75rem !important;
+
+}
+
+</style>
 
 
 
@@ -1794,7 +1911,94 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  console.log('Custom right navigation loading...'); // Debug log
+    console.log('Sidebar fixes script loaded');
+
+    
+
+    setTimeout(function() {
+
+        // Fix sidebar Home link styling
+
+        const sidebarHomeLinks = document.querySelectorAll(
+
+            '.sidebar a[href*="index"], #quarto-sidebar a[href*="index"], .sidebar-item-text[href*="index"]'
+
+        );
+
+        sidebarHomeLinks.forEach(link => {
+
+            if (link.textContent.trim().toLowerCase().includes('home')) {
+
+                console.log('Applying white styling to Home link in sidebar');
+
+                link.style.setProperty('color', 'white', 'important');
+
+                link.style.setProperty('background', 'linear-gradient(135deg, #2780e3 0%, #1967d2 100%)', 'important');
+
+                link.style.setProperty('border', '2px solid #2780e3', 'important');
+
+                link.style.setProperty('border-radius', '12px', 'important');
+
+                link.style.setProperty('padding', '0.8rem 1rem', 'important');
+
+                link.style.setProperty('font-weight', '600', 'important');
+
+                link.style.setProperty('box-shadow', '0 3px 8px rgba(39, 128, 227, 0.3)', 'important');
+
+                link.style.setProperty('margin-bottom', '1rem', 'important');
+
+                link.classList.add('home-link-styled');
+
+                
+
+                // Add home icon if missing
+
+                if (!link.querySelector('.bi-house-fill')) {
+
+                    const homeIcon = document.createElement('i');
+
+                    homeIcon.className = 'bi bi-house-fill';
+
+                    homeIcon.style.marginRight = '0.75rem';
+
+                    homeIcon.style.color = 'white';
+
+                    link.prepend(homeIcon);
+
+                }
+
+            }
+
+        });
+
+    }, 1000);
+
+});
+
+</script>
+<div id="custom-right-nav" style="display: none;">
+
+  <div class="toc-title">Related Pages</div>
+
+  <nav class="toc" role="doc-toc">
+
+    <ul>
+
+      <li><em>Loading...</em></li>
+
+    </ul>
+
+  </nav>
+
+</div>
+
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  console.log('📋 Related Pages navigation loading...');
 
   
 
@@ -1849,10 +2053,6 @@ document.addEventListener('DOMContentLoaded', function() {
       return null;
 
     }
-
-    
-
-    const navStructure = {};
 
     
 
@@ -2314,7 +2514,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function createCustomRightNav() {
 
-    // Try multiple container strategies
+    // Try multiple container strategies for right sidebar
 
     const containerSelectors = [
 
@@ -2322,9 +2522,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       '.margin-sidebar', 
 
-      '#quarto-sidebar-toc',
-
-      '.sidebar-navigation'
+      '#quarto-sidebar-toc'
 
     ];
 
@@ -2348,9 +2546,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!targetContainer) {
 
-      // Fallback to body for mobile or other layouts
+      console.log('❌ Right sidebar container not found');
 
-      targetContainer = document.body;
+      return;
 
     }
 
@@ -2394,7 +2592,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // Insert into the proper Quarto sidebar container
+    // Insert into the proper Quarto right sidebar container
 
     const existingToc = targetContainer.querySelector('.toc-right, #TOC, .table-of-contents');
 
@@ -2460,7 +2658,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    console.log('Current path detected:', path); // Debug log
+    console.log('Current path detected:', path);
 
     return path;
 
@@ -2606,7 +2804,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <style>
 
-/* Professional custom navigation styling */
+/* Professional Related Pages navigation styling - RIGHT SIDEBAR ONLY */
 
 #custom-right-nav {
 
@@ -2796,7 +2994,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
 
-  /* In larger screens, position in sidebar */
+  /* In larger screens, position in right sidebar */
 
   .page-columns .margin-sidebar #custom-right-nav {
 

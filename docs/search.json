@@ -154,5 +154,201 @@
       "BRK123: Build AI Apps with Microsoft Graph",
       "Summary"
     ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html",
+    "title": "",
+    "section": "",
+    "text": "Code",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#table-of-contents",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#table-of-contents",
+    "title": "",
+    "section": "Table of Contents",
+    "text": "Table of Contents\n\nIntroduction and Session Overview\nThe Business Case for .NET Upgrades\nUnderstanding the Upgrade vs. Modernization Spectrum\nTraditional Migration Tools Analysis\n\n.NET Upgrade Assistant Capabilities\nAzure Migrate Application Code Assessment\nTool Limitations and Pain Points\n\nAI-Powered Upgrade Revolution\n\nGitHub Copilot for .NET Modernization\nLive Demonstration: eShopOnWeb Upgrade\nHuman-in-the-Loop Learning System\n\nFormula-Based Code Transformation\n\nArchitecture and Implementation\nAWS to Azure Migration Demo\nCustom Pattern Creation\n\nReal-World Impact and Success Stories\nFuture Roadmap and Vision\nTechnical Architecture Deep Dive\nPractical Implementation Guide\nReferences\nAppendix: Session Context and Ancillary Information\n\nSpeaker Introductions and Banter\nAudience Interaction and Polling\nTechnical Difficulties and Demo Adjustments\nCommunity Engagement Opportunities",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#introduction-and-session-overview",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#introduction-and-session-overview",
+    "title": "",
+    "section": "1. Introduction and Session Overview",
+    "text": "1. Introduction and Session Overview\nTimeframe: 00:00:00 - 00:02:15\nDuration: 2m 15s\nSpeakers: Chester Husk, Scott Hunter\nChester Husk opens the session with enthusiasm about AI-powered app modernization for .NET, establishing the collaborative nature of the presentation with Scott Hunter.  The introduction sets the stage for demonstrating how AI transforms the traditionally manual and error-prone process of application modernization into an intelligent, automated workflow.\nScott Hunter provides his background context, emphasizing his long tenure with .NET and recent focus on Azure technologies. He positions the session as showcasing how Azure migration technologies, demonstrated earlier for Java in Jay’s keynote, have been adapted and enhanced for .NET applications.\nThe speakers establish the session’s dual focus: building upon existing booth demonstrations while providing deeper technical insights into AI-assisted modernization tools.",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#the-business-case-for-.net-upgrades",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#the-business-case-for-.net-upgrades",
+    "title": "",
+    "section": "2. The Business Case for .NET Upgrades",
+    "text": "2. The Business Case for .NET Upgrades\nTimeframe: 00:02:15 - 00:08:30\nDuration: 6m 15s\nSpeakers: Chester Husk (primary), Scott Hunter (interjections)\nChester Husk presents a comprehensive argument for regular .NET upgrades, citing multiple compelling factors:\n\nPerformance Improvements\nReference to Stephen Toub’s annual performance analysis demonstrates significant runtime improvements with each release. This positions performance as a primary motivating factor for organizations considering upgrades.\n\n\nSecurity Enhancements\nMonthly servicing releases include critical security fixes, protecting applications from vulnerabilities that may not be immediately apparent to development teams. This creates a security imperative for staying current with runtime versions.\n\n\nTooling Advances\nEach .NET SDK release brings productivity improvements and new capabilities that enhance developer experience, even when not directly forcing Target Framework Moniker (TFM) changes.\n\n\nCompliance and Support Lifecycle Management\nThe Long-Term Support (LTS) versus Short-Term Support (STS) model creates predictable but limited support windows, requiring proactive upgrade planning to maintain vendor support throughout application lifecycles.\n\n\nEcosystem Alignment\nNuGet package authors, MSBuild task creators, and Roslyn analyzer developers make independent decisions about framework targeting. As ecosystem components advance, applications must keep pace to maintain compatibility and access to new features.",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#understanding-the-upgrade-vs.-modernization-spectrum",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#understanding-the-upgrade-vs.-modernization-spectrum",
+    "title": "",
+    "section": "3. Understanding the Upgrade vs. Modernization Spectrum",
+    "text": "3. Understanding the Upgrade vs. Modernization Spectrum\nTimeframe: 00:08:30 - 00:12:45\nDuration: 4m 15s\nSpeakers: Chester Husk\nThis section establishes critical distinctions between upgrade and modernization activities:\n\nUpgrade Activities (Point A → Point B)\n\nFramework version migrations (.NET 6 → .NET 8 → .NET 9)\nDependency updates and vulnerability patches\nTooling and SDK transitions\nMaintaining current functionality while updating underlying platforms\n\n\n\nModernization Activities (Architectural Transformation)\n\nDecomposition into microservices architectures\nMigration to cloud-native patterns (Azure Functions, Container Apps)\nAdoption of new deployment models and DevOps practices\nIntegration with modern observability and monitoring systems\n\n\n\nBusiness Motivations for Modernization\n\nCost reduction through cloud provider service alignment\nTalent attraction and retention through modern technology adoption\nEnhanced scalability and operational efficiency\nReduced infrastructure management overhead\n\nChester emphasizes that while these activities may feel similar to practitioners, existing tools target different points on this spectrum, with implications for tool selection and implementation strategies.",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#traditional-migration-tools-analysis",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#traditional-migration-tools-analysis",
+    "title": "",
+    "section": "4. Traditional Migration Tools Analysis",
+    "text": "4. Traditional Migration Tools Analysis\nTimeframe: 00:12:45 - 00:25:30\nDuration: 12m 45s\nSpeakers: Chester Husk (Upgrade Assistant), Scott Hunter (Azure Migrate)\n\n4.1 .NET Upgrade Assistant Capabilities\nTimeframe: 00:12:45 - 00:20:15\nDuration: 7m 30s\nSpeakers: Chester Husk\n\nAnalysis and Reporting Features\nThe .NET Upgrade Assistant provides comprehensive project assessment capabilities:\n\nAggregated dashboard showing problem categories\nProject-by-project detailed task breakdowns\nStory point estimates for effort planning\nDrill-down capabilities for specific issue types\n\n\n\nMultiple Upgrade Strategies\n\nIn-place migration: Direct transformation of existing projects\nSide-by-side migration: Parallel development for A/B testing scenarios\nSide-by-side incremental: Gradual migration of ASP.NET application slices\n\n\n\nAdditional Migration Capabilities\n\nNuGet Central Package Management: Automated package consolidation across repositories\nSDK-style project conversion: Migration from full-featured to modern project files\nCommand-line interface: Full functionality available outside Visual Studio\n\n\n\nSupported Project Types\n\nASP.NET Web Applications\nWPF and Windows Forms applications\nConsole Applications and Class Libraries\nAzure Functions (with specific limitations)\n\n\n\n\n4.2 Azure Migrate Application Code Assessment\nTimeframe: 00:20:15 - 00:24:00\nDuration: 3m 45s\nSpeakers: Scott Hunter\nThe Azure Migrate Application Code Assessment Tool focuses on cloud readiness evaluation:\n\nCore Functionality\n\nStatic code analysis for Azure compatibility assessment\nCloud migration planning and readiness reporting\nMandatory versus optional fix categorization\nBasic Copilot integration for documentation lookup\n\n\n\nDemonstration Results\nUsing the MVC Music Store sample application, Scott demonstrates:\n\nIdentification of mandatory fixes (Windows authentication incompatibility)\nOptional optimization recommendations (CDN usage, connection string improvements)\nLimited AI assistance providing documentation-style guidance\n\n\n\n\n4.3 Tool Limitations and Pain Points\nTimeframe: 00:24:00 - 00:25:30\nDuration: 1m 30s\nSpeakers: Scott Hunter, Chester Husk\nBoth speakers acknowledge significant limitations of traditional tools:\n\nAnalysis-heavy, execution-light: Tools generate extensive task lists requiring manual developer intervention\nLimited automation: Static analysis without intelligent code transformation\nOverwhelming output: 1,200+ line reports that discourage developer engagement\nShallow AI integration: Documentation lookup rather than actionable code assistance\n\nScott’s quote captures the frustration: Microsoft Field and Sales came to me and said, Scott, this is great. Now I give Jared this list of 1,200 line file, Please go fix all these things. And Jared’s like, I’m out.",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#ai-powered-upgrade-revolution",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#ai-powered-upgrade-revolution",
+    "title": "",
+    "section": "5. AI-Powered Upgrade Revolution",
+    "text": "5. AI-Powered Upgrade Revolution\nTimeframe: 00:25:30 - 00:38:15\nDuration: 12m 45s\nSpeakers: Chester Husk (primary), Scott Hunter (commentary)\n\n5.1 GitHub Copilot for .NET Modernization\nTimeframe: 00:25:30 - 00:29:00\nDuration: 3m 30s\nSpeakers: Chester Husk\n\nKey Design Improvements Over Traditional Tools\n\nDependency-aware analysis: Understanding project relationships and package usage patterns\nAutomated execution: Moving beyond analysis to actual code transformation\nIntelligent error handling: Context-aware problem resolution\nGit integration: Checkpoint commits for each transformation step\n\n\n\nHuman-in-the-Loop Learning Architecture\n\nError capture: When automated fixes fail, the system engages developers\nPattern recognition: Learning from developer interventions for future similar issues\nKnowledge persistence: Accumulated fixes become part of the tool’s capabilities\nContextual assistance: Copilot-enabled problem-solving environment\n\n\n\n\n5.2 Live Demonstration: eShopOnWeb Upgrade\nTimeframe: 00:29:00 - 00:35:45\nDuration: 6m 45s\nSpeakers: Chester Husk, Scott Hunter\n\nScenario Setup\nUpgrade of eShopOnWeb solution from .NET 6.0 to .NET 9.0, demonstrating real-world complexity with multiple projects and dependencies.\n\n\nProcess Workflow\n\nInteractive Planning Phase\n\nCopilot generates customizable upgrade strategy\nMarkdown-based plans that users can review and modify\nClear visibility into proposed changes\n\nAutomated Analysis and Vulnerability Detection\n\nAutomatic identification of security issues\nPackage vulnerability assessment\nDependency conflict resolution\n\nIntelligent Execution\n\nProject-by-project transformation\nReal-time progress reporting\nAutomatic build verification at each step\n\nError Recovery Demonstration\n\nCompilation error encounter and resolution\nDeveloper intervention integration\nLearning system activation for future similar issues\n\n\n\n\nLive Demo Results\n\nTime efficiency: ~2.5 minutes active upgrade time for 8 projects\nAutomation rate: 80%+ automated transformation\nSuccess metrics: Clean compilation and build verification\n\nScott’s commentary emphasizes the dramatic time savings: In that minute-and-a-half… it already saved Chet probably an hour or multiple hours of time to go manually update all those projects by hand.\n\n\n\n5.3 Human-in-the-Loop Learning System\nTimeframe: 00:35:45 - 00:38:15\nDuration: 2m 30s\nSpeakers: Chester Husk\nThe learning system represents a fundamental advancement in automated tooling:\n\nLearning Mechanisms\n\nPattern extraction: Analyzing successful developer interventions\nContext preservation: Maintaining situational awareness for similar problems\nIncremental improvement: Each interaction enhances tool capabilities\nKnowledge sharing: Learnings benefit all tool users\n\n\n\nDeveloper Experience Integration\n\nTransparent operation: Visible decision-making and transformation steps\nControllable automation: User approval workflows and modification capabilities\nFeedback incorporation: Continuous improvement from user interactions\nError resilience: Graceful handling of edge cases and unexpected scenarios",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#formula-based-code-transformation",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#formula-based-code-transformation",
+    "title": "",
+    "section": "6. Formula-Based Code Transformation",
+    "text": "6. Formula-Based Code Transformation\nTimeframe: 00:38:15 - 00:43:00\nDuration: 4m 45s\nSpeakers: Scott Hunter (demonstration), Chester Husk (technical details)\n\n6.1 Architecture and Implementation\nTimeframe: 00:38:15 - 00:39:30\nDuration: 1m 15s\nSpeakers: Chester Husk\nThe formula system enables large-scale pattern-based code transformation:\n\nSystem Components\n\nPre-built formulas: Top 10 common migration patterns from AppCAT analysis\nCustom formula creation: Learning from developer examples\nPrompt-based implementation: Editable transformation logic\nCross-project application: Bulk changes across entire codebases\n\n\n\nTransformation Scope\nFormulas can handle comprehensive migration scenarios including:\n\nPackage references and import statements\nAPI method calls and signatures\nConfiguration file modifications\nConnection string format changes\nAuthentication mechanism updates\n\n\n\n\n6.2 AWS to Azure Migration Demo\nTimeframe: 00:39:30 - 00:42:15\nDuration: 2m 45s\nSpeakers: Scott Hunter\n\nMigration Complexity Demonstration\nThe AWS S3 to Azure Blob Storage migration showcases formula capabilities:\nTransformation Elements:\n\nPackage Dependencies: AWS SDK to Azure SDK package references\nImport Statements: Namespace and using directive changes\nAPI Calls: Method signature and parameter transformations\nConfiguration: appsettings.json structure modifications\nAuthentication: Access pattern and credential handling changes\n\n\n\nDeveloper Experience Features\n\nPlan Review Workflow: Pre-transformation approval process\nReal-time Visualization: Live code transformation display\nAutomatic Verification: Build confirmation after changes\nStyle Preservation: Maintaining coding conventions and formatting\n\n\n\n\n6.3 Custom Pattern Creation\nTimeframe: 00:42:15 - 00:43:00\nDuration: 45s\nSpeakers: Chester Husk\n\nFormula Development Process\n\nExample-based Learning: Developers provide transformation examples\nPattern Extraction: AI identifies reusable transformation rules\nValidation Testing: Automatic verification of formula accuracy\nDistribution Mechanism: Sharing formulas across teams and organizations",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#real-world-impact-and-success-stories",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#real-world-impact-and-success-stories",
+    "title": "",
+    "section": "7. Real-World Impact and Success Stories",
+    "text": "7. Real-World Impact and Success Stories\nTimeframe: 00:43:00 - 00:44:30\nDuration: 1m 30s\nSpeakers: Scott Hunter, Chester Husk\n\nMicrosoft Internal Adoption\n\nTeams and Xbox divisions: Significant upgrade acceleration achieved\nDiverse development pressures: Different teams with varying timeline constraints\nQuantified benefits: Hours of manual work compressed to minutes of automated execution\n\n\n\nPartner and Customer Results\n\nEnterprise transformations: 8-month migration projects reduced to weeks\nLegacy codebase modernization: Automated pattern migrations at scale\nDeveloper productivity gains: Focus shift from mechanical updates to business logic development\n\n\n\nOrganizational Impact\nThe tools enable development teams to redirect effort from routine maintenance tasks to value-creating feature development, fundamentally changing the economics of application lifecycle management.",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#future-roadmap-and-vision",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#future-roadmap-and-vision",
+    "title": "",
+    "section": "8. Future Roadmap and Vision",
+    "text": "8. Future Roadmap and Vision\nTimeframe: 00:44:30 - 00:45:00\nDuration: 30s\nSpeakers: Chester Husk, Scott Hunter\n\nNear-term Development Priorities\n\nFramework → Core migration support: Bridging the final gap in upgrade tooling\nMulti-editor integration: Visual Studio Code and additional development environment support\nBulk processing capabilities: Organization-wide automated upgrade orchestration\nFormula marketplace expansion: Enhanced sharing and discovery of transformation patterns\n\n\n\nLong-term Strategic Vision\n\nUnified workflow integration: Seamless upgrade and modernization experience\nSRE agent integration: Automated monitoring and upgrade triggering\nCross-language expansion: Python, C++, JavaScript formula system support\nEnd-to-end DevOps automation: Complete development lifecycle integration",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#technical-architecture-deep-dive",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#technical-architecture-deep-dive",
+    "title": "",
+    "section": "9. Technical Architecture Deep Dive",
+    "text": "9. Technical Architecture Deep Dive\n\nAI Integration Architecture\n\nRoslyn Compiler Integration: Deep semantic code understanding for accurate error detection and transformation\nLarge Language Model Integration: Context-aware transformation instruction generation\nPattern Recognition Systems: Machine learning from successful developer interventions\nValidation Frameworks: Automated testing and quality assurance throughout transformation process\n\n\n\nDeveloper Experience Design Principles\n\nTransparency: All transformation steps, decisions, and commits are visible to developers\nControl: User approval workflows and plan modification capabilities maintain developer agency\nFeedback Integration: Continuous improvement through user interaction data\nError Recovery: Graceful degradation and developer escalation for edge cases\n\n\n\nScalability and Performance Considerations\n\nIncremental Processing: Project-by-project transformation to manage complexity\nCheckpoint Management: Git-based rollback points for transformation safety\nParallel Execution: Multi-project processing where dependencies allow\nResource Optimization: Intelligent scheduling of analysis and transformation workloads",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#practical-implementation-guide",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#practical-implementation-guide",
+    "title": "",
+    "section": "10. Practical Implementation Guide",
+    "text": "10. Practical Implementation Guide\n\nImmediate Adoption Steps\n\nTool Installation: GitHub Copilot App Modernization extension available in public preview\nAssessment Strategy: Use existing tools for baseline analysis and planning\nTesting Infrastructure: Ensure comprehensive test coverage before AI-assisted transformations\nTeam Training: Developer familiarity with AI-assisted development workflows\n\n\n\nStrategic Implementation Considerations\n\nRisk Management: Start with non-critical applications to build confidence\nQuality Assurance: Integrate automated testing and code review processes\nKnowledge Management: Capture and share successful transformation patterns\nFeedback Participation: Contribute usage data and feedback for tool improvement\n\n\n\nSuccess Metrics and Measurement\n\nTime Reduction: Quantify hours saved through automated transformation\nError Reduction: Measure improvement in upgrade success rates\nDeveloper Satisfaction: Track team adoption and workflow integration\nBusiness Impact: Assess cost savings and productivity improvements",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#references",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#references",
+    "title": "",
+    "section": "References",
+    "text": "References\n\nMicrosoft Official Documentation\n\nGitHub Copilot App Modernization Extension - Visual Studio Marketplace\nOfficial extension for AI-powered .NET application modernization. Essential for hands-on experience with the demonstrated capabilities.\n.NET Upgrade Assistant Documentation - Microsoft Learn\nComprehensive guide to traditional upgrade tooling. Provides baseline understanding for comparing with AI-enhanced approaches.\nAzure Migrate Application Assessment - Azure Documentation\nDetails on Azure migration planning and assessment tools. Context for understanding the evolution from static analysis to AI-driven transformation.\n.NET Support Policy and Lifecycle - Microsoft .NET Support Policy\nOfficial support lifecycle information including LTS vs STS models. Critical for understanding the business drivers for upgrade planning.\n\n\n\nPerformance and Security Resources\n\nStephen Toub’s .NET Performance Improvements - .NET Blog\nAnnual performance analysis referenced in the session. Demonstrates quantifiable benefits of runtime upgrades.\n.NET Security Updates - .NET Security\nSecurity bulletin tracking for understanding the security imperative of regular updates.\n\n\n\nTechnical Architecture References\n\nRoslyn Compiler Platform - Microsoft Docs\nUnderstanding the compiler integration that enables deep code analysis in AI-powered tools.\nAzure DevOps and GitHub Integration - Azure DevOps Documentation\nContext for understanding how AI-assisted modernization integrates with existing development workflows.\n\n\n\nCommunity and Ecosystem\n\nMicrosoft Build 2025 Session Catalog - Build Conference\nRelated sessions including BRK131 deep dive and hands-on labs for extended learning.\nNuGet Central Package Management - Microsoft Learn\nDetails on package management modernization techniques demonstrated in the session.",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
+  },
+  {
+    "objectID": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#appendix-session-context-and-ancillary-information",
+    "href": "202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html#appendix-session-context-and-ancillary-information",
+    "title": "",
+    "section": "Appendix: Session Context and Ancillary Information",
+    "text": "Appendix: Session Context and Ancillary Information\n\nA.1 Speaker Introductions and Banter\nThe session opens with characteristic Microsoft conference humor, with Chester Husk noting the limited audience enthusiasm for AI-powered app modernization (Alright, like, five of you, great). This informal tone continues throughout, with speakers making self-deprecating comments about Microsoft’s naming conventions and tool proliferation.\nScott Hunter’s introduction emphasizes his .NET background and recent Azure focus, positioning him as a bridge between traditional .NET development and modern cloud-native approaches. The collaborative dynamic between the speakers reflects the cross-team nature of modern Microsoft tooling development.\n\n\nA.2 Audience Interaction and Polling\nSeveral audience polls provide insight into the .NET ecosystem’s current state:\n\nFramework Application Usage: Approximately one-third to half of attendees still maintain .NET Framework applications\nWeb Forms Applications: Roughly 10% of Framework applications use Web Forms (identified as the most challenging migration scenario)\nTool Awareness: Very few attendees were familiar with Azure Migrate Application Code Assessment Tool\nPrevious Migration Experience: Significant portion of audience has performed Framework to Core migrations\n\nThese data points inform the speakers’ emphasis on different tool capabilities and use cases.\n\n\nA.3 Technical Difficulties and Demo Adjustments\nScott Hunter’s comment about Wi-Fi affecting AI performance (It’s amazing what Wi-Fi does for AI) acknowledges common conference demonstration challenges. The speakers adapt by switching between prepared demonstrations and explaining concepts when live demos encounter issues.\nChester Husk’s decision to focus on analysis rather than full upgrade execution (I want to make sure we have time to do the really fun stuff) demonstrates presentation time management and priority setting for maximum educational impact.\n\n\nA.4 Community Engagement Opportunities\nThe session references several engagement channels:\n\nConference Booth: AI-assisted App Modernization booth for direct team interaction\nRelated Sessions: BRK131 deep dive session with Timothy NG, hands-on labs\nVisual Studio Marketplace: Extension installation and feedback\nPublic Preview Participation: Direct tool usage and improvement feedback\n\nThese opportunities allow attendees to extend learning beyond the session and contribute to tool development through usage and feedback.\n\nThis comprehensive analysis captures the technical depth, practical implications, and strategic vision presented in Microsoft’s AI-powered .NET modernization session, providing actionable insights for development teams planning application lifecycle management strategies.",
+    "crumbs": [
+      "Home",
+      "Events",
+      "Build Conference 2025",
+      "BRK101: AI-Powered .NET Modernization",
+      "Session Details"
+    ]
   }
 ]

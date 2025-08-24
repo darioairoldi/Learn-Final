@@ -2125,7 +2125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (homeLink && !homeLink.querySelector('.bi')) {
 
-            console.log('Adding home icon');
+            console.log('Adding home icon to navbar');
 
             const icon = document.createElement('i');
 
@@ -2143,7 +2143,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (githubLink && !githubLink.querySelector('.bi')) {
 
-            console.log('Adding github icon');
+            console.log('Adding github icon to navbar');
 
             const icon = document.createElement('i');
 
@@ -2152,6 +2152,62 @@ document.addEventListener('DOMContentLoaded', function() {
             githubLink.prepend(icon);
 
         }
+
+        
+
+        // Fix sidebar Home link styling
+
+        const sidebarHomeLinks = document.querySelectorAll(
+
+            '.sidebar a[href*="index"], #quarto-sidebar a[href*="index"], .sidebar-item-text[href*="index"]'
+
+        );
+
+        sidebarHomeLinks.forEach(link => {
+
+            if (link.textContent.trim().toLowerCase().includes('home')) {
+
+                console.log('Applying white styling to Home link in sidebar');
+
+                link.style.setProperty('color', 'white', 'important');
+
+                link.style.setProperty('background', 'linear-gradient(135deg, #2780e3 0%, #1967d2 100%)', 'important');
+
+                link.style.setProperty('border', '2px solid #2780e3', 'important');
+
+                link.style.setProperty('border-radius', '12px', 'important');
+
+                link.style.setProperty('padding', '0.8rem 1rem', 'important');
+
+                link.style.setProperty('font-weight', '600', 'important');
+
+                link.style.setProperty('box-shadow', '0 3px 8px rgba(39, 128, 227, 0.3)', 'important');
+
+                link.style.setProperty('margin-bottom', '1rem', 'important');
+
+                link.classList.add('home-link-styled');
+
+                
+
+                // Add home icon if missing
+
+                if (!link.querySelector('.bi-house-fill')) {
+
+                    const homeIcon = document.createElement('i');
+
+                    homeIcon.className = 'bi bi-house-fill';
+
+                    homeIcon.style.marginRight = '0.75rem';
+
+                    homeIcon.style.color = 'white';
+
+                    link.prepend(homeIcon);
+
+                }
+
+            }
+
+        });
 
         
 
@@ -2233,9 +2289,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!sidebar) {
 
-      console.log('Sidebar not found, using fallback structure');
+      console.log('❌ Sidebar not found');
 
-      return getFallbackNavStructure();
+      return null;
 
     }
 
@@ -2251,199 +2307,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!sidebarContent) {
 
-      console.log('Sidebar content not found, using fallback structure');
+      console.log('❌ Sidebar content not found');
 
-      return getFallbackNavStructure();
+      return null;
 
     }
 
     
 
-    // Find all top-level sections (like "🎉 Events", "🛠️ Tools", etc.)
-
-    const topLevelSections = sidebarContent.querySelectorAll('.sidebar-item-container');
+    console.log('✅ Found sidebar content, extracting structure...');
 
     
 
-    topLevelSections.forEach(container => {
+    // Find all navigation items recursively
 
-      // Look for the section header
+    function extractItems(container, level = 0) {
 
-      const sectionHeader = container.querySelector('.sidebar-item-text:not([href])');
+      const items = [];
 
-      if (!sectionHeader) return;
-
-      
-
-      const sectionName = sectionHeader.textContent.trim();
-
-      if (!sectionName) return;
+      const directChildren = container.children;
 
       
 
-      console.log(`Processing section: ${sectionName}`);
+      Array.from(directChildren).forEach(child => {
 
-      
+        // Look for sidebar items
 
-      // Find subsections within this main section
+        if (child.classList.contains('sidebar-item') || child.classList.contains('sidebar-item-container')) {
 
-      const subsections = container.querySelectorAll('.sidebar-item-container .sidebar-item-container, .sidebar-section');
+          const item = extractSidebarItem(child, level);
 
-      
+          if (item) {
 
-      if (subsections.length === 0) {
-
-        // No subsections, collect all direct links
-
-        const directLinks = container.querySelectorAll('a.sidebar-item-text[href]');
-
-        if (directLinks.length > 0) {
-
-          navStructure[sectionName] = {
-
-            'Pages': {
-
-              pages: Array.from(directLinks).map(link => ({
-
-                text: link.textContent.trim(),
-
-                href: link.getAttribute('href')
-
-              }))
-
-            }
-
-          };
-
-        }
-
-      } else {
-
-        // Has subsections
-
-        navStructure[sectionName] = {};
-
-        
-
-        subsections.forEach(subsection => {
-
-          // Find subsection header
-
-          const subsectionHeader = subsection.querySelector('.sidebar-item-text:not([href])');
-
-          let subsectionName = 'Pages';
-
-          
-
-          if (subsectionHeader) {
-
-            subsectionName = subsectionHeader.textContent.trim();
-
-          } else {
-
-            // Try to get subsection name from first link or parent structure
-
-            const firstLink = subsection.querySelector('a.sidebar-item-text[href]');
-
-            if (firstLink) {
-
-              // Extract subsection name from path or use a generic name
-
-              const href = firstLink.getAttribute('href');
-
-              if (href.includes('Build 2025')) {
-
-                subsectionName = 'Build Conference 2025';
-
-              } else if (href.includes('Azure')) {
-
-                subsectionName = '☁️ Azure';
-
-              } else if (href.includes('Quarto')) {
-
-                subsectionName = 'Quarto Documentation';
-
-              } else {
-
-                subsectionName = 'Pages';
-
-              }
-
-            }
+            items.push(item);
 
           }
 
-          
+        } else if (child.children.length > 0) {
 
-          console.log(`  Processing subsection: ${subsectionName}`);
+          // Recurse into child elements
 
-          
+          const childItems = extractItems(child, level);
 
-          // Find all links in this subsection
-
-          const links = subsection.querySelectorAll('a.sidebar-item-text[href]');
-
-          if (links.length > 0) {
-
-            navStructure[sectionName][subsectionName] = {
-
-              pages: Array.from(links).map(link => ({
-
-                text: link.textContent.trim(),
-
-                href: link.getAttribute('href')
-
-              }))
-
-            };
-
-          }
-
-        });
-
-      }
-
-    });
-
-    
-
-    // If extraction didn't work well, enhance with fallback data
-
-    if (Object.keys(navStructure).length === 0) {
-
-      console.log('Dynamic extraction failed completely, using fallback structure');
-
-      return getFallbackNavStructure();
-
-    }
-
-    
-
-    // Enhance extracted structure with fallback data where missing
-
-    const fallbackStructure = getFallbackNavStructure();
-
-    
-
-    // Ensure Build Conference 2025 has all sessions
-
-    if (navStructure['🎉 Events'] && navStructure['🎉 Events']['Build Conference 2025']) {
-
-      const extractedPages = navStructure['🎉 Events']['Build Conference 2025'].pages || [];
-
-      const fallbackPages = fallbackStructure['🎉 Events']['Build Conference 2025'].pages || [];
-
-      
-
-      // Merge pages, preferring fallback for completeness
-
-      const allPages = [...fallbackPages];
-
-      extractedPages.forEach(page => {
-
-        if (!allPages.some(fp => fp.href === page.href)) {
-
-          allPages.push(page);
+          items.push(...childItems);
 
         }
 
@@ -2451,557 +2357,137 @@ document.addEventListener('DOMContentLoaded', function() {
 
       
 
-      navStructure['🎉 Events']['Build Conference 2025'].pages = allPages;
-
-    } else if (fallbackStructure['🎉 Events']) {
-
-      // If extraction missed Events section, use fallback
-
-      navStructure['🎉 Events'] = fallbackStructure['🎉 Events'];
+      return items;
 
     }
 
     
 
-    // Ensure other sections are complete too
+    function extractSidebarItem(itemElement, level) {
 
-    Object.keys(fallbackStructure).forEach(sectionKey => {
+      const textElement = itemElement.querySelector('.sidebar-item-text');
 
-      if (!navStructure[sectionKey]) {
+      if (!textElement) return null;
 
-        navStructure[sectionKey] = fallbackStructure[sectionKey];
+      
 
-      } else {
+      const item = {
 
-        // Merge subsections
+        text: textElement.textContent.trim(),
 
-        Object.keys(fallbackStructure[sectionKey]).forEach(subsectionKey => {
+        level: level,
 
-          if (!navStructure[sectionKey][subsectionKey]) {
+        href: textElement.getAttribute('href'),
 
-            navStructure[sectionKey][subsectionKey] = fallbackStructure[sectionKey][subsectionKey];
+        isSection: !textElement.hasAttribute('href'),
 
-          }
+        children: []
 
-        });
+      };
 
-      }
+      
 
-    });
+      // Find child items
+
+      const childContainers = itemElement.querySelectorAll(':scope > .sidebar-item-container, :scope > .sidebar-section');
+
+      childContainers.forEach(childContainer => {
+
+        const childItems = extractItems(childContainer, level + 1);
+
+        item.children.push(...childItems);
+
+      });
+
+      
+
+      return item;
+
+    }
 
     
 
-    console.log('Final merged navigation structure:', navStructure);
+    const allItems = extractItems(sidebarContent, 0);
 
-    return navStructure;
+    console.log('📊 Extracted navigation items:', allItems);
+
+    
+
+    return allItems;
 
   }
 
 
 
-  // Enhanced navigation structure that exactly mirrors _quarto.yml hierarchy  
+  // Find current page in navigation structure
 
-  function getFallbackNavStructure() {
+  function findCurrentPageInNav(items, currentPath) {
 
-    return {
+    const normalizedCurrentPath = currentPath.toLowerCase().replace(/\\/g, '/');
 
-      'Events': {
+    
 
-        'Build Conference 2025': {
+    function searchItems(itemList, parentChain = []) {
 
-          // Main overview page
+      for (const item of itemList) {
 
-          overview: { text: 'Conference Overview', href: '202506 Build 2025/Readme.md' },
+        if (item.href) {
 
-          // All the BRK/DEM sessions as subsections
+          const itemHref = item.href.toLowerCase().replace(/\\/g, '/').replace('.md', '');
 
-          sessions: {
+          const isMatch = normalizedCurrentPath.includes(itemHref) || 
 
-            'BRK101: AI-Powered .NET Modernization': {
+                         itemHref.includes(normalizedCurrentPath) ||
 
-              pages: [
+                         normalizedCurrentPath.endsWith(itemHref.split('/').pop());
 
-                { text: 'Summary', href: '202506 Build 2025/BRK101 Dotnet app modernization/SUMMARY.md' },
+          
 
-                { text: 'Session Details', href: '202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.md' }
+          if (isMatch) {
 
-              ]
+            console.log(`🎯 Found current page: ${item.text}`);
 
-            },
+            return {
 
-            'BRK103: Microsoft Developers Use AI': {
+              currentItem: item,
 
-              pages: [
+              parentChain: parentChain,
 
-                { text: 'Summary', href: '202506 Build 2025/BRK103 Microsoft Developers Use AI/SUMMARY.md' },
+              siblings: itemList,
 
-                { text: 'Session Details', href: '202506 Build 2025/BRK103 Microsoft Developers Use AI/README.Sonnet4.md' }
+              children: item.children || []
 
-              ]
-
-            },
-
-            'BRK104: Building Next Gen Apps with AI & .NET': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK104 Building the Next Generation of Apps with AI and .NET/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK104 Building the Next Generation of Apps with AI and .NET/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK106: .NET Aspire AI & Cloud': {
-
-              pages: [
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK106 Elevating Development with .NET Aspire AI/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK114: What\'s New in C# 14': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK114 C# 14 Language Features and Beyond/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK114 C# 14 Language Features and Beyond/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK119: Debug Like a Pro': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK119 Debug Like a Pro - Improve Your Efficiency/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK119 Debug Like a Pro - Improve Your Efficiency/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK122: ASP.NET Core & Blazor Future': {
-
-              pages: [
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK122 Supercharge Your Git workflow with VS Code/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK123: Build AI Apps with Microsoft Graph': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK123 Build AI Apps with Microsoft Graph Data/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK123 Build AI Apps with Microsoft Graph Data/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK127: AI and Dev Box Developer Potential': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK127 Unleash developer potential with AI and Dev Box/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK127 Unleash developer potential with AI and Dev Box/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK141: RAG for Enterprise Agents': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK141 RAG for enterprise agents with Azure AI Search/SUMMARY.md' }
-
-              ]
-
-            },
-
-            'BRK155: Azure AI Foundry - App & Agent Factory': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK155 Azure AI Foundry - app and Agent Factory/SUMMARY.md' }
-
-              ]
-
-            },
-
-            'BRK163: M365 Agents SDK Custom Engine Development': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK163 Create agents for 365 Copilot with 365 Agents SDK/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK163 Create agents for 365 Copilot with 365 Agents SDK/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK165: Building Agents for Microsoft 365 Copilot': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK165 Building agents for Microsoft 365 Copilot/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK165 Building agents for Microsoft 365 Copilot/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK176: Multi-Agent Solutions with Copilot Studio': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK176 agent solutions with Copilot Studio and M365 Agents SDK/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK176 agent solutions with Copilot Studio and M365 Agents SDK/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK195: Inside Azure Innovations': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK195 Inside Azure innovations with Mark Russinovich/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK195 Inside Azure innovations with Mark Russinovich/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK199: Accelerate Modernization': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK199 Accelerate Modernization/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK199 Accelerate Modernization/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK204: Microsoft Databases': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK204 Whats new in Microsoft Databases/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK204 Whats new in Microsoft Databases/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK223: Windows AI Foundry': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK223 An overview of Windows AI Foundry/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK223 An overview of Windows AI Foundry/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK224: Integrate AI using Windows AI APIs': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK224 Integrate AI using Windows AI APIs/SUMMARY.md' }
-
-              ]
-
-            },
-
-            'BRK225: Windows ML - Bring Your Own Model': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK225 Bring your own model to Windows using Windows ML/SUMMARY.md' }
-
-              ]
-
-            },
-
-            'BRK226: Windows Developer Tools': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK226 Boost Development Productivity/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK226 Boost Development Productivity/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK229: MCP on Windows for Agentic Apps': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK229 Unlock agents for your apps using MCP on Windows/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/BRK229 Unlock agents for your apps using MCP on Windows/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'BRK229: Introducing Copilot Solutions': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/BRK229 Introducing Copilot Solutions/SUMMARY.md' }
-
-              ]
-
-            },
-
-            'DEM508: .NET Aspire Testing': {
-
-              pages: [
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM508 Streamlining Application Testing with .NET Aspire and Playwright/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM509: Essential AI Prompts': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM509 Essential AI Prompts for Developers/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM509 Essential AI Prompts for Developers/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM515: Write Better C#': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM515 Write better C# code/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM515 Write better C# code/README.GPT5.md' }
-
-              ]
-
-            },
-
-            'DEM517: MCP Server': {
-
-              pages: [
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM517 Build, Deploy, & Use Your First MCP Server/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM518: Direct C# File Execution': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM518 dotnet run app/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM518 dotnet run app/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM519: Agent Mode for Serious Developers': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM519 Agent mode for serious developers/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM519 Agent mode for serious developers/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM520: Local AI Development': {
-
-              pages: [
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM520 Local AI Development with Foundry Local and .NET Aspire/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM524: Running LLMs Locally': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM524 Running Large Language Models on your local machine/SUMMARY.md' }
-
-              ]
-
-            },
-
-            'DEM571: PowerToys Extensions': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM571 Extending your application with powertoys/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM571 Extending your application with powertoys/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'DEM581: Transforming Microsoft Learn with AI': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/DEM581 Transforming Microsoft Learn with AI/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/DEM581 Transforming Microsoft Learn with AI/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'ODFP957: Sentry & Copilot AI Debugging': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/ODFP957 Sentry and Copilot Integration for AI Debugging/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/ODFP957 Sentry and Copilot Integration for AI Debugging/README.Sonnet4.md' }
-
-              ]
-
-            },
-
-            'STUDIO14: Agents & Azure AI Foundry': {
-
-              pages: [
-
-                { text: 'Summary', href: '202506 Build 2025/STUDIO14 Agents AI and Azure AI Foundry/SUMMARY.md' },
-
-                { text: 'Session Details', href: '202506 Build 2025/STUDIO14 Agents AI and Azure AI Foundry/README.Sonnet4.md' }
-
-              ]
-
-            }
+            };
 
           }
 
         }
 
-      },
+        
 
-      'Tools': {
+        // Search in children
 
-        'Development Tools': {
+        if (item.children && item.children.length > 0) {
 
-          pages: [
+          const result = searchItems(item.children, [...parentChain, item]);
 
-            { text: 'Git Command Line', href: '20250709 Manage GitRepo from commandline/README.md' },
-
-            { text: 'HTTP Files Testing', href: '20250711 Use http files for easy and repeatable test/README.md' },
-
-            { text: 'HTTP Files (Extended)', href: '20250713 Use http files for easy and repeatable test/README.md' }
-
-          ]
-
-        },
-
-        'Quarto Documentation': {
-
-          pages: [
-
-            { text: 'Using Quarto', href: '20250712 Use QUARTO doc for Github repos doc/README.md' },
-
-            { text: 'Quarto.yml document structure', href: '20250712 Use QUARTO doc for Github repos doc/002.01. Quarto.yml document structure.md' },
-
-            { text: 'Quarto specific markdown features', href: '20250712 Use QUARTO doc for Github repos doc/002.02. Quarto specific markdown features.md' },
-
-            { text: 'Quarto Theming and Styling', href: '20250712 Use QUARTO doc for Github repos doc/002.03. Quarto Theming and Styling.md' }
-
-          ]
-
-        }
-
-      },
-
-      'Issues & Solutions': {
-
-        'Development Issues': {
-
-          pages: [
-
-            { text: 'VS Clone Error Fix (solved)', href: '_ISSUES/20250709 fatal error cloning a repo with Visual Studio/README.md' }
-
-          ]
-
-        }
-
-      },
-
-      'Other Technologies': {
-
-        'DIY Projects': {
-
-          pages: [
-
-            { text: 'DIY Li-Ion Battery Packs', href: '20250815 DIY Battery Pack/README.md' }
-
-          ]
-
-        }
-
-      },
-
-      'Culture & Travel': {
-
-        'Travel Experiences': {
-
-          pages: [
-
-            { text: 'Paris Cultural Journey 2025', href: 'Travel/Paris 2025/README.md' }
-
-          ]
+          if (result) return result;
 
         }
 
       }
 
-    };
+      return null;
+
+    }
+
+    
+
+    return searchItems(items);
 
   }
 
-
+  
 
   function handleResponsiveLayout() {
 
@@ -3123,9 +2609,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
 
-        if (page.isHeader) {
+        if (page.isInfo) {
 
-          // Session headers (non-clickable)
+          // Info messages (non-clickable)
+
+          const info = document.createElement('div');
+
+          info.textContent = page.text;
+
+          info.style.cssText = 'color: #888; font-style: italic; padding: 4px 8px; margin-left: 8px; font-size: 0.85em;';
+
+          li.appendChild(info);
+
+        } else if (page.isSection && !page.href) {
+
+          // Section headers (non-clickable)
 
           const header = document.createElement('div');
 
@@ -3152,6 +2650,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Handle relative paths - ensure they work with GitHub Pages
 
             if (!href.startsWith('/')) {
+
+              href = href.startsWith('./') ? href.substring(2) : href;
 
               href = '/' + href;
 
@@ -3187,11 +2687,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
           a.addEventListener('mouseleave', () => {
 
-            a.style.color = '#666';
+            const isCurrentPage = isCurrentPageHighlighted(page, currentPath);
 
-            a.style.borderLeft = '2px solid transparent';
+            a.style.color = isCurrentPage ? '#2780e3' : '#666';
 
-            a.style.backgroundColor = 'transparent';
+            a.style.borderLeft = isCurrentPage ? '3px solid #2780e3' : '2px solid transparent';
+
+            a.style.backgroundColor = isCurrentPage ? '#e7f3ff' : 'transparent';
 
           });
 
@@ -3199,15 +2701,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           // Highlight current page
 
-          const pageBasePath = page.href.replace(/^.*\//, '').replace('.md', '');
-
-          const currentBasePath = currentPath.replace(/^.*\//, '').replace('.html', '').replace('.md', '');
-
-          if (pageBasePath === currentBasePath || 
-
-              currentPath.includes(page.href.replace('.md', '')) || 
-
-              page.href.includes(currentPath.replace('.html', ''))) {
+          if (isCurrentPageHighlighted(page, currentPath)) {
 
             a.style.fontWeight = 'bold';
 
@@ -3236,6 +2730,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     console.log(`🎨 Rendered ${pageCount} items for section: ${subsectionName}`);
+
+  }
+
+
+
+  function isCurrentPageHighlighted(page, currentPath) {
+
+    if (!page.href) return false;
+
+    
+
+    const pageBasePath = page.href.replace(/^.*\//, '').replace('.md', '');
+
+    const currentBasePath = currentPath.replace(/^.*\//, '').replace('.html', '').replace('.md', '');
+
+    
+
+    return pageBasePath === currentBasePath || 
+
+           currentPath.includes(page.href.replace('.md', '')) || 
+
+           page.href.includes(currentPath.replace('.html', ''));
 
   }
 
@@ -3403,12 +2919,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    const navStructure = getFallbackNavStructure();
-
-    const normalizedCurrentPath = currentPath.toLowerCase().replace(/\\/g, '/');
-
-    
-
     // Handle home page special case
 
     if (!currentPath || currentPath === '/' || currentPath === '' || currentPath === 'index') {
@@ -3417,17 +2927,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         sectionName: 'Home',
 
-        subsectionName: 'Featured Sections',
+        subsectionName: 'Quick Navigation',
 
         subsectionData: {
 
           pages: [
 
-            { text: 'Build Conference 2025', href: '202506 Build 2025/Readme.md' },
-
-            { text: 'Development Tools', href: '20250712 Use QUARTO doc for Github repos doc/README.md' },
-
-            { text: 'Culture & Travel', href: 'Travel/Paris 2025/README.md' }
+            { text: 'Browse Sidebar', href: '#', isInfo: true }
 
           ]
 
@@ -3439,175 +2945,101 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    // Special handling for Build Conference structure
+    // Extract navigation structure from sidebar
 
-    if (normalizedCurrentPath.includes('202506 build 2025')) {
+    const navItems = extractNavigationFromSidebar();
 
-      const buildSection = navStructure['Events']['Build Conference 2025'];
+    if (!navItems || navItems.length === 0) {
 
-      
+      console.log('❌ No navigation items found');
 
-      console.log('📅 Detected Build Conference path');
-
-      
-
-      // Check if we're on the main Build Conference overview page
-
-      const overviewHref = buildSection.overview.href.toLowerCase().replace(/\\/g, '/').replace('.md', '');
-
-      if (normalizedCurrentPath.includes(overviewHref) || overviewHref.includes(normalizedCurrentPath)) {
-
-        console.log('✅ On Build Conference overview - showing all sessions');
-
-        
-
-        // Show all session titles as children
-
-        const allSessions = [];
-
-        Object.keys(buildSection.sessions).forEach(sessionName => {
-
-          allSessions.push({ text: sessionName, href: '#session', isHeader: true });
-
-        });
-
-        
-
-        return {
-
-          sectionName: 'Events',
-
-          subsectionName: 'Build Conference 2025 - All Sessions',
-
-          subsectionData: { pages: allSessions }
-
-        };
-
-      }
-
-      
-
-      // Check if we're in a specific session
-
-      for (const [sessionName, sessionData] of Object.entries(buildSection.sessions)) {
-
-        if (sessionData.pages) {
-
-          const matchingPage = sessionData.pages.find(page => {
-
-            const pageHref = page.href.toLowerCase().replace(/\\/g, '/').replace('.md', '');
-
-            const isMatch = normalizedCurrentPath.includes(pageHref) || pageHref.includes(normalizedCurrentPath);
-
-            
-
-            if (isMatch) {
-
-              console.log(`🎯 Found match in session: ${sessionName} - page: ${page.text}`);
-
-            }
-
-            
-
-            return isMatch;
-
-          });
-
-          
-
-          if (matchingPage) {
-
-            console.log(`✅ Found in session: ${sessionName} - showing siblings`);
-
-            // Show sibling pages within this session (Summary + Session Details)
-
-            return {
-
-              sectionName: 'Events',
-
-              subsectionName: sessionName,
-
-              subsectionData: sessionData
-
-            };
-
-          }
-
-        }
-
-      }
+      return null;
 
     }
 
     
 
-    // Check other sections (Tools, Issues & Solutions, etc.)
+    // Find current page in navigation
 
-    for (const [sectionName, sections] of Object.entries(navStructure)) {
+    const pageLocation = findCurrentPageInNav(navItems, currentPath);
 
-      if (sectionName === 'Events') continue; // Already handled above
+    if (!pageLocation) {
 
-      
+      console.log('❌ Current page not found in navigation');
 
-      for (const [subsectionName, subsectionData] of Object.entries(sections)) {
-
-        if (!subsectionData.pages) continue;
-
-        
-
-        console.log(`🔍 Checking ${sectionName} > ${subsectionName}`);
-
-        
-
-        // Check if any page in this subsection matches current path
-
-        const matchingPage = subsectionData.pages.find(page => {
-
-          const pageHref = page.href.toLowerCase().replace(/\\/g, '/').replace('.md', '');
-
-          const isMatch = normalizedCurrentPath.includes(pageHref) || pageHref.includes(normalizedCurrentPath);
-
-          
-
-          if (isMatch) {
-
-            console.log(`🎯 Found match in ${subsectionName} - page: ${page.text}`);
-
-          }
-
-          
-
-          return isMatch;
-
-        });
-
-        
-
-        if (matchingPage) {
-
-          console.log(`✅ Found in subsection: ${subsectionName} - showing siblings`);
-
-          return {
-
-            sectionName,
-
-            subsectionName,
-
-            subsectionData
-
-          };
-
-        }
-
-      }
+      return null;
 
     }
 
     
 
-    console.log('❌ No matching section found for path:', normalizedCurrentPath);
+    const { currentItem, parentChain, siblings, children } = pageLocation;
 
-    return null;
+    
+
+    // Determine what to show based on the page type and location
+
+    if (children.length > 0) {
+
+      // Current page has children - show children
+
+      console.log(`📂 Showing children for: ${currentItem.text}`);
+
+      return {
+
+        sectionName: parentChain.length > 0 ? parentChain[0].text : 'Navigation',
+
+        subsectionName: `${currentItem.text} - Children`,
+
+        subsectionData: {
+
+          pages: children.map(child => ({
+
+            text: child.text,
+
+            href: child.href || '#',
+
+            isSection: child.isSection
+
+          }))
+
+        }
+
+      };
+
+    } else {
+
+      // Current page is a leaf - show siblings
+
+      console.log(`📄 Showing siblings for: ${currentItem.text}`);
+
+      const parentSection = parentChain.length > 0 ? parentChain[parentChain.length - 1] : null;
+
+      
+
+      return {
+
+        sectionName: parentChain.length > 0 ? parentChain[0].text : 'Navigation',
+
+        subsectionName: parentSection ? `${parentSection.text} - Pages` : 'Related Pages',
+
+        subsectionData: {
+
+          pages: siblings.filter(sibling => sibling.href).map(sibling => ({
+
+            text: sibling.text,
+
+            href: sibling.href,
+
+            isSection: false
+
+          }))
+
+        }
+
+      };
+
+    }
 
   }
 
@@ -3836,6 +3268,138 @@ document.addEventListener('DOMContentLoaded', function() {
 #custom-right-nav.has-many-pages li:nth-child(even) a:hover {
 
   background-color: #e7f3ff;
+
+}
+
+
+
+/* Home link special styling - make it white and prominent */
+
+.sidebar .nav-link[href="index.qmd"],
+
+.sidebar .sidebar-item-text[href="index.qmd"],
+
+.sidebar a[href="index.qmd"],
+
+.sidebar-navigation .sidebar-item-text[href="index.qmd"],
+
+#quarto-sidebar .sidebar-item-text[href="index.qmd"] {
+
+  font-weight: 600 !important;
+
+  font-size: 1.1rem !important;
+
+  color: white !important;
+
+  background: linear-gradient(135deg, #2780e3 0%, #1967d2 100%) !important;
+
+  border: 2px solid #2780e3 !important;
+
+  margin-bottom: 1rem !important;
+
+  padding: 0.8rem 1rem !important;
+
+  border-radius: 12px !important;
+
+  box-shadow: 0 3px 8px rgba(39, 128, 227, 0.3) !important;
+
+  transition: all 0.3s ease !important;
+
+  display: block !important;
+
+}
+
+
+
+.sidebar .nav-link[href="index.qmd"]:hover,
+
+.sidebar .sidebar-item-text[href="index.qmd"]:hover,
+
+.sidebar a[href="index.qmd"]:hover,
+
+.sidebar-navigation .sidebar-item-text[href="index.qmd"]:hover,
+
+#quarto-sidebar .sidebar-item-text[href="index.qmd"]:hover {
+
+  background: linear-gradient(135deg, #1967d2 0%, #1557b0 100%) !important;
+
+  transform: translateX(3px) translateY(-1px) !important;
+
+  box-shadow: 0 6px 16px rgba(39, 128, 227, 0.4) !important;
+
+  border-color: #1967d2 !important;
+
+  color: white !important;
+
+}
+
+
+
+/* Also target the Home icon specifically */
+
+.sidebar .sidebar-item-text[href="index.qmd"] .bi-house-fill,
+
+#quarto-sidebar .sidebar-item-text[href="index.qmd"] .bi-house-fill {
+
+  color: white !important;
+
+  margin-right: 0.75rem !important;
+
+}
+
+
+
+/* Bootstrap Icons spacing fix - add margin between icon and text */
+
+.sidebar .nav-link .bi,
+
+.sidebar .sidebar-item-text .bi,
+
+#quarto-sidebar .sidebar-item-text .bi {
+
+  margin-right: 0.75rem !important;
+
+  font-size: 1.1em !important;
+
+}
+
+
+
+/* General sidebar icon spacing */
+
+.sidebar .nav-link i,
+
+.sidebar .sidebar-item-text i,
+
+#quarto-sidebar .sidebar-item-text i {
+
+  margin-right: 0.75rem !important;
+
+  font-size: 1.1em !important;
+
+}
+
+
+
+/* Force Bootstrap Icons to display with proper spacing in sidebar */
+
+.sidebar .sidebar-item-text .bi::before,
+
+#quarto-sidebar .sidebar-item-text .bi::before {
+
+  margin-right: 0.75rem !important;
+
+}
+
+
+
+/* Section icons spacing */
+
+.sidebar .sidebar-section > .nav-link .bi,
+
+#quarto-sidebar .sidebar-section > .sidebar-item-text .bi {
+
+  margin-right: 0.75rem !important;
 
 }
 

@@ -1,0 +1,110 @@
+<!-- Sidebar styling and fixes -->
+<style>
+/* Home link special styling - make it white and prominent */
+.sidebar .nav-link[href="index.qmd"],
+.sidebar .sidebar-item-text[href="index.qmd"],
+.sidebar a[href="index.qmd"],
+.sidebar-navigation .sidebar-item-text[href="index.qmd"],
+#quarto-sidebar .sidebar-item-text[href="index.qmd"] {
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+  color: white !important;
+  background: linear-gradient(135deg, #2780e3 0%, #1967d2 100%) !important;
+  border: 2px solid #2780e3 !important;
+  margin-bottom: 1rem !important;
+  padding: 0.8rem 1rem !important;
+  border-radius: 12px !important;
+  box-shadow: 0 3px 8px rgba(39, 128, 227, 0.3) !important;
+  transition: all 0.3s ease !important;
+  display: block !important;
+}
+
+.sidebar .nav-link[href="index.qmd"]:hover,
+.sidebar .sidebar-item-text[href="index.qmd"]:hover,
+.sidebar a[href="index.qmd"]:hover,
+.sidebar-navigation .sidebar-item-text[href="index.qmd"]:hover,
+#quarto-sidebar .sidebar-item-text[href="index.qmd"]:hover {
+  background: linear-gradient(135deg, #1967d2 0%, #1557b0 100%) !important;
+  transform: translateX(3px) translateY(-1px) !important;
+  box-shadow: 0 6px 16px rgba(39, 128, 227, 0.4) !important;
+  border-color: #1967d2 !important;
+  color: white !important;
+}
+
+/* Ensure sidebar icons work with emoji fallback */
+.sidebar-navigation .sidebar-item-text {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Bootstrap Icons spacing fix - add margin between icon and text */
+.sidebar .nav-link .bi,
+.sidebar .sidebar-item-text .bi,
+#quarto-sidebar .sidebar-item-text .bi {
+  margin-right: 0.75rem !important;
+  font-size: 1.1em !important;
+}
+
+/* General sidebar icon spacing */
+.sidebar .nav-link i,
+.sidebar .sidebar-item-text i,
+#quarto-sidebar .sidebar-item-text i {
+  margin-right: 0.75rem !important;
+  font-size: 1.1em !important;
+}
+
+/* Force Bootstrap Icons to display with proper spacing in sidebar */
+.sidebar .sidebar-item-text .bi::before,
+#quarto-sidebar .sidebar-item-text .bi::before {
+  margin-right: 0.75rem !important;
+}
+
+/* Section icons spacing */
+.sidebar .sidebar-section > .nav-link .bi,
+#quarto-sidebar .sidebar-section > .sidebar-item-text .bi {
+  margin-right: 0.75rem !important;
+}
+
+/* Also target the Home icon specifically */
+.sidebar .sidebar-item-text[href="index.qmd"] .bi-house-fill,
+#quarto-sidebar .sidebar-item-text[href="index.qmd"] .bi-house-fill {
+  color: white !important;
+  margin-right: 0.75rem !important;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Sidebar fixes script loaded');
+    
+    setTimeout(function() {
+        // Fix sidebar Home link styling
+        const sidebarHomeLinks = document.querySelectorAll(
+            '.sidebar a[href*="index"], #quarto-sidebar a[href*="index"], .sidebar-item-text[href*="index"]'
+        );
+        sidebarHomeLinks.forEach(link => {
+            if (link.textContent.trim().toLowerCase().includes('home')) {
+                console.log('Applying white styling to Home link in sidebar');
+                link.style.setProperty('color', 'white', 'important');
+                link.style.setProperty('background', 'linear-gradient(135deg, #2780e3 0%, #1967d2 100%)', 'important');
+                link.style.setProperty('border', '2px solid #2780e3', 'important');
+                link.style.setProperty('border-radius', '12px', 'important');
+                link.style.setProperty('padding', '0.8rem 1rem', 'important');
+                link.style.setProperty('font-weight', '600', 'important');
+                link.style.setProperty('box-shadow', '0 3px 8px rgba(39, 128, 227, 0.3)', 'important');
+                link.style.setProperty('margin-bottom', '1rem', 'important');
+                link.classList.add('home-link-styled');
+                
+                // Add home icon if missing
+                if (!link.querySelector('.bi-house-fill')) {
+                    const homeIcon = document.createElement('i');
+                    homeIcon.className = 'bi bi-house-fill';
+                    homeIcon.style.marginRight = '0.75rem';
+                    homeIcon.style.color = 'white';
+                    link.prepend(homeIcon);
+                }
+            }
+        });
+    }, 1000);
+});
+</script>

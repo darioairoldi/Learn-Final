@@ -387,6 +387,8 @@ format:
     css: 
       - styles.css
     include-after-body: 
+      - _includes/navbar-fixes.html
+      - _includes/sidebar-fixes.html
       - _includes/right-nav.html
     toc: true
     toc-depth: 3
