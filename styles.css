@@ -727,12 +727,6 @@ body > .custom-toc-addition {
   padding-left: 2.9rem !important;
 }
 
-/* Remove tree indicators for cleaner look */
-#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item-text:before,
-#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item .sidebar-item-text:before {
-  display: none;
-}
-
 /* Improve overall sidebar spacing */
 #quarto-sidebar .sidebar-item {
   margin-bottom: 0.05rem; /* Reduce spacing between items */
