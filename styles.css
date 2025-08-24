@@ -549,6 +549,27 @@ a:hover {
   transform: translateX(3px);
 }
 
+/* Consolidate into a single responsive approach */
+.custom-right-nav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 250px;
+  z-index: 1000;
+}
+
+@media (max-width: 1200px) {
+  .custom-right-nav { display: none; }
+}
+
+@media (min-width: 1201px) and (min-width: 1400px) {
+  .custom-right-nav {
+    position: relative;
+    /* Move to margin sidebar when space allows */
+  }
+}
+
 /* Ensure right margin is wide enough for custom navigation */
 .page-columns .margin-sidebar {
   width: 250px !important;
@@ -675,82 +696,78 @@ body > .custom-toc-addition {
   line-height: 1.4;
 }
 
-/* Base sidebar item text styling - reduce left spacing */
+/* Base sidebar item text styling */
 #quarto-sidebar .sidebar-item-text {
   display: flex;
   align-items: center;
-  padding: 0.2rem 0.4rem; /* Reduced left/right padding from 0.8rem to 0.4rem */
-  gap: 0.4rem; /* Reduce gap between icon and text */
-  margin: 0.05rem 0; /* Reduce vertical margins */
+  padding: 0.3rem 0.5rem;
+  gap: 0.5rem;
+  margin: 0.1rem 0;
   word-wrap: break-word;
   white-space: normal;
   overflow-wrap: break-word;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 
-/* Top-level items (Level 0) - "Home", "Events", "Tools", etc. */
-#quarto-sidebar > .sidebar-navigation > .sidebar-item > .sidebar-item-text {
+/* Level 0 (Top-level items) - "Home", "Events", "Tools", etc. */
+#quarto-sidebar .sidebar-navigation > .sidebar-item > .sidebar-item-text {
   font-weight: 600;
   font-size: 0.95rem;
-  padding-left: 0.4rem; /* Reduced from 0.8rem */
+  padding-left: 0.5rem;
+  color: #2d3748;
 }
 
-/* First nested level (Level 1) - "Build Conference 2025", "Development Tools", etc. */
-#quarto-sidebar .sidebar-item .sidebar-item > .sidebar-item-text {
-  padding-left: 1.2rem !important; /* Reduced from 1.5rem for better alignment */
+/* Level 1 (First nested) - "Build Conference 2025", "Development Tools", etc. */
+#quarto-sidebar .sidebar-navigation .sidebar-item .sidebar-item > .sidebar-item-text {
+  padding-left: 1.8rem !important;
   font-size: 0.9rem;
-  color: #666;
+  color: #4a5568;
   font-weight: 500;
 }
 
-/* Second nested level (Level 2) - "Conference Overview", "Git Command Line", etc. */
-#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
-  padding-left: 2.0rem !important; /* Reduced from 2.2rem for better alignment */
+/* Level 2 (Second nested) - "Conference Overview", "Git Command Line", etc. */
+#quarto-sidebar .sidebar-navigation .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
+  padding-left: 3.1rem !important;
   font-size: 0.85rem;
-  color: #777;
+  color: #718096;
   font-weight: 400;
 }
 
-/* Third nested level (Level 3) - Deep nested items */
-#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
-  padding-left: 2.8rem !important; /* Reduced from 2.9rem for better alignment */
+/* Level 3 (Third nested) - Deep nested items */
+#quarto-sidebar .sidebar-navigation .sidebar-item .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
+  padding-left: 4.4rem !important;
   font-size: 0.8rem;
-  color: #888;
-}
-
-/* Alternative selector approach for better specificity */
-#quarto-sidebar .sidebar-item-container .sidebar-item-text {
-  padding-left: 1.2rem !important;
-}
-
-#quarto-sidebar .sidebar-item-container .sidebar-item-container .sidebar-item-text {
-  padding-left: 2.0rem !important;
-}
-
-#quarto-sidebar .sidebar-item-container .sidebar-item-container .sidebar-item-container .sidebar-item-text {
-  padding-left: 2.8rem !important;
+  color: #a0aec0;
+  font-weight: 400;
 }
 
 /* Fix icon alignment within sidebar items */
 #quarto-sidebar .sidebar-item-text i,
 #quarto-sidebar .sidebar-item-text .bi {
-  flex-shrink: 0; /* Prevent icon from shrinking */
-  width: 1.0em; /* Reduced from 1.1em */
+  flex-shrink: 0;
+  width: 1em;
   text-align: center;
-  margin-right: 0.4rem; /* Explicit right margin */
+  margin-right: 0.5rem;
 }
 
 /* Improve overall sidebar spacing */
 #quarto-sidebar .sidebar-item {
-  margin-bottom: 0.02rem; /* Further reduced spacing between items */
+  margin-bottom: 0.05rem;
 }
 
 /* Hover states for better UX */
 #quarto-sidebar .sidebar-item-text:hover {
-  background-color: rgba(248, 249, 250, 0.8);
-  border-radius: 4px;
+  background-color: rgba(237, 242, 247, 0.8);
 }
 
-/* Specific fix for sidebar-link class if it exists */
-#quarto-sidebar .sidebar-link {
-  padding: 0.2rem 0.4rem !important;
+/* Active states */
+#quarto-sidebar .sidebar-item-text.active {
+  background-color: var(--primary-color);
+  color: white !important;
+}
+
+#quarto-sidebar .sidebar-item-text.active i,
+#quarto-sidebar .sidebar-item-text.active .bi {
+  color: white !important;
 }
