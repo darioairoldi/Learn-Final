@@ -41,7 +41,7 @@
 .sidebar .nav-link .bi,
 .sidebar .sidebar-item-text .bi,
 #quarto-sidebar .sidebar-item-text .bi {
-  margin-right: 0.75rem !important;
+  margin-right: 0.5rem !important; /* Reduced from 0.75rem to 0.5rem */
   font-size: 1.1em !important;
 }
 
@@ -49,27 +49,93 @@
 .sidebar .nav-link i,
 .sidebar .sidebar-item-text i,
 #quarto-sidebar .sidebar-item-text i {
-  margin-right: 0.75rem !important;
+  margin-right: 0.5rem !important; /* Reduced from 0.75rem to 0.5rem */
   font-size: 1.1em !important;
 }
 
 /* Force Bootstrap Icons to display with proper spacing in sidebar */
 .sidebar .sidebar-item-text .bi::before,
 #quarto-sidebar .sidebar-item-text .bi::before {
-  margin-right: 0.75rem !important;
+  margin-right: 0.5rem !important; /* Reduced from 0.75rem to 0.5rem */
 }
 
 /* Section icons spacing */
 .sidebar .sidebar-section > .nav-link .bi,
 #quarto-sidebar .sidebar-section > .sidebar-item-text .bi {
-  margin-right: 0.75rem !important;
+  margin-right: 0.5rem !important; /* Reduced from 0.75rem to 0.5rem */
 }
 
 /* Also target the Home icon specifically */
 .sidebar .sidebar-item-text[href="index.qmd"] .bi-house-fill,
 #quarto-sidebar .sidebar-item-text[href="index.qmd"] .bi-house-fill {
   color: white !important;
-  margin-right: 0.75rem !important;
+  margin-right: 0.5rem !important; /* Reduced from 0.75rem to 0.5rem */
+}
+
+/* FIXED: Left sidebar hierarchical indentation and spacing */
+/* Reduce spacing between sidebar items */
+#quarto-sidebar .sidebar-item {
+  margin-bottom: 0.05rem; /* Reduced from 0.1rem */
+}
+
+/* Ensure proper alignment and indentation for nested items */
+#quarto-sidebar .sidebar-item-text {
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 0.8rem; /* Reduced vertical padding from 0.4rem to 0.2rem */
+  gap: 0.5rem;
+  line-height: 1.2; /* Reduced from 1.3 to 1.2 */
+}
+
+/* Level 0: Top-level sections - "Home", "Events", "Tools", etc. */
+#quarto-sidebar > .sidebar-navigation > .sidebar-item > .sidebar-item-text {
+  font-weight: 600;
+  padding: 0.25rem 0.8rem; /* Slightly more padding for top-level items but still reduced */
+}
+
+/* Level 1: Second-level items - "Build Conference 2025", "Development Tools", etc. */
+#quarto-sidebar .sidebar-item .sidebar-item > .sidebar-item-text {
+  padding: 0.15rem 1.8rem; /* Reduced vertical padding and set left padding */
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Level 2: Third-level items - "Conference Overview", "Git Command Line", etc. */
+#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
+  padding: 0.1rem 2.6rem; /* Reduced vertical padding and set left padding */
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* Level 3: Fourth-level items */
+#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
+  padding: 0.1rem 3.4rem; /* Reduced vertical padding and set left padding */
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Alternative selector approach for better specificity */
+#quarto-sidebar .sidebar-item-container .sidebar-item-text {
+  padding: 0.15rem 1.8rem !important;
+}
+
+#quarto-sidebar .sidebar-item-container .sidebar-item-container .sidebar-item-text {
+  padding: 0.1rem 2.6rem !important;
+}
+
+#quarto-sidebar .sidebar-item-container .sidebar-item-container .sidebar-item-container .sidebar-item-text {
+  padding: 0.1rem 3.4rem !important;
+}
+
+/* Hover effects for better UX */
+#quarto-sidebar .sidebar-item-text:hover {
+  background-color: rgba(248, 249, 250, 0.8);
+  border-radius: 4px;
+}
+
+/* Additional fix for any Quarto-generated link classes */
+#quarto-sidebar .sidebar-link {
+  padding: 0.15rem 0.8rem !important;
 }
 </style>
 
