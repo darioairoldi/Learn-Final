@@ -107,7 +107,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check if this is a section node (has children) or a leaf node
     const activeItemContainer = activeItem.closest('.sidebar-item');
-    const hasChildren = activeItemContainer.querySelector('.sidebar-item-container, .sidebar-section, ul');
+    
+    // DEBUG: Log the structure to understand what we're working with
+    console.log('🔍 Active item container:', activeItemContainer);
+    console.log('🔍 Container HTML:', activeItemContainer.outerHTML.substring(0, 500));
+    console.log('🔍 Container children:', Array.from(activeItemContainer.children).map(c => c.className));
+    
+    const hasChildren = activeItemContainer.querySelector('.sidebar-item-container, .sidebar-section, ul, .sidebar-item');
     
     if (hasChildren) {
       console.log('📂 This is a section node with children - showing child pages');
@@ -115,22 +121,65 @@ document.addEventListener('DOMContentLoaded', function() {
       // For section nodes, show ONLY immediate children (not grandchildren)
       const childItems = [];
       
-      // Find the immediate child container
-      const immediateChildContainer = activeItemContainer.querySelector('.sidebar-item-container, .sidebar-section, ul');
-      if (immediateChildContainer) {
-        // Get only DIRECT children of this container (not nested grandchildren)
-        const directChildren = immediateChildContainer.querySelectorAll(':scope > .sidebar-item');
+      // ENHANCED: Try multiple strategies to find child containers
+      console.log('🔍 Looking for child containers...');
+      
+      // Strategy 1: Look for dedicated child containers
+      const childContainers = activeItemContainer.querySelectorAll(
+        '.sidebar-item-container, .sidebar-section, ul, ol, .sidebar-items'
+      );
+      console.log('🔍 Found child containers:', childContainers.length);
+      
+      if (childContainers.length > 0) {
+        childContainers.forEach((container, index) => {
+          console.log(`🔍 Container ${index}:`, container.className, container.tagName);
+          
+          // Get only DIRECT children of this container
+          const directChildren = container.querySelectorAll(':scope > .sidebar-item');
+          console.log(`🔍 Direct children in container ${index}:`, directChildren.length);
+          
+          directChildren.forEach((childItem, childIndex) => {
+            console.log(`🔍 Child ${childIndex}:`, childItem.className);
+            const childTextElement = childItem.querySelector('.sidebar-item-text');
+            if (childTextElement) {
+              console.log(`🔍 Child text element:`, childTextElement.textContent.trim());
+              const href = childTextElement.getAttribute('href');
+              if (href && href !== '#') {
+                childItems.push({
+                  text: childTextElement.textContent.trim(),
+                  href: href,
+                  isActive: childTextElement.classList.contains('active')
+                });
+                console.log(`✅ Added child item: ${childTextElement.textContent.trim()}`);
+              } else {
+                console.log(`❌ Child item has no valid href: ${href}`);
+              }
+            } else {
+              console.log(`❌ Child item has no text element`);
+            }
+          });
+        });
+      } else {
+        // Strategy 2: Look for any .sidebar-item children directly
+        console.log('🔍 Strategy 2: Looking for direct .sidebar-item children...');
+        const directSidebarItems = activeItemContainer.querySelectorAll(':scope .sidebar-item');
+        console.log('🔍 Found direct sidebar items:', directSidebarItems.length);
         
-        directChildren.forEach(childItem => {
-          const childTextElement = childItem.querySelector('.sidebar-item-text[href]');
-          if (childTextElement) {
-            const href = childTextElement.getAttribute('href');
-            if (href && href !== '#') {
-              childItems.push({
-                text: childTextElement.textContent.trim(),
-                href: href,
-                isActive: childTextElement.classList.contains('active')
-              });
+        directSidebarItems.forEach((item, index) => {
+          if (item !== activeItemContainer) { // Don't include self
+            console.log(`🔍 Direct item ${index}:`, item.className);
+            const textElement = item.querySelector('.sidebar-item-text');
+            if (textElement) {
+              console.log(`🔍 Text element:`, textElement.textContent.trim());
+              const href = textElement.getAttribute('href');
+              if (href && href !== '#') {
+                childItems.push({
+                  text: textElement.textContent.trim(),
+                  href: href,
+                  isActive: textElement.classList.contains('active')
+                });
+                console.log(`✅ Added direct item: ${textElement.textContent.trim()}`);
+              }
             }
           }
         });
