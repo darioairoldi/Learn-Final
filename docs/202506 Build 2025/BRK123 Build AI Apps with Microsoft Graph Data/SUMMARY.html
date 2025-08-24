@@ -1745,15 +1745,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
 
-  // Wait for Quarto to finish loading
+  // Multiple initialization strategies to ensure it works
 
-  setTimeout(function() {
+  function initializeRightNav() {
+
+    console.log('🚀 Initializing right navigation...');
 
     createCustomRightNav();
 
     handleResponsiveLayout();
 
-  }, 500);
+    
+
+    // Additional attempt after a short delay
+
+    setTimeout(() => {
+
+      renderRightNav();
+
+    }, 100);
+
+  }
+
+  
+
+  // Try immediately
+
+  initializeRightNav();
+
+  
+
+  // Wait for Quarto to finish loading
+
+  setTimeout(initializeRightNav, 500);
 
   
 
@@ -1761,9 +1785,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   window.addEventListener('load', function() {
 
+    console.log('📄 Page fully loaded, attempting right nav render...');
+
     setTimeout(function() {
 
-      if (!document.querySelector('#custom-right-nav')) {
+      if (!document.querySelector('#custom-right-nav .has-content')) {
+
+        console.log('🔄 Right nav not yet rendered, trying again...');
 
         createCustomRightNav();
 
@@ -1774,6 +1802,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 200);
 
   });
+
+  
+
+  // Additional fallback after page load
+
+  setTimeout(() => {
+
+    console.log('⏰ Final fallback attempt for right nav...');
+
+    renderRightNav();
+
+  }, 2000);
 
   
 
@@ -1925,6 +1965,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
+    console.log('🔍 Searching for path:', normalizedCurrentPath);
+
+    
+
     function searchItems(itemList, parentChain = []) {
 
       for (const item of itemList) {
@@ -1933,17 +1977,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
           const itemHref = item.href.toLowerCase().replace(/\\/g, '/').replace('.md', '');
 
-          const isMatch = normalizedCurrentPath.includes(itemHref) || 
+          
 
-                         itemHref.includes(normalizedCurrentPath) ||
+          // Multiple matching strategies
 
-                         normalizedCurrentPath.endsWith(itemHref.split('/').pop());
+          const isExactMatch = normalizedCurrentPath === itemHref;
+
+          const isContainedMatch = normalizedCurrentPath.includes(itemHref) || itemHref.includes(normalizedCurrentPath);
+
+          const isFilenameMatch = normalizedCurrentPath.endsWith(itemHref.split('/').pop());
+
+          
+
+          // Special handling for Build Conference readme files
+
+          const isBuildReadmeMatch = (
+
+            (normalizedCurrentPath.includes('202506 build 2025') && itemHref.includes('202506 build 2025')) &&
+
+            (normalizedCurrentPath.includes('readme') && itemHref.includes('readme'))
+
+          );
+
+          
+
+          const isMatch = isExactMatch || isContainedMatch || isFilenameMatch || isBuildReadmeMatch;
 
           
 
           if (isMatch) {
 
-            console.log(`🎯 Found current page: ${item.text}`);
+            console.log(`🎯 Found current page: "${item.text}"`);
+
+            console.log(`   📄 Current path: ${normalizedCurrentPath}`);
+
+            console.log(`   🔗 Item href: ${itemHref}`);
+
+            console.log(`   ✅ Match type: ${isExactMatch ? 'exact' : isContainedMatch ? 'contained' : isFilenameMatch ? 'filename' : 'build-readme'}`);
+
+            
 
             return {
 
@@ -2391,6 +2463,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // If decoding fails, use original path
 
+      console.log('⚠️ URI decoding failed, using original path');
+
     }
 
     
@@ -2401,7 +2475,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-    console.log('Current path detected:', path);
+    // Handle GitHub Pages specific patterns
+
+    if (path.includes('202506 Build 2025')) {
+
+      // Ensure consistent casing for Build Conference paths
+
+      path = path.replace(/202506\s*build\s*2025/i, '202506 Build 2025');
+
+    }
+
+    
+
+    console.log('📍 Current path detected:', path);
 
     return path;
 
@@ -2429,7 +2515,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           pages: [
 
-            { text: 'Browse Sidebar', href: '#', isInfo: true }
+            { text: 'Browse Sidebar for more content', href: '#', isInfo: true }
 
           ]
 
@@ -2455,6 +2541,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
+    // Debug: Log the current path for troubleshooting
+
+    console.log('🔍 Current path for matching:', currentPath);
+
+    
+
     // Find current page in navigation
 
     const pageLocation = findCurrentPageInNav(navItems, currentPath);
@@ -2463,6 +2555,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
       console.log('❌ Current page not found in navigation');
 
+      
+
+      // Fallback: If we're in Build Conference folder, show a general overview
+
+      if (currentPath.toLowerCase().includes('202506 build 2025')) {
+
+        console.log('🎯 Fallback: Detected Build Conference path, showing overview');
+
+        return {
+
+          sectionName: 'Events',
+
+          subsectionName: 'Build Conference 2025 - Navigate',
+
+          subsectionData: {
+
+            pages: [
+
+              { text: 'Conference Overview', href: '202506 Build 2025/Readme.md' },
+
+              { text: 'All Sessions available in sidebar', href: '#', isInfo: true }
+
+            ]
+
+          }
+
+        };
+
+      }
+
+      
+
       return null;
 
     }
@@ -2470,6 +2594,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
 
     const { currentItem, parentChain, siblings, children } = pageLocation;
+
+    
+
+    console.log('✅ Page location found:', {
+
+      currentItem: currentItem.text,
+
+      parentChain: parentChain.map(p => p.text),
+
+      childrenCount: children.length,
+
+      siblingsCount: siblings.length
+
+    });
 
     
 
