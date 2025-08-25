@@ -61,9 +61,28 @@ jobs:
       if: false  # Set to true if you use R
       with:
         r-version: '4.3.0'
+
+    - name: Extract navigation structure to JSON
+      run: |
+        # Install yq for YAML to JSON conversion
+        sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+        sudo chmod +x /usr/local/bin/yq
+        
+        # Extract sidebar structure from _quarto.yml and convert to JSON
+        echo "Extracting sidebar structure from _quarto.yml..."
+        yq '.website.sidebar' _quarto.yml > navigation.json
+        echo "Generated navigation.json:"
+        cat navigation.json
         
     - name: Render Quarto Project
       run: quarto render
+
+    - name: Copy navigation data to published site
+      run: |
+        # Copy navigation.json to the published site for client-side navigation
+        cp navigation.json docs/navigation.json
+        echo "Copied navigation.json to docs/navigation.json"
+        ls -la docs/navigation.json
       
     - name: Setup Pages
       uses: actions/configure-pages@v4

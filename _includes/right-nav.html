@@ -49,8 +49,32 @@ nav[role="doc-toc"]:not(#custom-right-nav nav) {
 document.addEventListener('DOMContentLoaded', function() {
   console.log('📋 Related Pages navigation loading...');
   
+  // Global navigation structure from navigation.json
+  let navigationConfig = null;
+  
   // Wrap everything in try-catch to prevent other JS errors from breaking this
   try {
+    // Load navigation configuration (much cleaner than YAML parsing!)
+    async function loadNavigationConfig() {
+      try {
+        console.log('🔄 Loading navigation.json configuration...');
+        const response = await fetch('navigation.json');
+        if (response.ok) {
+          navigationConfig = await response.json();
+          console.log('✅ Loaded navigation config:', navigationConfig);
+          
+          // Re-render navigation with config data
+          renderRightNav();
+        } else {
+          console.log('⚠️ Could not load navigation.json, falling back to DOM parsing');
+          renderRightNav(); // Fall back to DOM parsing
+        }
+      } catch (error) {
+        console.log('⚠️ Error loading navigation.json:', error);
+        renderRightNav(); // Fall back to DOM parsing
+      }
+    }
+    
     // Handle responsive layout function
     function handleResponsiveLayout() {
       const customNav = document.querySelector('#custom-right-nav');
@@ -73,6 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
           createCustomRightNav();
           handleResponsiveLayout();
+          // Load config after creating nav
+          loadNavigationConfig();
         }, 300);
       } catch (error) {
         console.error('❌ Error in initializeRightNav:', error);
@@ -141,196 +167,130 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     
-    // OPTIMIZED: Find current page siblings OR children if it's a section
+    // ENHANCED: Use navigation.json config if available, fall back to DOM parsing
     function findCurrentPageSiblings() {
       try {
-        const sidebar = document.querySelector('#quarto-sidebar');
-        if (!sidebar) {
-          console.log('❌ Sidebar not found');
-          return null;
-        }
-        
-        const currentPath = getCurrentPagePath();
-        console.log('🔍 Looking for current page:', currentPath);
-        
-        // IMPROVED: Try multiple strategies to find the active item
-        let activeItem = null;
-        
-        // Strategy 1: Look for .active class
-        activeItem = sidebar.querySelector('.sidebar-item-text.active');
-        if (activeItem) {
-          console.log('✅ Found active item via .active class:', activeItem.textContent.trim());
+        if (navigationConfig && navigationConfig.contents) {
+          console.log('✅ Using navigation.json configuration for navigation');
+          return findSiblingsFromConfig();
         } else {
-          // Strategy 2: Try path matching with various patterns
-          const pathVariations = [
-            currentPath,
-            currentPath.replace('Learn/', ''),
-            currentPath.split('/').pop(), // Just the filename
-            currentPath.replace(/\s+/g, '%20'), // URL encoded spaces
-            currentPath.replace(/%20/g, ' ') // Decode spaces
-          ];
-          
-          console.log('🔍 Trying path variations:', pathVariations);
-          
-          for (const pathVar of pathVariations) {
-            activeItem = sidebar.querySelector(`.sidebar-item-text[href*="${pathVar}"]`);
-            if (activeItem) {
-              console.log(`✅ Found active item via path "${pathVar}":`, activeItem.textContent.trim());
-              break;
-            }
-          }
-          
-          // Strategy 3: Look for exact filename match
-          if (!activeItem) {
-            const filename = currentPath.split('/').pop();
-            console.log('🔍 Looking for filename:', filename);
-            
-            const allSidebarLinks = sidebar.querySelectorAll('.sidebar-item-text[href]');
-            allSidebarLinks.forEach(link => {
-              const linkHref = link.getAttribute('href');
-              if (linkHref && linkHref.includes(filename)) {
-                console.log('🔍 Potential match:', link.textContent.trim(), 'href:', linkHref);
-                if (!activeItem) { // Take the first match
-                  activeItem = link;
-                  console.log('✅ Found active item via filename match:', activeItem.textContent.trim());
-                }
-              }
-            });
-          }
-        }
-        
-        if (!activeItem) {
-          console.log('❌ Active sidebar item not found');
-          console.log('🔍 Available sidebar items:');
-          const allItems = sidebar.querySelectorAll('.sidebar-item-text[href]');
-          allItems.forEach((item, index) => {
-            console.log(`  ${index}: "${item.textContent.trim()}" -> ${item.getAttribute('href')}`);
-          });
-          return null;
-        }
-        
-        console.log('✅ Using active item:', activeItem.textContent.trim());
-        console.log('✅ Active item href:', activeItem.getAttribute('href'));
-        
-        // Check if this is a section node (has children) or a leaf node
-        const activeItemContainer = activeItem.closest('.sidebar-item');
-        
-        // DEBUG: Log the structure to understand what we're working with
-        console.log('🔍 Active item container:', activeItemContainer);
-        console.log('🔍 Container HTML preview:', activeItemContainer.outerHTML.substring(0, 500));
-        console.log('🔍 Container children:', Array.from(activeItemContainer.children).map(c => c.className));
-        
-        const hasChildren = activeItemContainer.querySelector('.sidebar-item-container, .sidebar-section, ul, .sidebar-item');
-        
-        if (hasChildren) {
-          console.log('📂 This is a section node with children - showing child pages');
-          
-          // For section nodes, show ONLY immediate children (not grandchildren)
-          const childItems = [];
-          
-          // ENHANCED: Try multiple strategies to find child containers
-          console.log('🔍 Looking for child containers...');
-          
-          // Strategy 1: Look for dedicated child containers
-          const childContainers = activeItemContainer.querySelectorAll(
-            '.sidebar-item-container, .sidebar-section, ul, ol, .sidebar-items'
-          );
-          console.log('🔍 Found child containers:', childContainers.length);
-          
-          if (childContainers.length > 0) {
-            childContainers.forEach((container, index) => {
-              console.log(`🔍 Container ${index}:`, container.className, container.tagName);
-              
-              // Get only DIRECT children of this container
-              const directChildren = container.querySelectorAll(':scope > .sidebar-item');
-              console.log(`🔍 Direct children in container ${index}:`, directChildren.length);
-              
-              directChildren.forEach((childItem, childIndex) => {
-                console.log(`🔍 Child ${childIndex}:`, childItem.className);
-                const childTextElement = childItem.querySelector('.sidebar-item-text');
-                if (childTextElement) {
-                  console.log(`🔍 Child text element:`, childTextElement.textContent.trim());
-                  const href = childTextElement.getAttribute('href');
-                  if (href && href !== '#') {
-                    childItems.push({
-                      text: childTextElement.textContent.trim(),
-                      href: href,
-                      isActive: childTextElement.classList.contains('active')
-                    });
-                    console.log(`✅ Added child item: ${childTextElement.textContent.trim()}`);
-                  } else {
-                    console.log(`❌ Child item has no valid href: ${href}`);
-                  }
-                } else {
-                  console.log(`❌ Child item has no text element`);
-                }
-              });
-            });
-          } else {
-            // Strategy 2: Look for any .sidebar-item children directly
-            console.log('🔍 Strategy 2: Looking for direct .sidebar-item children...');
-            const directSidebarItems = activeItemContainer.querySelectorAll(':scope .sidebar-item');
-            console.log('🔍 Found direct sidebar items:', directSidebarItems.length);
-            
-            directSidebarItems.forEach((item, index) => {
-              if (item !== activeItemContainer) { // Don't include self
-                console.log(`🔍 Direct item ${index}:`, item.className);
-                const textElement = item.querySelector('.sidebar-item-text');
-                if (textElement) {
-                  console.log(`🔍 Text element:`, textElement.textContent.trim());
-                  const href = textElement.getAttribute('href');
-                  if (href && href !== '#') {
-                    childItems.push({
-                      text: textElement.textContent.trim(),
-                      href: href,
-                      isActive: textElement.classList.contains('active')
-                    });
-                    console.log(`✅ Added direct item: ${textElement.textContent.trim()}`);
-                  }
-                }
-              }
-            });
-          }
-          
-          console.log(`📂 Found ${childItems.length} immediate child pages:`, childItems.map(s => s.text));
-          return childItems;
-          
-        } else {
-          console.log('📄 This is a leaf node - showing sibling pages');
-          
-          // For leaf nodes, show siblings (original logic)
-          const parentContainer = activeItemContainer.parentElement;
-          if (!parentContainer) {
-            console.log('❌ Parent container not found');
-            return [];
-          }
-          
-          const siblingItems = [];
-          const siblings = parentContainer.querySelectorAll(':scope > .sidebar-item');
-          console.log('🔍 Found siblings:', siblings.length);
-          
-          siblings.forEach((sibling, index) => {
-            const textElement = sibling.querySelector('.sidebar-item-text');
-            if (textElement && textElement.hasAttribute('href')) {
-              const href = textElement.getAttribute('href');
-              if (href && href !== '#') {
-                console.log(`🔍 Sibling ${index}: "${textElement.textContent.trim()}" -> ${href}`);
-                siblingItems.push({
-                  text: textElement.textContent.trim(),
-                  href: href,
-                  isActive: textElement.classList.contains('active') || href.includes(currentPath) || textElement === activeItem
-                });
-              }
-            }
-          });
-          
-          console.log(`📄 Found ${siblingItems.length} sibling pages:`, siblingItems.map(s => s.text));
-          return siblingItems;
+          console.log('⚠️ Using DOM parsing fallback');
+          return findSiblingsFromDOM();
         }
       } catch (error) {
         console.error('❌ Error in findCurrentPageSiblings:', error);
         return null;
       }
+    }
+    
+    // Find siblings using navigation.json configuration
+    function findSiblingsFromConfig() {
+      const currentPath = getCurrentPagePath();
+      console.log('🔍 Looking for current page in config:', currentPath);
+      
+      // Find current item in the configuration
+      const result = findItemInConfig(navigationConfig.contents, currentPath);
+      if (!result) {
+        console.log('❌ Current page not found in config');
+        return [];
+      }
+      
+      const { item, parent, siblings } = result;
+      console.log('✅ Found current item:', item.text || item.section);
+      
+      if (item.contents && item.contents.length > 0) {
+        // This is a section - show children
+        console.log('📂 Section node - showing children');
+        const children = item.contents.filter(child => child.href && child.href !== '#');
+        console.log('📂 Found children:', children.map(c => c.text || c.section));
+        return children.map(child => ({
+          text: child.text || child.section,
+          href: child.href,
+          isActive: false
+        }));
+      } else {
+        // This is a leaf - show siblings
+        console.log('📄 Leaf node - showing siblings');
+        const siblingItems = siblings.filter(sibling => 
+          sibling.href && sibling.href !== '#' && sibling !== item
+        );
+        console.log('📄 Found siblings:', siblingItems.map(s => s.text || s.section));
+        return siblingItems.map(sibling => ({
+          text: sibling.text || sibling.section,
+          href: sibling.href,
+          isActive: sibling === item
+        }));
+      }
+    }
+    
+    // Recursively find item in config structure
+    function findItemInConfig(items, targetPath, parent = null) {
+      if (!items || !Array.isArray(items)) return null;
+      
+      for (const item of items) {
+        if (item.href && pathsMatch(item.href, targetPath)) {
+          return { 
+            item, 
+            parent, 
+            siblings: parent ? parent.contents : items 
+          };
+        }
+        
+        if (item.contents && item.contents.length > 0) {
+          const found = findItemInConfig(item.contents, targetPath, item);
+          if (found) return found;
+        }
+      }
+      return null;
+    }
+    
+    // Check if two paths match (with various normalizations)
+    function pathsMatch(configPath, currentPath) {
+      const normalize = (path) => {
+        return path.toLowerCase()
+          .replace(/\\/g, '/')
+          .replace(/\.(md|html|qmd)$/, '')
+          .replace(/^\/+/, '')
+          .trim();
+      };
+      
+      const normalizedConfig = normalize(configPath);
+      const normalizedCurrent = normalize(currentPath);
+      
+      return normalizedConfig === normalizedCurrent ||
+             normalizedConfig.endsWith(normalizedCurrent) ||
+             normalizedCurrent.endsWith(normalizedConfig) ||
+             normalizedConfig.split('/').pop() === normalizedCurrent.split('/').pop();
+    }
+    
+    // Fallback DOM parsing (simplified version of previous logic)
+    function findSiblingsFromDOM() {
+      const sidebar = document.querySelector('#quarto-sidebar');
+      if (!sidebar) return [];
+      
+      const activeItem = sidebar.querySelector('.sidebar-item-text.active');
+      if (!activeItem) return [];
+      
+      const activeContainer = activeItem.closest('.sidebar-item');
+      const parentContainer = activeContainer.parentElement;
+      
+      if (!parentContainer) return [];
+      
+      const siblings = [];
+      const siblingItems = parentContainer.querySelectorAll(':scope > .sidebar-item .sidebar-item-text[href]');
+      
+      siblingItems.forEach(item => {
+        const href = item.getAttribute('href');
+        if (href && href !== '#') {
+          siblings.push({
+            text: item.textContent.trim(),
+            href: href,
+            isActive: item.classList.contains('active')
+          });
+        }
+      });
+      
+      return siblings;
     }
 
     function createCustomRightNav() {
@@ -460,7 +420,8 @@ document.addEventListener('DOMContentLoaded', function() {
         customNav.classList.add('has-content');
         handleResponsiveLayout();
         
-        console.log('✅ Related pages rendered:', siblings.length, 'items');
+        const source = navigationConfig ? 'navigation.json config' : 'DOM parsing';
+        console.log(`✅ Related pages rendered from ${source}:`, siblings.length, 'items');
       } catch (error) {
         console.error('❌ Error in renderRightNav:', error);
       }
