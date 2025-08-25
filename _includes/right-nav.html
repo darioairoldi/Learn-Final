@@ -7,598 +7,6 @@
   </nav>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('📋 Related Pages navigation loading...');
-  
-  // Handle responsive layout function
-  function handleResponsiveLayout() {
-    const customNav = document.querySelector('#custom-right-nav');
-    if (!customNav) return;
-    
-    const isMobile = window.innerWidth <= 800;
-    if (isMobile) {
-      customNav.style.display = 'none';
-    } else if (customNav.classList.contains('has-content')) {
-      customNav.style.display = 'block';
-    }
-  }
-  
-  // Multiple initialization strategies to ensure it works across all page types
-  function initializeRightNav() {
-    console.log('🚀 Initializing right navigation...');
-    createCustomRightNav();
-    handleResponsiveLayout();
-    
-    // Additional attempt after a short delay for any page type
-    setTimeout(() => {
-      renderRightNav();
-    }, 100);
-  }
-  
-  // Try immediately for any page
-  initializeRightNav();
-  
-  // Wait for Quarto to finish loading (works for all page types)
-  setTimeout(initializeRightNav, 500);
-  
-  // Also try when the page is fully loaded (universal)
-  window.addEventListener('load', function() {
-    console.log('📄 Page fully loaded, attempting right nav render...');
-    setTimeout(function() {
-      if (!document.querySelector('#custom-right-nav .has-content')) {
-        console.log('🔄 Right nav not yet rendered, trying again...');
-        createCustomRightNav();
-      }
-      renderRightNav();
-    }, 200);
-  });
-  
-  // Universal fallback after page load for any menu structure
-  setTimeout(() => {
-    console.log('⏰ Final fallback attempt for right nav...');
-    renderRightNav();
-  }, 2000);
-  
-  // Handle window resize (universal)
-  window.addEventListener('resize', handleResponsiveLayout);
-  
-  // Dynamic navigation structure - reads from Quarto's rendered sidebar
-  function extractNavigationFromSidebar() {
-    const sidebar = document.querySelector('#quarto-sidebar');
-    if (!sidebar) {
-      console.log('❌ Sidebar not found');
-      return null;
-    }
-    
-    // Look for the main sidebar content structure - FIXED selectors
-    const sidebarContent = sidebar.querySelector('.sidebar-menu-container, .sidebar-content, .sidebar-navigation');
-    if (!sidebarContent) {
-      console.log('❌ Sidebar content not found, available classes:', sidebar.className);
-      console.log('❌ Sidebar children:', Array.from(sidebar.children).map(c => c.className).join(', '));
-      return null;
-    }
-    
-    console.log('✅ Found sidebar content:', sidebarContent.className);
-    
-    // Find all navigation items recursively
-    function extractItems(container, level = 0) {
-      const items = [];
-      const directChildren = container.children;
-      
-      Array.from(directChildren).forEach(child => {
-        // Look for sidebar items
-        if (child.classList.contains('sidebar-item') || child.classList.contains('sidebar-item-container')) {
-          const item = extractSidebarItem(child, level);
-          if (item) {
-            items.push(item);
-          }
-        } else if (child.children.length > 0) {
-          // Recurse into child elements
-          const childItems = extractItems(child, level);
-          items.push(...childItems);
-        }
-      });
-      
-      return items;
-    }
-    
-    function extractSidebarItem(itemElement, level) {
-      const textElement = itemElement.querySelector('.sidebar-item-text');
-      if (!textElement) return null;
-      
-      const item = {
-        text: textElement.textContent.trim(),
-        level: level,
-        href: textElement.getAttribute('href'),
-        isSection: !textElement.hasAttribute('href'),
-        children: []
-      };
-      
-      // Find child items - IMPROVED selector
-      const childContainers = itemElement.querySelectorAll(':scope > .sidebar-item-container, :scope > .sidebar-section, :scope > ul');
-      childContainers.forEach(childContainer => {
-        const childItems = extractItems(childContainer, level + 1);
-        item.children.push(...childItems);
-      });
-      
-      return item;
-    }
-    
-    const allItems = extractItems(sidebarContent, 0);
-    console.log('📊 Extracted navigation items:', allItems.length);
-    
-    return allItems;
-  }
-
-  // Find current page in navigation structure
-  function findCurrentPageInNav(items, currentPath) {
-    if (!items || items.length === 0) return null;
-    
-    const normalizedCurrentPath = currentPath.toLowerCase().replace(/\\/g, '/');
-    
-    console.log('🔍 Searching for path:', normalizedCurrentPath);
-    
-    function searchItems(itemList, parentChain = []) {
-      for (const item of itemList) {
-        if (item.href) {
-          const itemHref = item.href.toLowerCase().replace(/\\/g, '/').replace('.md', '');
-          
-          // Generic matching strategies - no filename assumptions
-          const isExactMatch = normalizedCurrentPath === itemHref;
-          const isContainedMatch = normalizedCurrentPath.includes(itemHref) || itemHref.includes(normalizedCurrentPath);
-          const isFilenameMatch = normalizedCurrentPath.endsWith(itemHref.split('/').pop());
-          
-          // Generic path-based matching - works for any file in same directory
-          const isSameDirectoryMatch = (
-            normalizedCurrentPath.split('/').slice(0, -1).join('/') === 
-            itemHref.split('/').slice(0, -1).join('/')
-          ) && (
-            // Only match if the filenames are related (same base name or common patterns)
-            normalizedCurrentPath.split('/').pop().replace(/\.(html|md)$/, '') === 
-            itemHref.split('/').pop().replace(/\.(html|md)$/, '') ||
-            // Or if one contains the other (like "summary" in "project-summary")
-            normalizedCurrentPath.split('/').pop().includes(itemHref.split('/').pop()) ||
-            itemHref.split('/').pop().includes(normalizedCurrentPath.split('/').pop())
-          );
-          
-          const isMatch = isExactMatch || isContainedMatch || isFilenameMatch || isSameDirectoryMatch;
-          
-          if (isMatch) {
-            console.log('🎯 Found current page: "' + item.text + '"');
-            console.log('   📄 Current path: ' + normalizedCurrentPath);
-            console.log('   🔗 Item href: ' + itemHref);
-            console.log('   ✅ Match type: ' + (isExactMatch ? 'exact' : isContainedMatch ? 'contained' : isFilenameMatch ? 'filename' : 'same-directory'));
-            
-            return {
-              currentItem: item,
-              parentChain: parentChain,
-              siblings: itemList,
-              children: item.children || []
-            };
-          }
-        }
-        
-        // Search in children
-        if (item.children && item.children.length > 0) {
-          const result = searchItems(item.children, [...parentChain, item]);
-          if (result) return result;
-        }
-      }
-      
-      return null;
-    }
-
-    return searchItems(items);
-  }
-  
-  function createCustomRightNav() {
-    console.log('🏗️ Creating custom right nav...');
-    
-    // Try multiple container strategies for right sidebar
-    const containerSelectors = [
-      '#quarto-margin-sidebar',
-      '.margin-sidebar', 
-      '#quarto-sidebar-toc',
-      '.toc-right'
-    ];
-    
-    let targetContainer = null;
-    for (const selector of containerSelectors) {
-      targetContainer = document.querySelector(selector);
-      if (targetContainer) {
-        console.log('✅ Found right sidebar container:', selector);
-        break;
-      }
-    }
-
-    if (!targetContainer) {
-      console.log('❌ Right sidebar container not found, available elements:');
-      console.log('   #quarto-margin-sidebar:', !!document.querySelector('#quarto-margin-sidebar'));
-      console.log('   .margin-sidebar:', !!document.querySelector('.margin-sidebar'));
-      console.log('   #quarto-sidebar-toc:', !!document.querySelector('#quarto-sidebar-toc'));
-      return;
-    }
-
-    // Check if custom nav already exists
-    const existing = document.querySelector('#custom-right-nav');
-    if (existing) {
-      existing.remove();
-    }
-
-    // Create the custom nav element with proper styling
-    const customNav = document.createElement('div');
-    customNav.id = 'custom-right-nav';
-    customNav.className = 'toc-right';
-    customNav.innerHTML = `
-      <div class="toc-title">Related Pages</div>
-      <nav class="toc" role="doc-toc">
-        <ul>
-          <li><em>Loading...</em></li>
-        </ul>
-      </nav>
-    `;
-
-    // Insert into the proper Quarto right sidebar container
-    const existingToc = targetContainer.querySelector('.toc-right, #TOC, .table-of-contents');
-    if (existingToc) {
-      existingToc.parentNode.insertBefore(customNav, existingToc.nextSibling);
-      console.log('✅ Inserted custom nav after existing TOC');
-    } else {
-      targetContainer.appendChild(customNav);
-      console.log('✅ Appended custom nav to container');
-    }
-
-    // Now render the navigation
-    setTimeout(() => {
-      renderRightNav();
-    }, 100);
-  }
-
-  // Get current page path, accounting for different environments
-  function getCurrentPagePath() {
-    let path = window.location.pathname;
-    
-    // Handle different URL structures
-    if (path === '/' || path === '') {
-      return 'index';
-    }
-    
-    // Remove leading slash and decode URI components
-    path = path.replace(/^\//, '');
-    try {
-      path = decodeURIComponent(path);
-    } catch (e) {
-      // If decoding fails, use original path
-      console.log('⚠️ URI decoding failed, using original path');
-    }
-    
-    // Convert .html back to source file extensions for matching
-    path = path.replace('.html', '');
-    
-    console.log('📍 Current path detected:', path);
-    return path;
-  }
-  
-  // Find the relevant section for the current page
-  function findCurrentSection(currentPath) {
-    console.log('🔍 Looking for section for path:', currentPath);
-    
-    // Handle home page special case
-    if (!currentPath || currentPath === '/' || currentPath === '' || currentPath === 'index') {
-      return {
-        sectionName: 'Home',
-        subsectionName: 'Quick Navigation',
-        subsectionData: {
-          pages: [
-            { text: 'Build Conference 2025', href: '202506 Build 2025/Readme.html' },
-            { text: 'Development Tools', href: '20250712 Use QUARTO doc for Github repos doc/README.html' },
-            { text: 'Azure Resources', href: '20250702 Azure Naming conventions/README.html' }
-          ]
-        }
-      };
-    }
-    
-    // ALWAYS check for Build Conference pages first
-    if (currentPath.includes('202506 build 2025') || 
-        currentPath.toLowerCase().includes('build conference 2025') || 
-        currentPath.toLowerCase().includes('build 2025') ||
-        currentPath.includes('Build 2025') ||
-        currentPath.includes('BRK') || currentPath.includes('DEM') ||
-        currentPath.includes('build-2025')) {
-      console.log('🏢 Detected Build Conference 2025 page, forcing Build section');
-      return getBuildConference2025Section(currentPath);
-    }
-    
-    // Try to extract navigation structure from sidebar
-    const navItems = extractNavigationFromSidebar();
-    console.log('📊 Extracted navigation items count:', navItems ? navItems.length : 0);
-    
-    if (navItems && navItems.length > 0) {
-      // Find current page in navigation
-      const pageLocation = findCurrentPageInNav(navItems, currentPath);
-      if (pageLocation) {
-        const { currentItem, parentChain, siblings, children } = pageLocation;
-        
-        console.log('✅ Page location found:', {
-          currentItem: currentItem.text,
-          parentChain: parentChain.map(p => p.text),
-          childrenCount: children.length,
-          siblingsCount: siblings.length
-        });
-        
-        // Determine what to show based on the page type and location
-        if (children.length > 0) {
-          // Current page has children - show children
-          console.log(`📂 Showing children for: ${currentItem.text}`);
-          return {
-            sectionName: parentChain.length > 0 ? parentChain[0].text : 'Navigation',
-            subsectionName: `${currentItem.text} - Children`,
-            subsectionData: {
-              pages: children.map(child => ({
-                text: child.text,
-                href: child.href || '#',
-                isSection: child.isSection
-              }))
-            }
-          };
-        } else {
-          // Current page is a leaf - show siblings
-          console.log(`📄 Showing siblings for: ${currentItem.text}`);
-          const parentSection = parentChain.length > 0 ? parentChain[parentChain.length - 1] : null;
-          
-          return {
-            sectionName: parentChain.length > 0 ? parentChain[0].text : 'Navigation',
-            subsectionName: parentSection ? `${parentSection.text} - Pages` : 'Related Pages',
-            subsectionData: {
-              pages: siblings.filter(sibling => sibling.href).map(sibling => ({
-                text: sibling.text,
-                href: sibling.href,
-                isSection: false
-              }))
-            }
-          };
-        }
-      }
-    }
-    
-    // If everything fails, use fallback
-    console.log('❌ Using fallback section for path:', currentPath);
-    return getFallbackSection(currentPath);
-  }
-
-  // Special handler for Build Conference 2025 pages
-  function getBuildConference2025Section(currentPath) {
-    console.log('🏢 Building Build Conference 2025 section');
-    
-    // Extract all Build 2025 session links from the current sidebar
-    const sidebar = document.querySelector('#quarto-sidebar');
-    const buildSessions = [];
-    
-    if (sidebar) {
-      // Look for Build Conference section in sidebar
-      const allLinks = sidebar.querySelectorAll('a.sidebar-item-text[href]');
-      allLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        const text = link.textContent.trim();
-        if (href && text && (href.includes('202506 Build 2025') || href.includes('Build Conference') || href.includes('BRK') || href.includes('DEM'))) {
-          buildSessions.push({
-            text: text,
-            href: href
-          });
-        }
-      });
-    }
-    
-    // If we found sessions from sidebar, use them
-    if (buildSessions.length > 0) {
-      console.log(`🎯 Found ${buildSessions.length} Build sessions from sidebar`);
-      return {
-        sectionName: 'Build Conference 2025',
-        subsectionName: 'Conference Sessions',
-        subsectionData: {
-          pages: buildSessions.slice(0, 15) // Limit to first 15 to avoid overwhelming
-        }
-      };
-    }
-    
-    // Fallback: Hardcoded Build 2025 sessions for when sidebar parsing fails
-    console.log('📋 Using fallback Build 2025 sessions');
-    return {
-      sectionName: 'Build Conference 2025',
-      subsectionName: 'Featured Sessions',
-      subsectionData: {
-        pages: [
-          { text: 'Conference Overview', href: '202506 Build 2025/Readme.html' },
-          { text: 'BRK101: AI-Powered .NET Modernization', href: '202506 Build 2025/BRK101 Dotnet app modernization/README.Sonnet4.html' },
-          { text: 'BRK106: .NET Aspire AI & Cloud', href: '202506 Build 2025/BRK106 Elevating Development with .NET Aspire AI/README.Sonnet4.html' },
-          { text: 'BRK114: What\'s New in C# 14', href: '202506 Build 2025/BRK114 C# 14 Language Features and Beyond/README.Sonnet4.html' },
-          { text: 'BRK119: Debug Like a Pro', href: '202506 Build 2025/BRK119 Debug Like a Pro - Improve Your Efficiency/README.Sonnet4.html' },
-          { text: 'BRK122: ASP.NET Core & Blazor', href: '202506 Build 2025/BRK122 Supercharge Your Git workflow with VS Code/README.Sonnet4.html' },
-          { text: 'DEM508: .NET Aspire Testing', href: '202506 Build 2025/DEM508 Streamlining Application Testing with .NET Aspire and Playwright/README.Sonnet4.html' },
-          { text: 'DEM520: Local AI Development', href: '202506 Build 2025/DEM520 Local AI Development with Foundry Local and .NET Aspire/README.Sonnet4.html' },
-          { text: 'DEM517: MCP Servers', href: '202506 Build 2025/DEM517 Build, Deploy, & Use Your First MCP Server/README.Sonnet4.html' }
-        ]
-      }
-    };
-  }
-
-  // Generic fallback when navigation detection fails
-  function getFallbackSection(currentPath) {
-    console.log('🔄 Using generic fallback section for:', currentPath);
-    
-    // Try to determine section from path
-    if (currentPath.includes('azure') || currentPath.includes('Azure')) {
-      return {
-        sectionName: 'Azure Development',
-        subsectionName: 'Azure Resources',
-        subsectionData: {
-          pages: [
-            { text: 'Azure Naming Conventions', href: '20250702 Azure Naming conventions/README.html' },
-            { text: 'Table Storage Access', href: '20250704 TableStorageAccess options/README.html' },
-            { text: 'CosmosDB Access Options', href: '20250706 CosmosDB Access options/README.html' }
-          ]
-        }
-      };
-    }
-    
-    if (currentPath.includes('quarto') || currentPath.includes('Quarto')) {
-      return {
-        sectionName: 'Development Tools',
-        subsectionName: 'Documentation Tools',
-        subsectionData: {
-          pages: [
-            { text: 'Using Quarto', href: '20250712 Use QUARTO doc for Github repos doc/README.html' },
-            { text: 'Quarto.yml Structure', href: '20250712 Use QUARTO doc for Github repos doc/002.01. Quarto.yml document structure.html' },
-            { text: 'Quarto Markdown Features', href: '20250712 Use QUARTO doc for Github repos doc/002.02. Quarto specific markdown features.html' },
-            { text: 'Quarto Theming', href: '20250712 Use QUARTO doc for Github repos doc/002.03. Quarto Theming and Styling.html' }
-          ]
-        }
-      };
-    }
-    
-    // Generic fallback for ANY page - this ensures something always shows
-    return {
-      sectionName: 'Navigation',
-      subsectionName: 'Quick Links',
-      subsectionData: {
-        pages: [
-          { text: 'Home', href: 'index.html' },
-          { text: 'Build Conference 2025', href: '202506 Build 2025/Readme.html' },
-          { text: 'Development Tools', href: '20250712 Use QUARTO doc for Github repos doc/README.html' },
-          { text: 'Azure Resources', href: '20250702 Azure Naming conventions/README.html' }
-        ]
-      }
-    };
-  }
-  
-  // Render the right navigation based on the current page context
-  function renderRightNav() {
-    console.log('🎨 renderRightNav called');
-    const customNav = document.querySelector('#custom-right-nav');
-    if (!customNav) {
-      console.log('❌ Custom nav element not found');
-      return;
-    }
-
-    const currentPath = getCurrentPagePath();
-    const currentSection = findCurrentSection(currentPath);
-
-    if (!currentSection) {
-      // Hide if no relevant section found - this should NEVER happen now
-      console.log('❌ No section found - this should not happen with fallbacks');
-      customNav.style.display = 'none';
-      return;
-    }
-
-    console.log('✅ Found section for path:', currentSection);
-    
-    const { sectionName, subsectionName, subsectionData } = currentSection;
-    const navList = customNav.querySelector('ul');
-    
-    if (!navList) {
-      console.log('❌ Nav list not found');
-      return;
-    }
-
-    // Calculate page count first
-    const pageCount = subsectionData.pages ? subsectionData.pages.length : 0;
-
-    // Show the custom nav
-    customNav.style.display = 'block';
-    customNav.classList.add('has-content');
-    
-    // Clear existing content
-    navList.innerHTML = '';
-
-    // Add section header with page count
-    const sectionHeader = document.createElement('li');
-    sectionHeader.innerHTML = `<strong>${subsectionName}</strong> <span style="color: #888; font-size: 0.8em;">(${pageCount} items)</span>`;
-    sectionHeader.style.cssText = 'color: #2780e3; margin-bottom: 8px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;';
-    navList.appendChild(sectionHeader);
-
-    // Add all pages in the subsection
-    if (subsectionData.pages) {
-      subsectionData.pages.forEach((page, index) => {
-        const li = document.createElement('li');
-        
-        if (page.isInfo) {
-          // Info messages (non-clickable)
-          const info = document.createElement('div');
-          info.textContent = page.text;
-          info.style.cssText = 'color: #888; font-style: italic; padding: 4px 8px; margin-left: 8px; font-size: 0.85em;';
-          li.appendChild(info);
-        } else if (page.isSection && !page.href) {
-          // Section headers (non-clickable)
-          const header = document.createElement('div');
-          header.textContent = page.text;
-          header.style.cssText = 'font-weight: 600; color: #444; padding: 4px 8px; margin-left: 8px; font-size: 0.85em; border-left: 3px solid #2780e3; background: #f0f8ff;';
-          li.appendChild(header);
-        } else {
-          // Regular pages (clickable)
-          const a = document.createElement('a');
-          
-          // Construct proper href path
-          let href = page.href;
-          if (href && !href.startsWith('http') && !href.startsWith('#')) {
-            // Handle relative paths - ensure they work with GitHub Pages
-            if (!href.startsWith('/')) {
-              href = href.startsWith('./') ? href.substring(2) : href;
-              href = '/' + href;
-            }
-            // Convert .md to .html for web navigation
-            href = href.replace('.md', '.html');
-          }
-          
-          a.href = href;
-          a.textContent = page.text || page.title || 'Untitled';
-          a.style.cssText = 'color: #666; text-decoration: none; display: block; padding: 4px 8px; margin-left: 16px; border-left: 2px solid transparent; transition: all 0.2s ease; font-size: 0.9em;';
-          
-          // Hover effect
-          a.addEventListener('mouseenter', () => {
-            a.style.color = '#2780e3';
-            a.style.borderLeft = '2px solid #2780e3';
-            a.style.backgroundColor = '#f8f9fa';
-          });
-          a.addEventListener('mouseleave', () => {
-            const isCurrentPage = isCurrentPageHighlighted(page, currentPath);
-            a.style.color = isCurrentPage ? '#2780e3' : '#666';
-            a.style.borderLeft = isCurrentPage ? '3px solid #2780e3' : '2px solid transparent';
-            a.style.backgroundColor = isCurrentPage ? '#e7f3ff' : 'transparent';
-          });
-
-          // Highlight current page
-          if (isCurrentPageHighlighted(page, currentPath)) {
-            a.style.fontWeight = 'bold';
-            a.style.color = '#2780e3';
-            a.style.backgroundColor = '#e7f3ff';
-            a.style.borderLeft = '3px solid #2780e3';
-          }
-          
-          li.appendChild(a);
-        }
-        
-        navList.appendChild(li);
-      });
-    }
-
-    console.log(`🎨 Rendered ${pageCount} items for section: ${subsectionName}`);
-  }
-  
-  // Check if the current page is highlighted in the navigation
-  function isCurrentPageHighlighted(page, currentPath) {
-    if (!page.href) return false;
-    
-    const pageBasePath = page.href.replace(/^.*\//, '').replace('.md', '');
-    const currentBasePath = currentPath.replace(/^.*\//, '').replace('.html', '').replace('.md', '');
-    
-    return pageBasePath === currentBasePath || 
-           currentPath.includes(page.href.replace('.md', '')) || 
-           page.href.includes(currentPath.replace('.html', ''));
-  }
-});
-</script>
-
 <style>
 /* Professional Related Pages navigation styling - RIGHT SIDEBAR ONLY */
 #custom-right-nav {
@@ -607,11 +15,17 @@ document.addEventListener('DOMContentLoaded', function() {
   border: 1px solid #e9ecef;
   border-radius: 6px;
   padding: 12px;
-  margin-top: 16px;
+  margin-top: 2rem; /* Add spacing from native TOC */
   font-size: 0.9rem;
-  max-height: 70vh;
+  max-height: 60vh; /* Reduced from 70vh to leave space for native TOC */
   overflow-y: auto;
   scroll-behavior: smooth;
+}
+
+/* Ensure our custom nav doesn't interfere with native TOC styling */
+#custom-right-nav.custom-navigation {
+  background: #f0f8ff; /* Slightly different background to distinguish from native TOC */
+  border-color: #2780e3;
 }
 
 #custom-right-nav .toc-title {
@@ -623,91 +37,398 @@ document.addEventListener('DOMContentLoaded', function() {
   border-bottom: 2px solid #2780e3;
 }
 
-#custom-right-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#custom-right-nav li {
-  margin: 2px 0;
-}
-
-#custom-right-nav a {
-  color: #666;
-  text-decoration: none;
-  display: block;
-  padding: 3px 8px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  font-size: 0.9em;
-  line-height: 1.3;
-}
-
-#custom-right-nav a:hover {
-  background-color: #e7f3ff;
-  color: #2780e3;
-  text-decoration: none;
-}
-
-/* Compact view for longer lists */
-#custom-right-nav.has-many-pages {
-  font-size: 0.85rem;
-}
-
-#custom-right-nav.has-many-pages li {
-  margin: 1px 0;
-}
-
-#custom-right-nav.has-many-pages a {
-  padding: 2px 6px;
-  font-size: 0.85em;
-}
-
-/* Scrollbar styling */
-#custom-right-nav::-webkit-scrollbar {
-  width: 6px;
-}
-
-#custom-right-nav::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 3px;
-}
-
-#custom-right-nav::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 3px;
-}
-
-#custom-right-nav::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-
-/* Responsive behavior */
-@media (max-width: 800px) {
-  #custom-right-nav {
-    display: none; /* Hide on mobile to save space */
-  }
-}
-
-@media (min-width: 801px) {
-  #custom-right-nav {
-    display: block;
-  }
-  
-  /* In larger screens, position in right sidebar */
-  .page-columns .margin-sidebar #custom-right-nav {
-    position: sticky;
-    top: 2rem;
-  }
-}
-
-/* For very long lists, add zebra striping */
-#custom-right-nav.has-many-pages li:nth-child(even) a {
-  background-color: rgba(0,0,0,0.02);
-}
-
-#custom-right-nav.has-many-pages li:nth-child(even) a:hover {
-  background-color: #e7f3ff;
+/* Ensure native TOC is not affected by our styles */
+#TOC, 
+.table-of-contents:not(#custom-right-nav .table-of-contents),
+nav[role="doc-toc"]:not(#custom-right-nav nav) {
+  margin-bottom: 1rem !important;
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('📋 Related Pages navigation loading...');
+  
+  // Global navigation structure from navigation.json
+  let navigationConfig = null;
+  
+  // Wrap everything in try-catch to prevent other JS errors from breaking this
+  try {
+    // Load navigation configuration (much cleaner than YAML parsing!)
+    async function loadNavigationConfig() {
+      try {
+        console.log('🔄 Loading navigation.json configuration...');
+        const response = await fetch('navigation.json');
+        if (response.ok) {
+          navigationConfig = await response.json();
+          console.log('✅ Loaded navigation config:', navigationConfig);
+          
+          // Re-render navigation with config data
+          renderRightNav();
+        } else {
+          console.log('⚠️ Could not load navigation.json, falling back to DOM parsing');
+          renderRightNav(); // Fall back to DOM parsing
+        }
+      } catch (error) {
+        console.log('⚠️ Error loading navigation.json:', error);
+        renderRightNav(); // Fall back to DOM parsing
+      }
+    }
+    
+    // Handle responsive layout function
+    function handleResponsiveLayout() {
+      const customNav = document.querySelector('#custom-right-nav');
+      if (!customNav) return;
+      
+      const isMobile = window.innerWidth <= 800;
+      
+      if (isMobile) {
+        customNav.style.display = 'none';
+      } else if (customNav.classList.contains('has-content')) {
+        customNav.style.display = 'block';
+      }
+    }
+    
+    // Initialize right navigation with minimal delay
+    function initializeRightNav() {
+      console.log('🚀 Initializing right navigation...');
+      
+      try {
+        setTimeout(() => {
+          createCustomRightNav();
+          handleResponsiveLayout();
+          // Load config after creating nav
+          loadNavigationConfig();
+        }, 300);
+      } catch (error) {
+        console.error('❌ Error in initializeRightNav:', error);
+      }
+    }
+    
+    // Try immediately for any page
+    initializeRightNav();
+    
+    // Also try when the page is fully loaded
+    window.addEventListener('load', function() {
+      console.log('📄 Page loaded, rendering right nav...');
+      try {
+        setTimeout(renderRightNav, 200);
+      } catch (error) {
+        console.error('❌ Error in load event:', error);
+      }
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', handleResponsiveLayout);
+    
+    // ALSO: Listen for sidebar clicks to trigger updates
+    document.addEventListener('click', function(event) {
+      try {
+        // Check if a sidebar item was clicked
+        const sidebarItem = event.target.closest('.sidebar-item-text, .nav-link');
+        if (sidebarItem && sidebarItem.closest('#quarto-sidebar')) {
+          console.log('🖱️ Sidebar item clicked:', sidebarItem.textContent.trim());
+          // Delay slightly to let Quarto update the active states
+          setTimeout(renderRightNav, 100);
+        }
+      } catch (error) {
+        console.error('❌ Error in click handler:', error);
+      }
+    });
+    
+    // Get current page path
+    function getCurrentPagePath() {
+      try {
+        let path = window.location.pathname;
+        
+        if (path === '/' || path === '') {
+          return 'index';
+        }
+        
+        // Remove leading slash and decode URI components
+        path = path.replace(/^\//, '');
+        try {
+          path = decodeURIComponent(path);
+        } catch (e) {
+          console.log('⚠️ URI decoding failed');
+        }
+        
+        // Remove .html extension and normalize
+        path = path.replace('.html', '');
+        
+        // DEBUG: Log the path processing
+        console.log('🔍 Original pathname:', window.location.pathname);
+        console.log('🔍 Processed path:', path);
+        
+        return path;
+      } catch (error) {
+        console.error('❌ Error in getCurrentPagePath:', error);
+        return '';
+      }
+    }
+    
+    // ENHANCED: Use navigation.json config if available, fall back to DOM parsing
+    function findCurrentPageSiblings() {
+      try {
+        if (navigationConfig && navigationConfig.contents) {
+          console.log('✅ Using navigation.json configuration for navigation');
+          return findSiblingsFromConfig();
+        } else {
+          console.log('⚠️ Using DOM parsing fallback');
+          return findSiblingsFromDOM();
+        }
+      } catch (error) {
+        console.error('❌ Error in findCurrentPageSiblings:', error);
+        return null;
+      }
+    }
+    
+    // Find siblings using navigation.json configuration
+    function findSiblingsFromConfig() {
+      const currentPath = getCurrentPagePath();
+      console.log('🔍 Looking for current page in config:', currentPath);
+      
+      // Find current item in the configuration
+      const result = findItemInConfig(navigationConfig.contents, currentPath);
+      if (!result) {
+        console.log('❌ Current page not found in config');
+        return [];
+      }
+      
+      const { item, parent, siblings } = result;
+      console.log('✅ Found current item:', item.text || item.section);
+      
+      if (item.contents && item.contents.length > 0) {
+        // This is a section - show children
+        console.log('📂 Section node - showing children');
+        const children = item.contents.filter(child => child.href && child.href !== '#');
+        console.log('📂 Found children:', children.map(c => c.text || c.section));
+        return children.map(child => ({
+          text: child.text || child.section,
+          href: child.href,
+          isActive: false
+        }));
+      } else {
+        // This is a leaf - show siblings
+        console.log('📄 Leaf node - showing siblings');
+        const siblingItems = siblings.filter(sibling => 
+          sibling.href && sibling.href !== '#' && sibling !== item
+        );
+        console.log('📄 Found siblings:', siblingItems.map(s => s.text || s.section));
+        return siblingItems.map(sibling => ({
+          text: sibling.text || sibling.section,
+          href: sibling.href,
+          isActive: sibling === item
+        }));
+      }
+    }
+    
+    // Recursively find item in config structure
+    function findItemInConfig(items, targetPath, parent = null) {
+      if (!items || !Array.isArray(items)) return null;
+      
+      for (const item of items) {
+        if (item.href && pathsMatch(item.href, targetPath)) {
+          return { 
+            item, 
+            parent, 
+            siblings: parent ? parent.contents : items 
+          };
+        }
+        
+        if (item.contents && item.contents.length > 0) {
+          const found = findItemInConfig(item.contents, targetPath, item);
+          if (found) return found;
+        }
+      }
+      return null;
+    }
+    
+    // Check if two paths match (with various normalizations)
+    function pathsMatch(configPath, currentPath) {
+      const normalize = (path) => {
+        return path.toLowerCase()
+          .replace(/\\/g, '/')
+          .replace(/\.(md|html|qmd)$/, '')
+          .replace(/^\/+/, '')
+          .trim();
+      };
+      
+      const normalizedConfig = normalize(configPath);
+      const normalizedCurrent = normalize(currentPath);
+      
+      return normalizedConfig === normalizedCurrent ||
+             normalizedConfig.endsWith(normalizedCurrent) ||
+             normalizedCurrent.endsWith(normalizedConfig) ||
+             normalizedConfig.split('/').pop() === normalizedCurrent.split('/').pop();
+    }
+    
+    // Fallback DOM parsing (simplified version of previous logic)
+    function findSiblingsFromDOM() {
+      const sidebar = document.querySelector('#quarto-sidebar');
+      if (!sidebar) return [];
+      
+      const activeItem = sidebar.querySelector('.sidebar-item-text.active');
+      if (!activeItem) return [];
+      
+      const activeContainer = activeItem.closest('.sidebar-item');
+      const parentContainer = activeContainer.parentElement;
+      
+      if (!parentContainer) return [];
+      
+      const siblings = [];
+      const siblingItems = parentContainer.querySelectorAll(':scope > .sidebar-item .sidebar-item-text[href]');
+      
+      siblingItems.forEach(item => {
+        const href = item.getAttribute('href');
+        if (href && href !== '#') {
+          siblings.push({
+            text: item.textContent.trim(),
+            href: href,
+            isActive: item.classList.contains('active')
+          });
+        }
+      });
+      
+      return siblings;
+    }
+
+    function createCustomRightNav() {
+      try {
+        console.log('🏗️ Creating custom right nav...');
+        
+        // Find right sidebar container
+        const containerSelectors = [
+          '#quarto-margin-sidebar',
+          '.margin-sidebar', 
+          '#quarto-sidebar-toc'
+        ];
+        
+        let targetContainer = null;
+        for (const selector of containerSelectors) {
+          const found = document.querySelector(selector);
+          if (found) {
+            targetContainer = found;
+            console.log('✅ Found right sidebar container:', selector);
+            break;
+          }
+        }
+
+        if (!targetContainer) {
+          console.log('⚠️ Creating fallback right sidebar container...');
+          const rightSidebarContainer = document.createElement('div');
+          rightSidebarContainer.id = 'custom-margin-sidebar';
+          rightSidebarContainer.style.cssText = `
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            width: 250px;
+            max-height: 60vh;
+            overflow-y: auto;
+            z-index: 1000;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          `;
+          document.body.appendChild(rightSidebarContainer);
+          targetContainer = rightSidebarContainer;
+          console.log('✅ Created fallback container');
+        }
+
+        // Remove existing custom nav
+        const existing = document.querySelector('#custom-right-nav');
+        if (existing) {
+          existing.remove();
+        }
+
+        // Preserve existing TOC
+        const existingToc = targetContainer.querySelector('#TOC, .table-of-contents, nav[role="doc-toc"]:not(#custom-right-nav nav)');
+        if (existingToc) {
+          console.log('✅ Preserving existing Quarto TOC');
+        }
+
+        // Create the custom nav element
+        const customNav = document.createElement('div');
+        customNav.id = 'custom-right-nav';
+        customNav.className = 'toc-right custom-navigation';
+        customNav.innerHTML = `
+          <div class="toc-title">Related Pages</div>
+          <nav class="toc" role="doc-toc">
+            <ul>
+              <li><em>Loading...</em></li>
+            </ul>
+          </nav>
+        `;
+
+        // Insert after existing TOC or append to container
+        if (existingToc) {
+          customNav.style.marginTop = '2rem';
+          existingToc.parentNode.insertBefore(customNav, existingToc.nextSibling);
+        } else {
+          targetContainer.appendChild(customNav);
+        }
+
+        console.log('✅ Custom nav created');
+        
+        // Render content immediately
+        setTimeout(renderRightNav, 100);
+      } catch (error) {
+        console.error('❌ Error in createCustomRightNav:', error);
+      }
+    }
+    
+    // OPTIMIZED: Render only sibling pages, not entire navigation tree
+    function renderRightNav() {
+      try {
+        const customNav = document.querySelector('#custom-right-nav');
+        if (!customNav) return;
+        
+        const siblings = findCurrentPageSiblings();
+        const navContainer = customNav.querySelector('.toc > ul');
+        
+        if (!navContainer) return;
+        
+        // Clear existing content
+        navContainer.innerHTML = '';
+        
+        if (!siblings || siblings.length === 0) {
+          navContainer.innerHTML = '<li><em>No related pages found</em></li>';
+          console.log('📄 No related pages to show');
+          return;
+        }
+        
+        // Render sibling pages
+        siblings.forEach(sibling => {
+          const listItem = document.createElement('li');
+          listItem.className = 'nav-item';
+          
+          const link = document.createElement('a');
+          link.href = sibling.href;
+          link.textContent = sibling.text;
+          link.className = 'nav-link';
+          
+          if (sibling.isActive) {
+            link.classList.add('active');
+          }
+          
+          listItem.appendChild(link);
+          navContainer.appendChild(listItem);
+        });
+        
+        customNav.classList.add('has-content');
+        handleResponsiveLayout();
+        
+        const source = navigationConfig ? 'navigation.json config' : 'DOM parsing';
+        console.log(`✅ Related pages rendered from ${source}:`, siblings.length, 'items');
+      } catch (error) {
+        console.error('❌ Error in renderRightNav:', error);
+      }
+    }
+    
+  } catch (error) {
+    console.error('❌ Fatal error in Related Pages navigation:', error);
+  }
+});
+</script>

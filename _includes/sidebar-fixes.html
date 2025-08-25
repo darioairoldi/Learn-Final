@@ -37,39 +37,83 @@
     align-items: center;
 }
 
-/* Bootstrap Icons spacing fix - add margin between icon and text */
-.sidebar .nav-link .bi,
-.sidebar .sidebar-item-text .bi,
+/* FIXED: Left sidebar hierarchical indentation and spacing */
+/* Reset all sidebar items to consistent baseline */
+#quarto-sidebar .sidebar-item {
+  margin-bottom: 0.1rem;
+}
+
+/* Base styling for all sidebar item texts */
+#quarto-sidebar .sidebar-item-text {
+  display: flex;
+  align-items: center;
+  gap: 0 !important; /* Remove the 0.5rem gap */
+  line-height: 1.3;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+/* Level 0 (Root level): "Home", "Events", "Tools", etc. */
+#quarto-sidebar > .sidebar-navigation > .sidebar-item > .sidebar-item-text {
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  padding: 0.4rem 0.75rem !important;
+  color: #2d3748 !important;
+}
+
+/* Level 1 (First nested): "Build Conference 2025", "Development Tools", etc. */
+#quarto-sidebar .sidebar-item .sidebar-item > .sidebar-item-text {
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  padding: 0.3rem 0.75rem !important;
+  padding-left: 1.5rem !important; /* Indent from level 0 */
+  color: #4a5568 !important;
+}
+
+/* Level 2 (Second nested): "Git Command Line", "HTTP Files Testing", etc. */
+#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
+  font-weight: 400 !important;
+  font-size: 0.85rem !important;
+  padding: 0.25rem 0.75rem !important;
+  padding-left: 2.25rem !important; /* Further indent from level 1 */
+  color: #718096 !important;
+}
+
+/* Level 3 (Third nested): Deep nested items */
+#quarto-sidebar .sidebar-item .sidebar-item .sidebar-item .sidebar-item > .sidebar-item-text {
+  font-weight: 400 !important;
+  font-size: 0.8rem !important;
+  padding: 0.2rem 0.75rem !important;
+  padding-left: 3rem !important; /* Further indent from level 2 */
+  color: #a0aec0 !important;
+}
+
+/* Hover effects for better UX */
+#quarto-sidebar .sidebar-item-text:hover {
+  background-color: rgba(237, 242, 247, 0.8) !important;
+}
+
+/* Active state styling - hierarchical specificity */
+#quarto-sidebar .sidebar-item-text.active {
+  background-color: rgba(39, 128, 227, 0.1) !important;
+  color: #2780e3 !important;
+  border-left: 3px solid #2780e3 !important;
+}
+
+/* Override any conflicting container-based rules */
+#quarto-sidebar .sidebar-item-container .sidebar-item-text,
+#quarto-sidebar .sidebar-section .sidebar-item-text {
+  /* Reset any container-specific padding - let hierarchy rules take precedence */
+  padding: inherit !important;
+}
+
+/* Ensure icons align properly at all levels */
+#quarto-sidebar .sidebar-item-text i,
 #quarto-sidebar .sidebar-item-text .bi {
-  margin-right: 0.75rem !important;
-  font-size: 1.1em !important;
-}
-
-/* General sidebar icon spacing */
-.sidebar .nav-link i,
-.sidebar .sidebar-item-text i,
-#quarto-sidebar .sidebar-item-text i {
-  margin-right: 0.75rem !important;
-  font-size: 1.1em !important;
-}
-
-/* Force Bootstrap Icons to display with proper spacing in sidebar */
-.sidebar .sidebar-item-text .bi::before,
-#quarto-sidebar .sidebar-item-text .bi::before {
-  margin-right: 0.75rem !important;
-}
-
-/* Section icons spacing */
-.sidebar .sidebar-section > .nav-link .bi,
-#quarto-sidebar .sidebar-section > .sidebar-item-text .bi {
-  margin-right: 0.75rem !important;
-}
-
-/* Also target the Home icon specifically */
-.sidebar .sidebar-item-text[href="index.qmd"] .bi-house-fill,
-#quarto-sidebar .sidebar-item-text[href="index.qmd"] .bi-house-fill {
-  color: white !important;
-  margin-right: 0.75rem !important;
+  flex-shrink: 0;
+  width: 1em;
+  text-align: center;
+  margin-right: 0.5rem !important;
 }
 </style>
 
